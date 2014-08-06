@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+{% load staticfiles %}
+
+<!--title-->
+{% block title %}首页{% endblock %}
+
+<!--content-->
+{% block content %}
+    <!--slider starts-->
+    <div class="flexslider slider sixteen columns">
+        {% include 'home/slide.html' %}
+    </div>
+    <!--features start-->
+    <div class="container clearfix">
+        <ul class="features">
+            <li> <img src="{% static 'portal/img/icons/icon-1.png' %}" width="106" height="76" alt="icon" />
+                <h2>Awesomeness</h2>
+                <div class="divider"></div>
+                <p>Typi non habent claritatem insitam usus legentis in iis qui facit eorum. Investigationes lectores legere me lius quod ii legunt saepius.</p>
+            </li>
+            <li><img src="{% static 'portal/img/icons/icon-2.png' %}" width="106" height="76" alt="icon" />
+                <h2>Live Solutions</h2>
+                <div class="divider"></div>
+                <p>Typi non habent claritatem insitam usus legentis in iis qui facit eorum. Investigationes lectores legere me lius quod ii legunt saepius.</p>
+            </li>
+            <li><img src="{% static 'portal/img/icons/icon-3.png' %}" width="106" height="76" alt="icon" />
+                <h2>In-time Delivery</h2>
+                <div class="divider"></div>
+                <p>Typi non habent claritatem insitam usus legentis in iis qui facit eorum. Investigationes lectores legere me lius quod ii legunt saepius.</p>
+            </li>
+            <li><img src="{% static 'portal/img/icons/icon-4.png' %}" width="106" height="76" alt="icon" />
+                <h2>7x24技术支持</h2>
+                <div class="divider"></div>
+                <p>Typi non habent claritatem insitam usus legentis in iis qui facit eorum. Investigationes lectores legere me lius quod ii legunt saepius.</p>
+            </li>
+        </ul>
+    </div><!--features end-->
+ {% endblock %}
+
+<!--javascripts-->
+{% block javascript %}
+        <script src="{% static 'portal/js/jquery.flexslider-min.js' %}" type="text/javascript"></script>
+        <script src="{% static 'portal/js/custom.js' %}" type="text/javascript"></script>
+{% endblock %}

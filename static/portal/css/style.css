@@ -1,0 +1,867 @@
+
+/*
+Searching for particular element?
+Here is CSS structure...
+
+1. TEMPLATE SETUP
+	1.1 Reset 
+	1.2 General styles
+	1.3 Typography and test styles
+	1.4 Button styles
+	1.5 Image / Video styles
+	1.6 List styles
+	1.7 Dividers and spacers
+	
+2. TEMPLATE STRUCTURE
+	2.1 Common divs 
+	2.2 Header
+	2.3 Header bottom
+	2.4 Home section
+	2.5 Services section
+	2.6 Pricing section
+	2.7 Contact section
+	2.8 copyright
+	
+3. Media queries
+
+/*============================================================*/
+/*---------- 1. TEMPLATE SETUP ----------*/
+/*============================================================*/
+
+/*----------------------------------------*/
+/*----- 1.1 Reset -----*/
+/*----------------------------------------*/
+/* From - http://meyerweb.com/eric/tools/css/reset/  v2.0 | 20110126*/
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after, q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*----------------------------------------*/
+/*----- 1.2 General styles -----*/
+/*----------------------------------------*/
+body {
+	background: #f6f6f6;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 13px;
+	color: #6e6e6e;
+	text-shadow: 0px 1px 0px #ffffff;
+	font-weight: 400;
+	line-height: 1.5em;
+}
+img, embed, object, video {
+	max-width: 100%;
+	height: auto;
+}
+video {
+	width: 100% !important;
+	height: auto !important;
+}
+strong {
+	font-weight: bold;
+}
+/*----------------------------------------*/
+/*----- 1.3 Typography and text styles-----*/
+/*----------------------------------------*/
+/*----- headings -----*/
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Expletus Sans', Tahoma, Arial;
+	color: #434343;
+	font-weight: 600;
+	line-height: 1.2em;
+	font-style: normal;
+	word-spacing: 1px;
+}
+h1 {
+	font-size: 24px;
+	margin-bottom: 15px;
+}
+h2 {
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+h3 {
+	font-size: 16px;
+	margin-bottom: 10px;
+}
+h4 {
+	font-size: 15px;
+	margin-bottom: 10px;
+}
+h5 {
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+/*----- links -----*/
+a {
+	color: #6e6e6e;
+	text-decoration: none;
+	cursor: pointer;
+	font-style: normal;
+	outline: none;
+}
+a:hover {
+	color: #54c2e6;
+}
+h1 a, h2 a, h3 a, h4 a, h5 a {
+	color: #434343;
+}
+a.link-style {
+	color: #54c2e6;
+}
+a.link-style:hover {
+	text-decoration:underline;
+}
+/*----- paragraph -----*/
+p {
+	padding-bottom: 10px;
+}
+p.text-big {
+	font-size: 20px;
+	color: #231f20;
+	line-height: 1.3em;
+}
+
+/*----------------------------------------*/
+/*----- 1.5 Image / Video Styles -----*/
+/*----------------------------------------*/
+.image-border {
+	background: #ffffff;
+	padding: 4px;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+}
+.image-left {
+	background: #ffffff;
+	padding: 4px;
+	margin-right: 10px;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	float: left;
+}
+.image-right {
+	background: #ffffff;
+	padding: 4px;
+	margin-left: 10px;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	float: right;
+}
+.image-left img, .image-right img {
+	float: left;
+}
+.left-align {
+	float: left;
+	margin-right: 10px;
+}
+.right-align {
+	float: right;
+	margin-left: 10px;
+}
+.video-wrapper {
+	background: #ffffff;
+	padding: 4px;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+/*----------------------------------------*/
+/*----- 1.6 List Styles -----*/
+/*----------------------------------------*/
+ul.list-bullet-blue li {
+	background: url(/static/portal/img/bullet-circle-blue.png) no-repeat left 7px;
+	padding: 0px 0px 10px 15px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	color: #54c2e6;
+	border-bottom: 1px dotted #cccccc;
+	list-style-type: none;
+}
+ul.list-bullet li {
+	background: url(/static/portal/img/bullet-circle.png) no-repeat 0 8px;
+	padding-left: 15px;
+	margin-bottom: 10px;
+	font-size: 14px;
+	list-style-type: none;
+}
+/*----------------------------------------*/
+/*----- 1.7 Dividers and spacers -----*/
+/*----------------------------------------*/
+.divider {
+	background: #000000;
+	width: 100px;
+	height: 1px;
+	margin: 15px auto;
+	display: inline-block;
+}
+.divider-dotted {
+	width: 100%;
+	margin: 25px auto;
+	border-top: 1px dotted #cccccc;
+	display: inline-block;
+}
+.page-divider {
+	background: url(/static/portal/img/page-divider.png) no-repeat center top;
+	width: 940px;
+	height: 99px;
+	margin: 85px auto 0px auto;
+	display: block;
+}
+.spacer-20px {
+	width: 100%;
+	height: 20px;
+	display: inline-block;
+}
+/*============================================================*/
+/*---------- 2. TEMPLATE STRUCTRE ----------*/
+/*============================================================*/
+/*----------------------------------------*/
+/*----- 2.1 Common divs -----*/
+/*----------------------------------------*/
+/*It will need to adjust top padding of '#home and #services, #pricing, #contact' if your header height is increasing than present,
+  so that there will be sufficient space between header and scrolling divs*/
+#content {
+	width: 100%;
+	padding-top: 165px;
+}
+#services, #pricing, #contact {
+	width: 100%;
+	padding-top: 105px;
+}
+.content-page {
+	padding-top: 165px;
+}
+/*blank space between two scrolling divs is created with 'margin-top' of '.page-divider'
+  and 'padding-top' of scrolling div (like #services, #pricing and #contact)*/
+/*----------------------------------------*/
+/*----- 2.2 header -----*/
+/*----------------------------------------*/
+#header-wrapper {
+	width: 100%;
+	position: fixed;
+	top: 0;
+	z-index: 999;
+}
+#header {
+	background: #ffffff;
+	width: 100%;
+	padding: 20px 0px !important;
+}
+/*----- logo -----*/
+.logo h1 {
+	color: #54c2e6 !important;
+	margin: 7px 0px 0px 0px; /*adjust as per your logo*/
+}
+/*----- navigation -----*/
+#menu {
+	float: left;
+}
+#menu ul {
+	padding-top: 10px;
+	z-index: 999;
+	float: right;
+}
+#menu ul li {
+	margin: 0px 10px;
+	text-align: right;
+	background: none;
+	list-style-type: none;
+	float: left;
+}
+#menu ul li a {
+	font-family: 'Expletus Sans', Tahoma, Arial;
+	font-size: 14px;
+	color: #231f20;
+	font-weight: 400;
+	text-transform: uppercase;
+	text-decoration:none;
+	outline: none;
+}
+#menu ul li a:hover {
+	color: #df3a65 !important;
+}
+#menu .selected {
+	background: url(/static/portal/img/nav-arrow.png) no-repeat bottom right;
+	padding-bottom: 10px;
+	color: #df3a65 !important;
+}
+#menu ul li span {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 11px;
+	color: #a4a4a4;
+	line-height: 1.2em;
+	font-weight: 400;
+	text-transform: none;
+	display: block;
+}
+#menu select {
+	display: none;
+	cursor: pointer !important;
+	outline: none;
+	text-align:left;
+	border:solid 1px #e6e6e6;
+	padding: 5px;
+	background:transparent;
+	color: #6e6e6e;
+}
+#menu select span {
+	display: none !important;
+}
+.copyrights{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
+/*----------------------------------------*/
+/*----- 2.3 header_bottom -----*/
+/*----------------------------------------*/
+#hd-bottom-wrapper {
+	background: url(/static/portal/img/header-top-shadow.png) repeat-x;
+	width: 100%;
+}
+#header-bottom {
+	background: url(/static/portal/img/header-top-info-shadow.png) repeat-x top #ffffff;
+	width: 920px;
+	padding: 10px 10px 5px 10px;
+	margin: 0px auto 35px auto;
+	font-size: 11px;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	-moz-border-radius-bottomleft: 4px;
+	-moz-border-radius-bottomright: 4px;
+	-webkit-border-bottom-right-radius: 4px;
+	-webkit-border-bottom-left-radius: 4px;
+	-webkit-box-shadow:0 1px 1px rgba(0, 0, 0, 0.07);
+	-moz-box-shadow:0 1px 1px rgba(0, 0, 0, 0.07);
+	box-shadow:0 1px 1px rgba(0, 0, 0, 0.07);
+}
+#header-bottom ul {
+	float: left;
+}
+#header-bottom ul li {
+	margin-right: 5px;
+	background: none;
+	list-style-type: none;
+	float: left;
+}
+#header-bottom p {
+	padding-bottom: 0px;
+	float: right;
+}
+/*----------------------------------------*/
+/*----- 2.4 home section -----*/
+/*----------------------------------------*/
+.features {
+	display: inline-block;
+}
+.features li {
+	width: 220px;
+	margin: 0px 10px;
+	text-align: center;
+	background: none;
+	list-style-type: none;
+	float: left;
+}
+.features li h2 {
+	color: #df3a65;
+	margin-bottom: 0px;
+}
+.features li img {
+	margin-bottom: 10px;
+}
+/*----------------------------------------*/
+/*----- 2.5 services section -----*/
+/*----------------------------------------*/
+.services li {
+	width: 300px;
+	margin: 0px 20px 20px 0px;
+	background: none;
+	list-style-type: none;
+	display: inline-block;
+	float: left;
+}
+.services li img {
+	float: left;
+	margin: 0px 20px 0px 0px;
+}
+.arrow-icon {
+	float: right;
+	margin: 20px 20px 0px 10px;
+}
+/*----- box -----*/
+.box {
+	background: #ffffff;
+	padding: 19px;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+/*----------------------------------------*/
+/*----- 2.6 pricing section -----*/
+/*----------------------------------------*/
+.pricing {
+	width: 100%;
+	padding: 0;
+	margin-top: 10px;
+	display: inline-block;
+	text-shadow: none;
+	float: left;
+}
+.pricing.three-col .price-column {
+	width: 33.2%;
+}
+.pricing.four-col .price-column {
+	width: 24.9%;
+}
+.pricing.five-col .price-column {
+	width: 19.9%;
+}
+.price-column {
+	background:#FFFFFF;
+	height:100%;
+	border-bottom:1px solid #e6e6e6;
+	border-top:1px solid #e6e6e6;
+	display:inline-block;
+	float:left;
+	position: static;
+	overflow: hidden;
+}
+.price-column.first {
+	border-left: 1px solid #e6e6e6;
+	border-radius: 4px 0 0 4px;
+	-moz-border-radius: 4px 0 0 4px;
+	-webkit-border-radius: 4px 0 0 4px;
+	-ms-border-radius: 4px 0 0 4px;
+	-o-border-radius: 4px 0 0 4px;
+}
+.price-column.last {
+	border-right: 1px solid #e6e6e6;
+	border-radius: 0 4px 4px 0;
+	-moz-border-radius: 0 4px 4px 0;
+	-webkit-border-radius: 0 4px 4px 0;
+	-o-border-radius: 0 4px 4px 0;
+	-ms-border-radius: 0 4px 4px 0;
+}
+.price-column.focused {
+	background: #212121;
+	height: auto;
+	margin-top: -10px;
+	padding-bottom: 10px;
+	color: #a0a0a0 !important;
+	vertical-align: middle;
+	overflow: hidden;
+	border: 0px !important;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-ms-border-radius: 4px;
+	-o-border-radius: 4px;
+	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+	-moz-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+	-o-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+	-ms-box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+	-moz-transform:scale(1.00)!important;
+	-ms-transform:scale(1.00)!important;
+	-webkit-transform:scale(1.00) !important;
+	-o-transform:scale(1.00)!important;
+	transform:scale(1.00)!important;
+}
+.price-column.focused:hover {
+	box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.8);
+	-webkit-box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.8);
+	-moz-box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.8);
+	-o-box-shadow: 1px 1px 15px rgba(0, 0, 0, 0.8);
+	-ms-box-shadow:1px 1px 15px rgba(0, 0, 0, 0.8);
+	-webkit-transition:all 0.3s ease-in;
+	-moz-transition:all 0.3s ease-in;
+	-o-transition:all 0.3s ease-in;
+	-ms-transition:all 0.3s ease-in;
+	transition:all 0.3s ease-in;
+}
+.table-th {
+	background: #212121; /* for non-css3 browsers */
+ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#4b4b4b', endColorstr='#212121'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#4b4b4b), to(#212121)); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #4b4b4b, #212121); /* for firefox 3.6+ */
+	background:  -o-linear-gradient(top, #4b4b4b, #212121);
+	width: 100%;
+	padding: 15px 0px;
+	color:#ffffff;
+	float:left;
+	overflow:hidden;
+	text-shadow: none;
+}
+.table-th h4 {
+	margin: 0px 15px 0px 20px;
+	color: #ffffff;
+	font-size: 18px;
+	line-height: 1.8em;
+	display: inline;
+	float: left;
+}
+.table-th span {
+	font-size: 24px;
+	color: #54c2e6;
+	font-weight: 700;
+	display: inline;
+	line-height: 1em;
+}
+.table-th em {
+	font-size: 13px;
+	vertical-align: text-top !important;
+	font-style: normal;
+}
+.table-content {
+	padding: 20px;
+}
+.table-content p {
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px dotted #cccccc;
+}
+.price-column.focused .table-content p {
+	border-bottom: 1px dotted #a0a0a0 !important;
+}
+.table-content span {
+	color: #df3a65;
+}
+p.table-slug {
+	font-size: 11px;
+	color: #e69954;
+	padding: 0;
+	margin-left: 20px;
+	display: block;
+	line-height: 1em;
+}
+.sign-available {
+	background: url(/static/portal/img/correct.png) no-repeat right 0px;
+	padding-right: 30px;
+}
+.sign-notavailable {
+	background: url(/static/portal/img/cross.png) no-repeat right 0px;
+	padding-right: 30px;
+}
+/*----------------------------------------*/
+/*----- 2.7 contact section -----*/
+/*----------------------------------------*/
+/*----- contact form -----*/
+#contactform ul li {
+	margin-bottom: 10px;
+	background: none;
+	list-style-type: none;
+}
+#contactform label {
+	width: 100%;
+	font-family: 'Expletus Sans', Tahoma, Arial;
+	color: #434343;
+	font-size: 12px;
+	display: block;
+}
+#contactform input, #contactform textarea, #contactform select {
+	background: #ffffff;
+	width: 288px;
+	height: 20px;
+	padding: 5px;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 13px;
+	color: #a4a4a4;
+	line-height: 1.6em;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+	-moz-box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.04) inset;
+	-webkit-box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.04) inset;
+	box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.04) inset;
+	display: block;
+}
+#contactform select {
+	width: 300px;
+	height: 34px;
+}
+#contactform textarea {
+	height: 88px;
+}
+#contactform input.submit {
+	background: #3498cc; /* for non-css3 browsers */
+ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#54c2e6', endColorstr='#3498cc'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#54c2e6), to(#3498cc)); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #54c2e6, #3498cc); /* for firefox 3.6+ */
+	background:  -o-linear-gradient(top, #54c2e6, #3498cc);
+	width: auto;
+	height: 35px;
+	padding: 0px 10px;
+	font-family: 'Expletus Sans', Tahoma, Arial;
+	font-size: 11px;
+	color: #ffffff !important;
+	line-height: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	cursor: pointer;
+	border: 1px solid #2e85b2;
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-box-shadow: 0 1px 1px 0px rgba(255, 255, 255, 1) inset;
+	-webkit-box-shadow: 0 1px 1px 0px rgba(255, 255, 255, 1) inset;
+	box-shadow: 0 1px 1px 0px rgba(255, 255, 255, 1) inset;
+}
+#contactform input.submit:hover {
+	background: #0079c6; /* for non-css3 browsers */
+ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00aee2', endColorstr='#0079c6'); /* for IE */
+	background: -webkit-gradient(linear, left top, left bottom, from(#00aee2), to(#0079c6)); /* for webkit browsers */
+	background: -moz-linear-gradient(top, #00aee2, #0079c6); /* for firefox 3.6+ */
+	background:  -o-linear-gradient(top, #00aee2, #0079c6);
+}
+/*error*/
+#contactform label.error {
+	display: none !important;
+}
+#contactform input.error {
+	border: 1px solid #dc8f89;
+}
+#contactform textarea.error {
+	border: 1px solid #dc8f89;
+}
+#result {
+	width:300px;
+	padding-top: 5px;
+	display: block;
+	float: left;
+}
+/*----- twitter -----*/
+#twitter li {
+	margin-bottom: 15px;
+	padding-right: 10px;
+}
+/*----- map -----*/
+.map {
+	background: #ffffff;
+	width: 200px;
+	height: 140px;
+	padding: 4px;
+	margin-left: 10px;
+	border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	display: inline-block;
+}
+/*----- social list -----*/
+.social li {
+	margin-bottom: 10px;
+	line-height: 1em;
+	background: none;
+	list-style-type: none;
+	display: block;
+}
+.social li img {
+	margin-right: 7px;
+	vertical-align: middle;
+}
+/*----------------------------------------*/
+/*----- 2.8 copyright -----*/
+/*----------------------------------------*/
+#copyright {
+	background: url(/static/portal/img/slider-divider.png) no-repeat center top;
+	padding-top: 20px;
+	padding-bottom: 30px;
+	margin-top: 20px;
+	font-size: 11px;
+    text-align: center;
+}
+
+/*============================================================*/
+/*---------- 3. Media queries ----------*/
+/*============================================================*/
+
+/*----------------------------------------*/
+/*----- 3.1 Tablet (Portrait) / Design for a width of 768px -----*/
+/*----------------------------------------*/
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+#header-bottom {
+ width: 728px;
+}
+.features li {
+ width: 172px;
+}
+.services li {
+ width: 236px;
+}
+.pricing.five-col .table-th h4 {
+ float: none;
+ display: block;
+}
+.pricing.five-col .table-th span {
+ display: block;
+ margin: 0px 0px 0px 20px;
+}
+#contactform input, #contactform textarea, #contactform select {
+ width: 224px;
+}
+#contactform select {
+ width: 236px;
+}
+#result {
+ width: 236px;
+}
+.map {
+ width: 140px;
+ height: 120px;
+ float: right;
+}
+.page-divider {
+ background: none;
+ width: 748px;
+ height: auto;
+ display: block;
+ border-top: 1px dotted #cccccc;
+}
+}
+
+/*----------------------------------------*/
+/*----- 3.2 Mobile (Portrait) / Design for a width of 320px -----*/
+/*----------------------------------------*/
+
+@media only screen and (max-width: 767px) {
+
+/*----- Need changes while customization -----*/
+.logo h1 {
+ width: 178px; /*change height and width as per your logo*/
+ height: 40px;
+ margin: 0 auto;
+}
+/*change following in case height of header changes*/
+#home {
+ padding-top: 0px;
+}
+#services, #pricing, #contact {
+ width: 100%;
+ padding-top: 20px;
+}
+
+/*----- No need to change below unless heavy layout changes -----*/
+.container .columns, .container .column {
+ margin: 10px 0px 10px 0px !important;
+}
+#header-wrapper {
+ width: 100%;
+ position: relative !important;
+}
+.logo {
+ width: 300px;
+}
+#menu ul {
+ display: none;
+}
+#menu {
+ text-align:center;
+}
+#menu select {
+ display: inline-block;
+ width:60%;
+}
+#header-bottom {
+ width: 280px;
+ margin-bottom: 10px;
+}
+#header-bottom p {
+float: left;
+}
+.features li {
+ width: 300px;
+ margin: 0px 0px;
+ display: block;
+}
+.services li {
+ margin-right: 0px;
+ display: block;
+ float: none;
+}
+ .pricing.three-col .price-column, .pricing.four-col .price-column, .pricing.five-col .price-column {
+ width: 99.8%;
+ border: 1px solid #e6e6e6;
+ border-radius: 4px;
+ -moz-border-radius: 4px;
+ -webkit-border-radius: 4px;
+ -ms-border-radius: 4px;
+ -o-border-radius: 4px;
+ margin-bottom: 20px;
+}
+.price-column.focused {
+ margin-top: 0px;
+}
+.map {
+ margin-left: 0px;
+}
+#copyright {
+ background: none;
+ border-top: 1px dotted #cccccc;
+}
+.page-divider {
+ background: none;
+ width: 100%;
+ height: auto;
+ margin: 20px auto 0px auto;
+ display: block;
+ border-top: 1px dotted #cccccc;
+}
+}
+
+/*----------------------------------------*/
+/*----- 3.3 Mobile (Landscape) / Design for a width of 480px -----*/
+/*----------------------------------------*/
+
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+/*-----No need to change below unless heavy layout changes-----*/
+/* Other properties are according to those specified for Mobile (Portrait)*/
+.logo {
+ width: 420px;
+}
+#header-bottom {
+ width: 400px;
+}
+.features li {
+ width: 420px;
+ margin: 0px 0px;
+}
+.services li {
+ width: 420px;
+ margin-right: 0px;
+}
+}

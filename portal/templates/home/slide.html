@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<ul class="slides">
+    {% for slide in slides %}
+    <li>
+        <div class="eight columns alpha">
+            <h1>{{ slide.title }}<span>{{ slide.subtitle }}</span></h1>
+            <h2>{{ slide.heading }}</h2>
+            {% autoescape off %}
+            <p>{{ slide.content }}</p>
+            {% endautoescape %}
+            <a href="{{ slide.link }}"><span>{{ slide.button }}</span></a>
+            <p><em>{{ slide.note }}</em></p>
+        </div>
+        <div class="eight columns omega">
+            <div class="image-border">
+                <img src="{{ slide.image }}" style="width: 450px;height: 310px;"/>
+            </div>
+        </div>
+    </li>
+    {% endfor %}
+</ul><!--slides end-->

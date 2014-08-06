@@ -1,0 +1,6 @@
+*.pyc
+*.db
+*.sqlite
+*.sqlite3
+*.idea/
+*.css.map
