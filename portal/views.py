@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.conf import settings
 from portal.models import Slide
 from django.http.response import Http404
 
@@ -101,7 +102,11 @@ def init_context(current):
     init http response context
     :return:
     '''
-    context = {'current': current}
+    debug = settings.DEBUG
+    context = {
+        'current': current,
+        'debug': debug,
+    }
     return context
 
 def data_id_to_page_id(param):
