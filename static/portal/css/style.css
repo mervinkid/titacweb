@@ -66,7 +66,7 @@ table {
 /*----------------------------------------*/
 body {
 	background: #f6f6f6;
-	font-family: 'Open Sans', sans-serif;
+	font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 13px;
 	color: #6e6e6e;
 	text-shadow: 0px 1px 0px #ffffff;
@@ -89,7 +89,7 @@ strong {
 /*----------------------------------------*/
 /*----- headings -----*/
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Expletus Sans', Tahoma, Arial;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: #434343;
 	font-weight: 600;
 	line-height: 1.2em;
@@ -302,7 +302,7 @@ ul.list-bullet li {
 	float: left;
 }
 #menu ul li a {
-	font-family: 'Expletus Sans', Tahoma, Arial;
+	font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	color: #231f20;
 	font-weight: 400;
@@ -319,7 +319,7 @@ ul.list-bullet li {
 	color: #df3a65 !important;
 }
 #menu ul li span {
-	font-family: 'Open Sans', sans-serif;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 	font-size: 11px;
 	color: #a4a4a4;
 	line-height: 1.2em;
