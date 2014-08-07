@@ -31,10 +31,9 @@ urlpatterns += patterns('portal.views',
     url(r'^term/$', 'term'),
 )
 
-if settings.DEBUG is True:
-    static_urlpatterns = static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 else:
-    static_urlpatterns = patterns('',
+    urlpatterns += patterns('',
         url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.STATIC_ROOT}),
     )
-urlpatterns += static_urlpatterns

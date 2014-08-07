@@ -95,11 +95,12 @@ USE_TZ = True
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
-)
+if DEBUG:
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, "static"),
+    )
+else:
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
