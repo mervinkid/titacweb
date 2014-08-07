@@ -95,6 +95,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
