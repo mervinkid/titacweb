@@ -87,7 +87,6 @@ html[xmlns] .slides {
 	height: 52px;
 	margin: -13px 0 0;
 	display: block;
-	background: url(theme/bg_direction_nav.png) no-repeat;
 	position: absolute;
 	top: 50%;
 	cursor: pointer;
@@ -207,7 +206,7 @@ html[xmlns] .slides {
 }
 /*----- testimonial slider -----*/
 .slider-testimonial {
-	background: #f9f9f9;
+	background: #ffffff;
 	border: 1px solid #e6e6e6;
 	padding: 20px !important;
 	margin-top: 20px !important;
@@ -229,7 +228,7 @@ html[xmlns] .slides {
 	border-right: 1px solid #e6e6e6;
 }
 .client h2 {
-	color: #54c2e6;
+	color: #df3a65;
 	margin-bottom: 5px;
 }
 .client h6 {
@@ -238,6 +237,7 @@ html[xmlns] .slides {
 .client p {
 	font-size: 11px;
 }
+
 /*============================================================*/
 /*---------- 3. Media queries ----------*/
 /*============================================================*/
