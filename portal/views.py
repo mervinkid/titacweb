@@ -1,6 +1,7 @@
+#coding=utf-8
 from django.shortcuts import render
 from django.conf import settings
-from portal.models import Slide
+from portal.models import GlobalSetting, Slide
 from django.http.response import Http404
 
 def home(request):
@@ -110,10 +111,17 @@ def init_context(current):
     init http response context
     :return:
     '''
+    #获取DEBUG状态
     debug = settings.DEBUG
+    #获取全局页面关键字设置
+    try:
+        keyword = GlobalSetting.objects.get(key='keyword').value
+    except:
+        keyword = ''
     context = {
         'current': current,
         'debug': debug,
+        'keyword': keyword,
     }
     return context
 

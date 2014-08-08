@@ -1,3 +1,4 @@
+#coding=utf-8
 from django.db import models
 import datetime
 
@@ -21,3 +22,23 @@ class Slide(models.Model):
         if self.title is None:
             return u''
         return self.title
+
+    def save(self, *args, **kwargs):
+        self.update = datetime.datetime.now()
+        super(Slide, self).save(*args, **kwargs)
+
+class GlobalSetting(models.Model):
+    KEY_CHOICES = (
+        ('keyword', 'Keyword'),
+    )
+    key = models.CharField(max_length=250, primary_key=True, choices=KEY_CHOICES)
+    value = models.CharField(max_length=250, null=True, blank=True)
+    update = models.DateTimeField(default=datetime.datetime.now(), editable=False, help_text='Update time')
+
+    def __unicode__(self):
+        return \
+            self.key
+
+    def save(self, *args, **kwargs):
+        self.update = datetime.datetime.now()
+        super(GlobalSetting, self).save(*args, **kwargs)
