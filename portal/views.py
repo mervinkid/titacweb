@@ -1,4 +1,5 @@
 #coding=utf-8
+import datetime
 from django.shortcuts import render
 from django.conf import settings
 from portal.models import GlobalSetting, Slide
@@ -118,10 +119,13 @@ def init_context(current):
         keyword = GlobalSetting.objects.get(key='keyword').value
     except:
         keyword = ''
+    #获取当前年份
+    year = datetime.datetime.now().year
     context = {
         'current': current,
         'debug': debug,
         'keyword': keyword,
+        'year': year
     }
     return context
 

@@ -6,6 +6,7 @@ class GlobalSettingAdmin(admin.ModelAdmin):
     model = GlobalSetting
     ordering = ['key']
     list_display = ('key', 'value', 'update')
+    list_filter = ['update']
 
 class SlideAdmin(admin.ModelAdmin):
     model = Slide
