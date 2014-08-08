@@ -33,6 +33,7 @@ urlpatterns += patterns('portal.views',
     url(r'^term/$', 'term'),
 )
 
+#静态文件处理
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 else:
