@@ -73,6 +73,14 @@ def partner(request):
     context = init_context('partner')
     return render(request, 'partner/parter.html', context)
 
+def career(request):
+    '''
+    :param request:
+    :return:
+    '''
+    context = init_context('career')
+    return render(request, 'career/career.html', context)
+
 def company(request):
     '''
     :param request:
