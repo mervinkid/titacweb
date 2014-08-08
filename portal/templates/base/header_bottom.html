@@ -9,11 +9,15 @@
                     </ul>
                     -->
     <p>
+        {% ifnotequal call '' %}
         <span><img src="{% static 'portal/img/phone.png' %} " style="width: 14px;height: 14px;"/></span>
-        <span>&nbsp;(010)&nbsp;6711&nbsp;9616</span>
+        <span>&nbsp;{{ call }}</span>
+        {% endifnotequal %}
         <span>&nbsp;&nbsp;</span>
+        {% ifnotequal mail '' %}
         <span><img src="{% static 'portal/img/mail.png' %} " style="width: 14px;height: 14px;"/></span>
-        <span>&nbsp;<a href="mailto:gaozhanyi@titac.cn">gaozhanyi@titac.cn</a></span>
+        <span>&nbsp;<a href="mailto:{{ mail }}">{{ mail }}</a></span>
+        {% endifnotequal %}
     </p>
     <div class="clear"></div>
 </div><!--hdeaer-bottom end-->

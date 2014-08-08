@@ -119,13 +119,32 @@ def init_context(current):
         keyword = GlobalSetting.objects.get(key='keyword').value
     except:
         keyword = ''
+    #获取页面简述设置
+    try:
+        description = GlobalSetting.objects.get(key='description').value
+    except:
+        description = ''
+    #获取联系电话
+    try:
+        call = GlobalSetting.objects.get(key='call').value
+    except:
+        call = ''
+    #获取联系邮箱
+    try:
+        mail = GlobalSetting.objects.get(key='mail').value
+    except:
+        mail = ''
     #获取当前年份
     year = datetime.datetime.now().year
+    #将数据装入页面上下文
     context = {
         'current': current,
         'debug': debug,
         'keyword': keyword,
-        'year': year
+        'description': description,
+        'call': call,
+        'mail': mail,
+        'year': year,
     }
     return context
 

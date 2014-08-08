@@ -30,6 +30,9 @@ class Slide(models.Model):
 class GlobalSetting(models.Model):
     KEY_CHOICES = (
         ('keyword', 'Keyword'),
+        ('description', 'Description'),
+        ('call', 'Call'),
+        ('mail', 'Mail'),
     )
     key = models.CharField(max_length=250, primary_key=True, choices=KEY_CHOICES)
     value = models.CharField(max_length=250, null=True, blank=True)
