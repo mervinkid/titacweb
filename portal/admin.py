@@ -1,6 +1,6 @@
 #coding=utf-8
 from django.contrib import admin
-from portal.models import GlobalSetting, Slide, News
+from portal.models import GlobalSetting, Media, Slide, News
 
 class GlobalSettingAdmin(admin.ModelAdmin):
     model = GlobalSetting
@@ -20,7 +20,14 @@ class NewsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'enable', 'update')
     list_filter = ('enable', 'update')
 
+class MediaAdmin(admin.ModelAdmin):
+    model = Media
+    ordering = ['id']
+    list_display = ('id', 'title', 'file', 'update')
+    list_filter = ('update', 'title')
+
 admin.site.register(GlobalSetting, GlobalSettingAdmin)
 admin.site.register(Slide, SlideAdmin)
 admin.site.register(News, NewsAdmin)
+admin.site.register(Media, MediaAdmin)
 

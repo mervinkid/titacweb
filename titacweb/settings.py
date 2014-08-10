@@ -93,7 +93,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
+MEDIA_ROOT = join(BASE_DIR, 'media')
+
+MEDIA_URL = '/media/'
+
+UPLOAD_ROOT = 'upload/'
+
 STATIC_URL = '/static/'
+
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 if DEBUG:
