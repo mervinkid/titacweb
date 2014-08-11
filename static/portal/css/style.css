@@ -255,7 +255,7 @@ ul.list-bullet li {
   so that there will be sufficient space between header and scrolling divs*/
 #content {
 	width: 100%;
-	padding-top: 120px;
+	padding-top: 160px;
 }
 #services, #pricing, #contact {
 	width: 100%;

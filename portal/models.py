@@ -155,6 +155,7 @@ class Solution(models.Model):
     title = models.CharField(max_length=250, help_text='*Title of solution')
     enable = models.IntegerField(default=1, choices=ENABLE_CHOICES, help_text='*Enable status')
     image = models.CharField(max_length=250, null=True, blank=True, help_text='Images of solution')
+    sketch = models.TextField(null=True, blank=True, help_text='Sketch')
     content = models.TextField(null=True, blank=True, help_text='Content of solution')
     update = models.DateTimeField(default=datetime.datetime.now(), editable=False, help_text='*Update time')
 

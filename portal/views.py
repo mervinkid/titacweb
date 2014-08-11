@@ -2,7 +2,9 @@
 import datetime
 from django.conf import settings
 from django.shortcuts import render
-from portal.models import GlobalSetting, Slide
+from django.http.response import Http404
+from portal.models import GlobalSetting, Slide, Solution
+from portal.util import convert_to_data_value, convert_to_view_value
 
 def home(request):
     '''
@@ -13,29 +15,43 @@ def home(request):
     slide_list = Slide.objects.filter(enable=1).order_by('-update')
 
     return render(
-        request,
-        'home/home.html',
-        generate_context(
-            current='home',
-            slides=slide_list
-        )
-    )
+                request,
+                'home/home.html',
+                generate_context(
+                    current='home',
+                    slides=slide_list
+                ))
 
 def solution(request):
     '''
     :param request:
     :return:
     '''
-    context = generate_context(current='solution')
-    return render(request, 'solution/solution.html', context)
+    return render(
+                request,
+                'solution/solution.html',
+                generate_context(
+                    current='solution',
+                ))
 
-def solution_detail(request, param):
+def solution_detail(request, id):
     '''
+    :param request:
     :param id:
     :return:
     '''
-    context = generate_context(current='solution')
-    return render(request, 'solution/solution_detail.html', context)
+    solution_id = convert_to_data_value(id)
+    try:
+        solution_item = Solution.objects.get(id=solution_id)
+    except Exception, error:
+        raise Http404
+    return render(
+                request,
+                'solution/solution_detail.html',
+                generate_context(
+                    current='current',
+                    solution_item=solution_item,
+                ))
 
 def product(request):
     '''

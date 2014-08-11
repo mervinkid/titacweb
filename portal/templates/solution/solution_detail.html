@@ -4,4 +4,31 @@
 {% block title %}{{ solution.title }}{% endblock %}
 
 {% block content %}
+ <div class="container clearfix">
+    <div class="two-thirds column" style="width:700px;">
+        <div class="">
+            <div class="one-third column alpha" style="width: 240px;">
+                <p class="text-big" style="padding-top: 20px;">{{ solution_item.title }}</p>
+            </div>
+            <div class="one-third column omega" style="width: 400px;">
+                <p>{{ solution_item.sketch }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="one-third column" style="width: 220px;">
+      <div class="box" style="height: 100px;">
+          <h6></h6>
+      </div>
+    </div>
+    <div class="divider-dotted sixteen columns"></div>
+    </div>
+ <div class="container clearfix">
+    <div class="sixteen columns">
+        <div class="box">
+            {% autoescape off %}
+            {{ solution_item.content }}
+            {% endautoescape %}
+        </div>
+    </div>
+ </div>
 {% endblock %}
