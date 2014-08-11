@@ -7,8 +7,9 @@ from django.db import models
 from portal.util import generate_random_string
 
 class Media(models.Model):
+    UPLOAD_ROOT = 'upload/'
     title = models.CharField(max_length=250, help_text='*Title of media')
-    file = models.FileField(upload_to=settings.UPLOAD_ROOT)
+    file = models.FileField(upload_to=UPLOAD_ROOT)
     update = models.DateTimeField(default=datetime.datetime.now(), editable=False)
 
     def __unicode__(self):
@@ -143,21 +144,6 @@ class News(models.Model):
         self.update = datetime.datetime.now()
         super(News, self).save(*args, **kwargs)
 
-class SolutionCatalog(models.Model):
-    '''
-    用于管理解决方案分组
-    '''
-    ENABLE_CHOICES = (
-        (1, 'Yes'),
-        (0, 'No'),
-    )
-    title = models.CharField(max_length=250, help_text='*Title of solution catalog')
-    enable = models.IntegerField(default=1, choices=ENABLE_CHOICES, help_text='*Enable status')
-
-    def __unicode__(self):
-        return \
-            self.title
-
 class Solution(models.Model):
     '''
     用于管理解决方案信息
@@ -168,8 +154,9 @@ class Solution(models.Model):
     )
     title = models.CharField(max_length=250, help_text='*Title of solution')
     enable = models.IntegerField(default=1, choices=ENABLE_CHOICES, help_text='*Enable status')
+    image = models.CharField(max_length=250, null=True, blank=True, help_text='Images of solution')
+    content = models.TextField(null=True, blank=True, help_text='Content of solution')
     update = models.DateTimeField(default=datetime.datetime.now(), editable=False, help_text='*Update time')
-    catalog = models.ForeignKey(SolutionCatalog)
 
     def __unicode__(self):
         return \

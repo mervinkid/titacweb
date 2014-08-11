@@ -97,8 +97,6 @@ MEDIA_ROOT = join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
-UPLOAD_ROOT = 'upload/'
-
 STATIC_URL = '/static/'
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'

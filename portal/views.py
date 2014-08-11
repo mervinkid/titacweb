@@ -116,7 +116,7 @@ def generate_context(**contexts):
     :return:
     '''
     #获取传入的上下文
-    current = contexts
+    input_context = dict(contexts)
     #获取DEBUG状态
     debug = settings.DEBUG
     #获取全局页面关键字设置
@@ -142,8 +142,7 @@ def generate_context(**contexts):
     #获取当前年份
     year = datetime.datetime.now().year
     #将数据装入页面上下文
-    context = {
-        'current': current,
+    setting_context = {
         'debug': debug,
         'keyword': keyword,
         'description': description,
@@ -151,4 +150,5 @@ def generate_context(**contexts):
         'mail': mail,
         'year': year,
     }
+    context = dict(input_context.items() + setting_context.items())
     return context

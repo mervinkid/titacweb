@@ -1,7 +1,8 @@
 #coding=utf-8
+__author__ = 'Mervin'
+import datetime
 from django.test import TestCase
 from portal.util import generate_random_string
-from portal.models import Media
 
 #单元测试类
 class UnitTest(TestCase):
@@ -10,13 +11,25 @@ class UnitTest(TestCase):
         测试随机字符串生成
         :return:
         '''
+        #生成100个16位随机字符串
+        COUNT = 10000
         result_list = []
-        for i in range(10):
+        before_generate = datetime.datetime.now()
+        for i in range(COUNT):
             random_string = generate_random_string(16)
             result_list.append(random_string)
-        print result_list
-        return
-
-class ViewTest(TestCase):
-    def test_home(self):
-        response = self.client.get('/')
+        after_generate = datetime.datetime.now()
+        generate_cost = after_generate - before_generate
+        print 'Generate cost:' + str(generate_cost.microseconds/1000) + 'ms'
+        #检查字符串是否有重复
+        before_validate = datetime.datetime.now()
+        list_count = len(result_list)
+        for x in range(0, list_count-1, 1):
+            for y in range(x, list_count-1, 1):
+                if result_list[x] == result_list[x+1]:
+                    after_validate = datetime.datetime.now()
+                    print 'Fail'
+                    break
+        after_validate = datetime.datetime.now()
+        validate_cost = after_validate - before_validate
+        print 'Validate cost:' + str(validate_cost.microseconds/1000) + 'ms'
