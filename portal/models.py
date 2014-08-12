@@ -168,3 +168,29 @@ class Solution(models.Model):
         #保存时自动更新数据修改时间
         self.update = datetime.datetime.now()
         return super(Solution, self).save(*args, **kwargs)
+
+class Product(models.Model):
+    '''
+    用于管理产品数据
+    '''
+    ENABLE_CHOICES = (
+        (1, 'Yes'),
+        (0, 'No'),
+    )
+    title = models.CharField(max_length=250, help_text='*Product name')
+    enable = models.IntegerField(default=1, choices=ENABLE_CHOICES, help_text='*Enable status')
+    image = models.CharField(max_length=250, null=True, blank=True, help_text='Images of product')
+    sketch = models.TextField(null=True, blank=True, help_text='Sketch')
+    content = models.TextField(null=True, blank=True, help_text='Content of solution')
+    keyword = models.CharField(max_length=250, null=True, blank=True)
+    update = models.DateTimeField(default=datetime.datetime.now(), editable=False, help_text='*Update time')
+    solution = models.ForeignKey(Solution, null=True, blank=True)
+
+    def __unicode__(self):
+        return \
+            self.title
+
+    def save(self, *args, **kwargs):
+        #保存时自动更新数据修改时间
+        self.update = datetime.datetime.now()
+        return super(Product, self).save(*args, **kwargs)

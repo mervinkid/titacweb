@@ -1,6 +1,6 @@
 #coding=utf-8
 from django.contrib import admin
-from portal.models import GlobalSetting, Media, Slide, News, Solution
+from portal.models import GlobalSetting, Media, Slide, News, Solution, Product
 
 class GlobalSettingAdmin(admin.ModelAdmin):
     model = GlobalSetting
@@ -32,9 +32,16 @@ class SolutionAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'keyword', 'enable', 'update')
     list_filter = ('enable', 'update')
 
+class ProductAdmin(admin.ModelAdmin):
+    model = Product
+    ordering = ['id']
+    list_display = ('id', 'title', 'keyword', 'enable', 'solution', 'update')
+    list_filter = ('enable', 'update', 'solution')
+
 admin.site.register(GlobalSetting, GlobalSettingAdmin)
 admin.site.register(Slide, SlideAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Media, MediaAdmin)
 admin.site.register(Solution, SolutionAdmin)
+admin.site.register(Product, ProductAdmin)
 
