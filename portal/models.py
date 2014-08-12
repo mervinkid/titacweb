@@ -157,6 +157,7 @@ class Solution(models.Model):
     image = models.CharField(max_length=250, null=True, blank=True, help_text='Images of solution')
     sketch = models.TextField(null=True, blank=True, help_text='Sketch')
     content = models.TextField(null=True, blank=True, help_text='Content of solution')
+    keyword = models.CharField(max_length=250, null=True, blank=True)
     update = models.DateTimeField(default=datetime.datetime.now(), editable=False, help_text='*Update time')
 
     def __unicode__(self):

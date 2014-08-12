@@ -29,7 +29,7 @@ class MediaAdmin(admin.ModelAdmin):
 class SolutionAdmin(admin.ModelAdmin):
     model = Solution
     ordering = ['id']
-    list_display = ('id', 'title', 'enable', 'update')
+    list_display = ('id', 'title', 'keyword', 'enable', 'update')
     list_filter = ('enable', 'update')
 
 admin.site.register(GlobalSetting, GlobalSettingAdmin)
