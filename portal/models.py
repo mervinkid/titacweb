@@ -5,6 +5,7 @@ import datetime
 from django.conf import settings
 from django.db import models
 from portal.util import generate_random_string
+from portal.manager import SlideManager, SolutionManager, GlobalSettingManager
 
 class Media(models.Model):
     UPLOAD_ROOT = 'upload/'
@@ -79,6 +80,7 @@ class Slide(models.Model):
     button = models.CharField(max_length=250, null=True, blank=True, help_text='Button text')
     enable = models.IntegerField(default=1, choices=ENABLE_CHOICES, help_text='*Enable status')
     update = models.DateTimeField(default=datetime.datetime.now(), editable=False, help_text='Update time')
+    objects = SlideManager()
 
     def __unicode__(self):
         if self.title is None:
@@ -105,6 +107,7 @@ class GlobalSetting(models.Model):
     key = models.CharField(max_length=250, primary_key=True, choices=KEY_CHOICES, help_text='*Key')
     value = models.CharField(max_length=250, null=True, blank=True, help_text='Value')
     update = models.DateTimeField(default=datetime.datetime.now(), editable=False, help_text='Update time')
+    objects = GlobalSettingManager()
 
     def __unicode__(self):
         return \
@@ -159,6 +162,7 @@ class Solution(models.Model):
     content = models.TextField(null=True, blank=True, help_text='Content of solution')
     keyword = models.CharField(max_length=250, null=True, blank=True)
     update = models.DateTimeField(default=datetime.datetime.now(), editable=False, help_text='*Update time')
+    objects = SolutionManager()
 
     def __unicode__(self):
         return \

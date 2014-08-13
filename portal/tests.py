@@ -26,10 +26,8 @@ class UnitTest(TestCase):
         list_count = len(result_list)
         for x in range(0, list_count-1, 1):
             for y in range(x, list_count-1, 1):
-                if result_list[x] == result_list[x+1]:
-                    after_validate = datetime.datetime.now()
+                if result_list[x] == result_list[y+1]:
                     print 'Fail'
-                    break
-        after_validate = datetime.datetime.now()
-        validate_cost = after_validate - before_validate
-        print 'Validate cost:' + str(validate_cost.microseconds/1000) + 'ms'
+                    return
+        print 'Pass'
+        return

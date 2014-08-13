@@ -12,7 +12,7 @@ def home(request):
     :return:
     '''
     #load slide data
-    slide_list = Slide.objects.filter(enable=1).order_by('-update')
+    slide_list = Slide.objects.get_enabled_slide()
 
     return render(
                 request,
@@ -41,10 +41,10 @@ def solution_detail(request, id):
     :return:
     '''
     solution_id = convert_to_data_value(id)
-    try:
-        solution_item = Solution.objects.get(id=solution_id)
-    except Exception, error:
+    solution_item = Solution.objects.get_solution_by_id(solution_id)
+    if not solution_item:
         raise Http404
+
     return render(
                 request,
                 'solution/solution_detail.html',
@@ -135,35 +135,14 @@ def generate_context(**contexts):
     input_context = dict(contexts)
     #获取DEBUG状态
     debug = settings.DEBUG
-    #获取全局页面关键字设置
-    try:
-        keyword = GlobalSetting.objects.get(key='keyword').value
-    except Exception, error:
-        keyword = ''
-    #获取页面简述设置
-    try:
-        description = GlobalSetting.objects.get(key='description').value
-    except Exception, error:
-        description = ''
-    #获取联系电话
-    try:
-        call = GlobalSetting.objects.get(key='call').value
-    except Exception, error:
-        call = ''
-    #获取联系邮箱
-    try:
-        mail = GlobalSetting.objects.get(key='mail').value
-    except Exception, error:
-        mail = ''
+    #获取全局设置
+    g_settings = GlobalSetting.objects.get_settings()
     #获取当前年份
     year = datetime.datetime.now().year
     #将数据装入页面上下文
     setting_context = {
         'debug': debug,
-        'keyword': keyword,
-        'description': description,
-        'call': call,
-        'mail': mail,
+        'g_settings': g_settings,
         'year': year,
     }
     context = dict(input_context.items() + setting_context.items())
