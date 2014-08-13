@@ -44,7 +44,21 @@
             </div><!--header ends-->
             <!--hd-bottom-wrapper starts-->
             <div id="hd-bottom-wrapper">
-                {% include 'base/header_bottom.html' %}
+                <div id="header-bottom" xmlns="http://www.w3.org/1999/html">
+                    {% block position %}{% endblock %}
+                    <p>
+                        {% ifnotequal call None %}
+                        <span><img src="{% static 'portal/img/phone.png' %} " style="width: 14px;height: 14px;"/></span>
+                        <span>&nbsp;{{ g_settings.call }}</span>
+                        {% endifnotequal %}
+                        <span>&nbsp;&nbsp;</span>
+                        {% ifnotequal mail None %}
+                        <span><img src="{% static 'portal/img/mail.png' %} " style="width: 14px;height: 14px;"/></span>
+                        <span>&nbsp;<a href="mailto:{{ g_settings.mail }}">{{ g_settings.mail }}</a></span>
+                        {% endifnotequal %}
+                    </p>
+                    <div class="clear"></div>
+                </div><!--hdeaer-bottom end-->
             </div><!--hd-bottom-wrapper ends-->
             <div class="clear"></div>
         </div><!--header_wrapper ends -->
@@ -52,8 +66,7 @@
         <div id="content">
             <!--container clearfix-->
             <div class="container clearfix">
-                {% block content %}
-                {% endblock %}
+                {% block content %}{% endblock %}
             </div>
         </div><!--content end-->
         <!--copyright starts-->

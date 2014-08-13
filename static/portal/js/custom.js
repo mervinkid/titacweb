@@ -61,6 +61,13 @@ $(document).ready(function() {
     search.focusout(function(){
         search.attr('placeholder', '搜索');
     });
+    //Position
+    var arrow_right = $("#arrow_right");
+    arrow_right.attr("src", "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABSUlEQVQ4EZVTO26DQBDlDxKFQwetW4QCJzA3cG6Qq+UIyQ32Biaio4CkSwcpEb+8Id6N+BickZ5nZnnzdmZ3rUorFkXRyfO8xHXdL9j7CkUsySK6BkEQnGVZfuXrwzA8pWn6xvO5V+YLhmGwrusSQCL0ff/i+/7jnMfzRQf04Xg8HnRdZ+gkpBxdVECcZdlinFUBLqKqKkMsRNBRWBTFJ33ndlOACNQJdmYIRxH4BF3FeZ5/Ix5tU4AYJNK27QfCB8phiaZpQmRxiL+cv1/aDa3HQEWHSmPUdc04Q+PBlm+aRkLrI4iHsQR9V8BxnPEcUCRGwEgxV9gUoGIQ6V2IYrrOsiz3D5GKUcggwG+gUhQlrKpqco28k4mnYtu2L8BwRQl/8zVOipEcTNO8WJY1EBD/q1jCf+GMZzxwUD7f4Z78hHlLPOXnPfIPp3eQqrvrfccAAAAASUVORK5CYII=");
+    arrow_right.css({
+        "width":"10px",
+        "height":"10px"
+    });
 }); //close document.ready
 
     // Below scripts do not require modification
@@ -198,27 +205,27 @@ var imgSizer = {
             selectors.push(settings.customSelector);
         }
       
-      var $allVideos = $(this).find(selectors.join(','));
+        var $allVideos = $(this).find(selectors.join(','));
 
-      $allVideos.each(function(){
-        var $this = $(this);
-        if (this.tagName.toLowerCase() == 'embed' && $this.parent('object').length || $this.parent('.fluid-width-video-wrapper').length) { return; } 
-        var height = this.tagName.toLowerCase() == 'object' ? $this.attr('height') : $this.height(),
+        $allVideos.each(function(){
+            var $this = $(this);
+            if (this.tagName.toLowerCase() == 'embed' && $this.parent('object').length || $this.parent('.fluid-width-video-wrapper').length) { return; }
+            var height = this.tagName.toLowerCase() == 'object' ? $this.attr('height') : $this.height(),
             aspectRatio = height / $this.width();
-		if(!$this.attr('id')){
-			var videoID = 'fitvid' + Math.floor(Math.random()*999999);
-			$this.attr('id', videoID);
-		}
-        $this.wrap('<div class="fluid-width-video-wrapper"></div>').parent('.fluid-width-video-wrapper').css('padding-top', (aspectRatio * 100)+"%");
-        $this.removeAttr('height').removeAttr('width');
-      });
+		    if(!$this.attr('id')){
+			    var videoID = 'fitvid' + Math.floor(Math.random()*999999);
+			    $this.attr('id', videoID);
+		    }
+            $this.wrap('<div class="fluid-width-video-wrapper"></div>').parent('.fluid-width-video-wrapper').css('padding-top', (aspectRatio * 100)+"%");
+            $this.removeAttr('height').removeAttr('width');
+        });
     });
   
-  }
+}
 })( jQuery );
 
 
- // Basic FitVids Test
-        $(".container").fitVids();
-        // Custom selector and No-Double-Wrapping Prevention Test
-        $(".container").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});
+// Basic FitVids Test
+$(".container").fitVids();
+// Custom selector and No-Double-Wrapping Prevention Test
+$(".container").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});

@@ -1,7 +1,18 @@
 {% extends 'base/base.html' %}
 {% load staticfiles %}
 
-{% block title %}{{ solution.title }}{% endblock %}
+{% block title %}{{ solution_item.title }}{% endblock %}
+
+<!--position-->
+{% block position %}
+    <ul>
+        <li><a href="/">首页</a></li>
+        <li><img id="arrow_right" src=""></li>
+        <li><a href="/solution">解决方案</a></li>
+        <li><img id="arrow_right" src=""></li>
+        <li><a href="#">{{ solution_item.title }}</a></li>
+    </ul>
+{% endblock %}
 
 {% block content %}
  <div class="container clearfix">
