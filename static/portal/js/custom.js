@@ -1,8 +1,7 @@
 // JavaScript Document for Theflow
 $(document).ready(function() {
-
-//full width slider on home page
-$('.slider').flexslider({
+    //full width slider on home page
+    $('.slider').flexslider({
     	animation: "slide",
 		slideshowSpeed: 4000,
 		animationDuration: 500,
@@ -11,10 +10,9 @@ $('.slider').flexslider({
     	directionNav: false,
 		pauseOnHover: true,
 		pauseOnAction: true    
-});
-
-//full width slider on home page
-$('.slider-testimonial').flexslider({
+    });
+    //full width slider on home page
+    $('.slider-testimonial').flexslider({
     	animation: "fade",
 		slideshowSpeed: 4000,
 		animationDuration: 500,
@@ -23,10 +21,9 @@ $('.slider-testimonial').flexslider({
     	directionNav: false,
 		pauseOnHover: true,
 		pauseOnAction: true    
-});
-
-//full width slider on home page
-$('.slider-small').flexslider({
+    });
+    //full width slider on home page
+    $('.slider-small').flexslider({
     	animation: "fade",
 		slideshowSpeed: 4000,
 		animationDuration: 500,
@@ -35,34 +32,40 @@ $('.slider-small').flexslider({
     	directionNav: false,
 		pauseOnHover: true,
 		pauseOnAction: true    
-});
-
-// Create the dropdown menu for responsive
-$("<select />").appendTo("#menu");
+    });
+    // Create the dropdown menu for responsive
+    $("<select />").appendTo("#menu");
 	$("<option />", {
-	"selected": "selected",
-	"value"   : "",
-	"text"    : "Menu"
+	    "selected": "selected",
+	    "value"   : "",
+	    "text"    : "Menu"
 	}).appendTo("#menu select");
 	// Populate dropdown with menu items
 	$("#menu a").each(function() {
-	var el = $(this);
-	$("<option />", {
-	"value"   : el.attr("href"),
-	"text"    : el.text()
-	}).appendTo("#menu select");
+	    var el = $(this);
+	    $("<option />", {
+	        "value": el.attr("href"),
+	        "text" : el.text()
+	    }).appendTo("#menu select");
 	});
 	// To make dropdown actually work
 	// To make more unobtrusive: http://css-tricks.com/4064-unobtrusive-page-changer/
 	$("#menu select").change(function() {
-	window.location = $(this).find("option:selected").val();
-});
-
+	    window.location = $(this).find("option:selected").val();
+    });
+    //Search Box
+    var search = $('#search');
+    search.focus(function(){
+        search.attr('placeholder', '');
+    });
+    search.focusout(function(){
+        search.attr('placeholder', '搜索');
+    });
 }); //close document.ready
 
-// Below scripts do not require modification 
+    // Below scripts do not require modification
 
-/* IE Image Resizing - by Ethan Marcotte - http://unstoppablerobotninja.com/entry/fluid-images/ */
+    /* IE Image Resizing - by Ethan Marcotte - http://unstoppablerobotninja.com/entry/fluid-images/ */
 var imgSizer = {
 	Config : {
 		imgCache : []
@@ -149,32 +152,31 @@ var imgSizer = {
 */
 
 (function( $ ){
-
-  $.fn.fitVids = function( options ) {
-    var settings = {
-      customSelector: null
+    $.fn.fitVids = function( options ) {
+        var settings = {
+        customSelector: null
     }
     
     var div = document.createElement('div'),
         ref = document.getElementsByTagName('base')[0] || document.getElementsByTagName('script')[0];
         
   	div.className = 'fit-vids-style';
-    div.innerHTML = '&shy;<style>         \
-      .fluid-width-video-wrapper {        \
-         width: 100%;                     \
-         position: relative;              \
-         padding: 0;                      \
-      }                                   \
+    div.innerHTML = '&shy;<style>       \
+        .fluid-width-video-wrapper {      \
+            width: 100%;                  \
+            position: relative;           \
+            padding: 0;                   \
+        }                                 \
                                           \
-      .fluid-width-video-wrapper iframe,  \
-      .fluid-width-video-wrapper object,  \
-      .fluid-width-video-wrapper embed {  \
-         position: absolute;              \
-         top: 0;                          \
-         left: 0;                         \
-         width: 100%;                     \
-         height: 100%;                    \
-      }                                   \
+        .fluid-width-video-wrapper iframe,  \
+        .fluid-width-video-wrapper object,  \
+        .fluid-width-video-wrapper embed {  \
+            position: absolute;             \
+            top: 0;                         \
+            left: 0;                        \
+            width: 100%;                    \
+            height: 100%;                   \
+        }                                   \
     </style>';
                       
     ref.parentNode.insertBefore(div,ref);
@@ -184,17 +186,17 @@ var imgSizer = {
     }
     
     return this.each(function(){
-      var selectors = [
-        "iframe[src*='player.vimeo.com']", 
-        "iframe[src*='www.youtube.com']",  
-        "iframe[src*='www.kickstarter.com']", 
-        "object", 
-        "embed"
-      ];
+        var selectors = [
+            "iframe[src*='player.vimeo.com']",
+            "iframe[src*='www.youtube.com']",
+            "iframe[src*='www.kickstarter.com']",
+            "object",
+            "embed"
+        ];
       
-      if (settings.customSelector) {
-        selectors.push(settings.customSelector);
-      }
+        if (settings.customSelector) {
+            selectors.push(settings.customSelector);
+        }
       
       var $allVideos = $(this).find(selectors.join(','));
 
@@ -219,4 +221,4 @@ var imgSizer = {
  // Basic FitVids Test
         $(".container").fitVids();
         // Custom selector and No-Double-Wrapping Prevention Test
-        $(".container").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});  
+        $(".container").fitVids({ customSelector: "iframe[src^='http://socialcam.com']"});

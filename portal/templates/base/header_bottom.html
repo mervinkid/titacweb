@@ -11,12 +11,12 @@
     <p>
         {% ifnotequal call '' %}
         <span><img src="{% static 'portal/img/phone.png' %} " style="width: 14px;height: 14px;"/></span>
-        <span>&nbsp;{{ call }}</span>
+        <span>&nbsp;{{ g_settings.call }}</span>
         {% endifnotequal %}
         <span>&nbsp;&nbsp;</span>
         {% ifnotequal mail '' %}
         <span><img src="{% static 'portal/img/mail.png' %} " style="width: 14px;height: 14px;"/></span>
-        <span>&nbsp;<a href="mailto:{{ mail }}">{{ mail }}</a></span>
+        <span>&nbsp;<a href="mailto:{{ g_settings.mail }}">{{ g_settings.mail }}</a></span>
         {% endifnotequal %}
     </p>
     <div class="clear"></div>
