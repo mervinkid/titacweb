@@ -869,6 +869,7 @@ p.table-slug {
 div .search_box {
     border: 1px solid;
     background: #ffffff;
+    border-radius: 2px;
 }
 
 div .search_box  #search_text{
@@ -880,6 +881,7 @@ div .search_box  #search_text{
     border: none;
     outline: none;
     -webkit-appearance: none;
+    box-sizing: content-box;
 }
 
 div .search_box  #search_submit{
