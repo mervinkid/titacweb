@@ -18,8 +18,11 @@
                             -->
                             <li><span>关于我们</span><a href="/company" class="nav-contact nav {% ifequal current 'company' %}selected{% endifequal %}">公司</a></li>
                             <li>
-                                <div>
-                                    <input id="search" type="search"  style="width: 120px;" placeholder="搜索">
+                                <div class="search_box">
+                                        <form>
+                                        <input id="search_text" type="search"  placeholder="搜索">
+                                        <input id="search_submit" type="submit" value="">
+                                        </form>
                                 </div>
                             </li>
                         </ul>
