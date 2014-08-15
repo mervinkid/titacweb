@@ -4,7 +4,7 @@ from django.conf import settings
 from django.shortcuts import render
 from django.http.response import Http404
 from portal.models import GlobalSetting, Slide, Solution
-from portal.util import convert_to_data_value, convert_to_view_value
+from portal.utils import convert_to_data_value, convert_to_view_value
 
 def home(request):
     '''

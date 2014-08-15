@@ -47,12 +47,12 @@
                 <div id="header-bottom" xmlns="http://www.w3.org/1999/html">
                     {% block position %}{% endblock %}
                     <p>
-                        {% ifnotequal call None %}
+                        {% ifnotequal g_settings.call None %}
                         <span><img src="{% static 'portal/img/phone.png' %} " style="width: 14px;height: 14px;"/></span>
                         <span>&nbsp;{{ g_settings.call }}</span>
                         {% endifnotequal %}
                         <span>&nbsp;&nbsp;</span>
-                        {% ifnotequal mail None %}
+                        {% ifnotequal g_settings.mail None %}
                         <span><img src="{% static 'portal/img/mail.png' %} " style="width: 14px;height: 14px;"/></span>
                         <span>&nbsp;<a href="mailto:{{ g_settings.mail }}">{{ g_settings.mail }}</a></span>
                         {% endifnotequal %}

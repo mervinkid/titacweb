@@ -4,7 +4,7 @@ import os
 import datetime
 from django.conf import settings
 from django.db import models
-from portal.util import generate_random_string
+from portal.utils import generate_random_string
 from portal.manager import SlideManager, SolutionManager, GlobalSettingManager
 
 class Media(models.Model):

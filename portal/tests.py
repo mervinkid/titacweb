@@ -2,7 +2,7 @@
 __author__ = 'Mervin'
 import datetime
 from django.test import TestCase
-from portal.util import generate_random_string
+from portal.utils import generate_random_string
 
 #单元测试类
 class UnitTest(TestCase):
