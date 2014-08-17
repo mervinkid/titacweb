@@ -23,16 +23,17 @@
         <!--style sheets-->
         <link rel="stylesheet" media="screen" href="{% static 'portal/css/style.css' %}" />
         <link rel="stylesheet" media="screen" href="{% static 'portal/css/skeleton.css' %}" />
-        <link rel="stylesheet" media="screen" href="{% static 'portal/css/flexslider.css' %}" />
         <!--jquery libraries / others are at the bottom-->
         {% if debug == True %}
         <script src="{% static 'portal/js/jquery.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'portal/js/modernizr.js' %}" type="text/javascript"></script>
         <script src="{% static 'portal/js/jquery.flexslider-min.js' %}" type="text/javascript"></script>
+        <link rel="stylesheet" media="screen" href="{% static 'portal/css/flexslider.css' %}" />
         {% else %}
         <script src="http://cdn.bootcss.com/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
         <script src="http://cdn.bootcss.com/modernizr/2.8.2/modernizr.min.js" type="text/javascript"></script>
-        <script src="http://cdn.bootcss.com/flexslider/2.2.2/flexslider-min.css" type="text/javascript"></script>
+        <script src="http://cdn.bootcss.com/flexslider/2.2.2/jquery.flexslider-min.js" type="text/javascript"></script>
+        <link rel="stylesheet" media="screen" href="http://cdn.bootcss.com/flexslider/2.2.2/flexslider-min.css">
         {% endif %}
     </head>
     <body>
