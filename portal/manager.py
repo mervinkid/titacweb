@@ -24,3 +24,9 @@ class SolutionManager(models.Manager):
         except Exception:
             return None
 
+    def get_search(self, query):
+        return self.get_queryset().filter(models.Q(title__icontains=query)|models.Q(content__icontains=query), enable=1)
+
+class ProductManager(models.Manager):
+    def get_search(self, query):
+        return self.get_queryset().filter(models.Q(title__icontains=query)|models.Q(content__icontains=query), enable=1)

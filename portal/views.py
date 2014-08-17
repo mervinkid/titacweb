@@ -3,7 +3,7 @@ import datetime
 from django.conf import settings
 from django.shortcuts import render
 from django.http.response import Http404
-from portal.models import GlobalSetting, Slide, Solution
+from portal.models import GlobalSetting, Slide, Solution, Product
 from portal.utils import convert_to_data_value, convert_to_view_value
 
 def home(request):
@@ -125,6 +125,20 @@ def term(request):
     '''
     context = generate_context(current='company')
     return render(request, 'company/term.html', context)
+
+def search(request):
+    query = request.GET.get('s', None)
+
+    if query:
+        #查询解决方案
+        solutions = Solution.objects.get_search(query)
+        #查询产品
+        products = Product.objects.get_search(query)
+
+    return render(request, 'search.html', generate_context(current='home'))
+
+def h404(request):
+    return render(request, '404.html', generate_context(current='home'))
 
 def generate_context(**contexts):
     '''

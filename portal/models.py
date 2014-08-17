@@ -5,7 +5,7 @@ import datetime
 from django.conf import settings
 from django.db import models
 from portal.utils import generate_random_string
-from portal.manager import SlideManager, SolutionManager, GlobalSettingManager
+from portal.manager import SlideManager, SolutionManager, GlobalSettingManager, ProductManager
 
 class Media(models.Model):
     UPLOAD_ROOT = 'upload/'
@@ -189,6 +189,7 @@ class Product(models.Model):
     keyword = models.CharField(max_length=250, null=True, blank=True)
     update = models.DateTimeField(default=datetime.datetime.now(), editable=False, help_text='*Update time')
     solution = models.ForeignKey(Solution, null=True, blank=True)
+    objects = ProductManager()
 
     def __unicode__(self):
         return \
