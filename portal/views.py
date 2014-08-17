@@ -49,7 +49,7 @@ def solution_detail(request, id):
                 request,
                 'solution/solution_detail.html',
                 generate_context(
-                    current='current',
+                    current='solution',
                     solution_item=solution_item,
                 ))
 
@@ -128,17 +128,60 @@ def term(request):
 
 def search(request):
     query = request.GET.get('s', None)
-
-    if query:
+    search_result = []
+    if query and 'search' not in request.COOKIES:
         #查询解决方案
-        solutions = Solution.objects.get_search(query)
+        solution_result = Solution.objects.get_search(query)
+        for solution_item in solution_result:
+            solution_id = convert_to_view_value(solution_item.id)
+            solution_title = solution_item.title
+            solution_sketch = solution_item.sketch
+            if len(solution_sketch) > 100:
+                solution_sketch = solution_sketch[0:100] + '...'
+            result_item = {
+                'type': 'solution',
+                'id': solution_id,
+                'title': solution_title,
+                'sketch': solution_sketch,
+            }
+            search_result.append(result_item)
         #查询产品
-        products = Product.objects.get_search(query)
+        product_result = Product.objects.get_search(query)
+        for product_item in product_result:
+            product_id = convert_to_view_value(product_item.id)
+            product_title = product_item.title
+            product_sketch = product_item.sketch
+            if len(product_sketch) > 100:
+                product_sketch = product_sketch[0:100] + '...'
+            result_item = {
+                'type': 'product',
+                'id': product_id,
+                'title': product_title,
+                'sketch': product_sketch,
+            }
+            search_result.append(result_item)
 
-    return render(request, 'search.html', generate_context(current='home'))
+    if len(search_result) == 0:
+        search_result= None
+
+    response = render(
+        request,
+        'search.html',
+        generate_context(
+            current='home',
+            search_result=search_result,
+            query=query
+        )
+    )
+    response.set_cookie('search', max_age=2)
+
+    return response
 
 def h404(request):
     return render(request, '404.html', generate_context(current='home'))
+
+def h500(request):
+    return render(request, '500.html', generate_context(current='home'))
 
 def generate_context(**contexts):
     '''

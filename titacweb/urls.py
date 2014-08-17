@@ -1,7 +1,7 @@
 #coding=utf-8
 from django.conf import settings
 from django.conf.urls.static import static
-from django.conf.urls import patterns, include, url, handler404
+from django.conf.urls import patterns, include, url, handler404, handler500
 from django.contrib import admin
 import portal.urls
 admin.autodiscover()
@@ -26,3 +26,4 @@ else:
     )
 
 handler404 = 'portal.views.h404'
+handler500 = 'portal.views.h500'

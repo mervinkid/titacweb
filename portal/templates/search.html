@@ -7,10 +7,39 @@
     <ul>
         <li><a href="/">首页</a></li>
         <li><div class="position_split"></div></li>
-        <li>搜索结果</li>
+        <li><label>搜索结果</label></li>
     </ul>
 {% endblock %}
 
 {% block content %}
-
+ <div class="container clearfix">
+    <div class="sixteen columns">
+        <h2>关键词&nbsp;"{{ query }}"&nbsp;的搜索结果</h2>
+    </div>
+    <div class="divider-dotted sixteen columns"></div>
+    <div class="sixteen columns" style="min-height: 500px;">
+        {% if search_result == None %}
+        <div style="text-align: center; padding: 50px;">
+            <p>没有查到任何结果或您搜索的频率过快，请稍后再试。</p>
+        </div>
+        {% else %}
+            {% for result_item in search_result %}
+                <div style="border-radius: 5px; background: #ffffff;padding:15px;">
+                    <div>
+                    {% if result_item.type == 'solution' %}
+                        <a href="/solution/{{ result_item.id }}"><h3>{{ result_item.title }}</h3></a>
+                    {% endif %}
+                    {% if result_item.type == 'product' %}
+                        <a href="/product/{{ result_item.id }}"><h3>{{ result_item.title }}</h3></a>
+                    {% endif %}
+                    </div>
+                    <div style="height: 50px;">
+                        <p>{{ result_item.sketch }}</p>
+                    </div>
+                </div>
+                <p></p>
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
 {% endblock %}
