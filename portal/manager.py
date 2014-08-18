@@ -7,7 +7,7 @@ class GlobalSettingManager(models.Manager):
         setting_list =  self.get_queryset().all()
         settings = {}
         for setting_item in setting_list:
-            settings[str(setting_item.key)] = str(setting_item.value)
+            settings[setting_item.key] = setting_item.value
         return settings
 
 class SlideManager(models.Manager):
