@@ -164,16 +164,29 @@ def search(request):
     if len(search_result) == 0:
         search_result= None
 
+    query_history = request.COOKIES.get('query_history')
+    query = unicode(query).encode(encoding='utf-8')
+    if not query_history:
+        query_history = query
+    else:
+        query_history = query_history + ',' + query
+    history_list = query_history.split(',')
+
+
     response = render(
         request,
         'search.html',
         generate_context(
             current='home',
             search_result=search_result,
-            query=query
+            query=query,
+            history_list=history_list,
         )
     )
+    #搜索历史保存在客户端本地Cookie
     response.set_cookie('search', max_age=2)
+    #历史列表保存时间为24小时
+    response.set_cookie('query_history', query_history, max_age=86400)
 
     return response
 
