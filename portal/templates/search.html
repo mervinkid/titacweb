@@ -17,29 +17,40 @@
         <h2>关键词&nbsp;"{{ query }}"&nbsp;的搜索结果</h2>
     </div>
     <div class="divider-dotted sixteen columns"></div>
-    <div class="sixteen columns" style="min-height: 500px;">
+    <div class="columns" style="min-height: 500px;width: 700px;float: left">
         {% if search_result == None %}
         <div style="text-align: center; padding: 50px;">
             <p>没有查到任何结果或您搜索的频率过快，请稍后再试。</p>
         </div>
         {% else %}
             {% for result_item in search_result %}
-                <div style="border-radius: 5px; background: #ffffff;padding:15px;">
-                    <div>
-                    {% if result_item.type == 'solution' %}
-                        <a href="/solution/{{ result_item.id }}"><h3>{{ result_item.title }}</h3></a>
-                    {% endif %}
-                    {% if result_item.type == 'product' %}
-                        <a href="/product/{{ result_item.id }}"><h3>{{ result_item.title }}</h3></a>
-                    {% endif %}
+                <div style="border-radius: 5px; background: #ffffff;padding:10px;">
+                    <div style="width:50px; height:100%; float:left; _margin-right:-3px;">
+                        <h3><label>{{ forloop.counter }}</label></h3>
                     </div>
-                    <div style="height: 50px;">
-                        <p>{{ result_item.sketch }}</p>
+                    <div style="height:100%;">
+                        {% if result_item.type == 'solution' %}
+                        <a href="/solution/{{ result_item.id }}">
+                        {% elif result_item.type == 'product' %}
+                        <a href="/product/{{ result_item.id }}">
+                        {% endif %}
+                            <div>
+                                <h3>{{ result_item.title }}</h3>
+                            </div>
+                            <div style="max-height: 40px;padding-left: 50px;">
+                                <p>{{ result_item.sketch }}</p>
+                            </div>
+                        </a>
                     </div>
                 </div>
                 <p></p>
             {% endfor %}
         {% endif %}
+    </div>
+    <div class="columns" style="width: 220px;float: right">
+        <div style="border-radius: 5px; background: #ffffff;padding:10px;height: 200px;">
+
+        </div>
     </div>
 </div>
 {% endblock %}
