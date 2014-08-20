@@ -127,11 +127,17 @@ def term(request):
     return render(request, 'company/term.html', context)
 
 def search(request):
-    query = request.GET.get('s', None)
+    query = request.GET.get('s', '')
+    #对GET到的字符串数据进行转码
+    query = unicode(query).encode(encoding='utf-8')
+    #移除查询关键词前后的空格
+    query = query.strip()
+    #将关键词按照空格分割成list
+    query_list = query.split(' ')
     search_result = []
-    if query and 'search' not in request.COOKIES:
+    if 'search' not in request.COOKIES:
         #查询解决方案
-        solution_result = Solution.objects.get_search(query)
+        solution_result = Solution.objects.get_search(query_list)
         for solution_item in solution_result:
             solution_id = convert_to_view_value(solution_item.id)
             solution_title = solution_item.title
@@ -146,7 +152,7 @@ def search(request):
             }
             search_result.append(result_item)
         #查询产品
-        product_result = Product.objects.get_search(query)
+        product_result = Product.objects.get_search(query_list)
         for product_item in product_result:
             product_id = convert_to_view_value(product_item.id)
             product_title = product_item.title
@@ -165,13 +171,27 @@ def search(request):
         search_result= None
 
     query_history = request.COOKIES.get('query_history')
-    query = unicode(query).encode(encoding='utf-8')
     if not query_history:
-        query_history = query
+        if not query == '':
+            query_history = query
     else:
-        query_history = query_history + ',' + query
-    history_list = query_history.split(',')
+        #将本次关键词加入搜索历史
+        tmp = query_history.split(',')
+        in_history = False
+        #遍历搜索历史的每一项，检查是否有与本次关键词完全一样的项目
+        for tmp_item in tmp:
+            if query == tmp_item:
+                in_history = True
+                break
+        #不存在完全一样的项则将其加入搜索历史
+        if not in_history:
+            query_history = query +  ',' + query_history
 
+    #将cookie中取得的历史记录转换成list，该list将传递给页面模板
+    if query_history:
+        history_list = query_history.split(',')
+    else:
+        history_list = []
 
     response = render(
         request,
@@ -185,8 +205,8 @@ def search(request):
     )
     #搜索历史保存在客户端本地Cookie
     response.set_cookie('search', max_age=2)
-    #历史列表保存时间为24小时
-    response.set_cookie('query_history', query_history, max_age=86400)
+    #历史列表保存时间为2小时
+    response.set_cookie('query_history', query_history, max_age=7200)
 
     return response
 

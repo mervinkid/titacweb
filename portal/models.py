@@ -103,6 +103,7 @@ class GlobalSetting(models.Model):
         ('description', 'Description'),
         ('call', 'Call'),
         ('mail', 'Mail'),
+        ('qq', 'QQ'),
     )
     key = models.CharField(max_length=250, primary_key=True, choices=KEY_CHOICES, help_text='*Key')
     value = models.CharField(max_length=250, null=True, blank=True, help_text='Value')
