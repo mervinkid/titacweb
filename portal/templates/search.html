@@ -17,14 +17,14 @@
         <h2>关键词&nbsp;"{{ query }}"&nbsp;的搜索结果</h2>
     </div>
     <div class="divider-dotted sixteen columns"></div>
-    <div class="columns" style="min-height: 500px;width: 700px;float: left">
+    <div class="columns left-block">
         {% if search_result == None %}
         <div style="text-align: center; padding: 50px;">
             <p>没有查到任何结果或您搜索的频率过快，请稍后再试。</p>
         </div>
         {% else %}
             {% for result_item in search_result %}
-                <div style="border-radius: 5px; background: #ffffff;padding:10px;">
+                <div class="white-box">
                     <div style="width:50px; height:100%; float:left; _margin-right:-3px;">
                         <h3><label>{{ forloop.counter }}</label></h3>
                     </div>
@@ -47,9 +47,23 @@
             {% endfor %}
         {% endif %}
     </div>
-    <div class="columns" style="width: 220px;float: right">
-        <div style="border-radius: 5px; background: #ffffff;padding:10px;height: 200px;">
-
+    <div class="columns right-block">
+        <div class="white-box">
+            <label>您的搜索历史</label>
+            <hr/>
+            <p></p>
+            {% for history_item in history_list %}
+            <p>
+                <a href="/search/?s={{ history_item }}">
+                    <img src="{% static 'portal/img/favicon.png' %}" style="width: 11px;height: 11px;">
+                    {% ifequal history_item '' %}
+                    搜索
+                    {% else %}
+                    {{ history_item }}
+                    {% endifequal %}
+                </a>
+            </p>
+            {% endfor %}
         </div>
     </div>
 </div>

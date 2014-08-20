@@ -898,3 +898,25 @@ div .position_split{
     height: 16px;
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAe0lEQVQ4T2NkoBAwUqifgWYGlAFdxgTEHYRciMsFnUCNIEMqCRmCzwuNQM11QAyiG3C5hFAYNAE11uIzhJABIIvxGkKMAfVQL4DCpQLdK4QM6AFqKCbXC31AjYXkBmI71LldQLocX1rA5QWQv7kIaQYZTCgMCCXEQWAAAIpIEhFQed/YAAAAAElFTkSuQmCC);
 }
+
+/*Enterprise page layout*/
+div .left-block {
+    min-height: 500px;
+    width: 750px;
+    float: left;
+}
+
+div .right-block {
+    width: 170px;
+    float: right;
+}
+
+div .white-box {
+    background: #ffffff;
+    padding:10px;
+    border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+}
