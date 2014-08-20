@@ -9,10 +9,63 @@
     <ul>
         <li><a href="/">首页</a></li>
         <li><div class="position_split"></div></li>
-        <li><a href="/solution">解决方案</a></li>
+        <li><label>解决方案</label></li>
     </ul>
 {% endblock %}
 
 <!--content-->
 {% block content %}
+ <div class="container clearfix">
+    <div class="hole-block">
+        <div class="white-box">
+            <h3><label>解决方案</label></h3>
+            <p>泰科泰格面向客户，提供安全、可靠、高质量、易扩展的行业解决方案，帮助您实现信息化管理最佳实<br>践，以满足您业务快速发展的不同需求。</p>
+            <p>解决方案涵盖的领域包括：电信、电力、金融、政府（社会保障、财政、税务、公共安全、国土资<br>源、海洋、质量监督检验检疫、工商、电子政务、环保、农业等）、制造与商贸流通业、医疗卫生、教<br>育、交通、新闻出版等行业。</p>
+        </div>
+    </div>
+ </div>
+ <div class="container clearfix">
+    <div class="left-block">
+        <div class="white-box space">
+            {% for solution_item in solutions %}
+                <div class="item-block">
+                    <a href="/solution/{{ solution_item.solution_id }}">
+                        <h4>{{ solution_item.solution_title }}</h4>
+                        <p>{{ solution_item.solution.subtitle }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="right-block">
+        <div class="white-box">
+            <div>
+                <label>与我们联系</label>
+                <hr>
+                <p></p>
+                <label>服务时间：</label><br>
+            </div>
+            <div style="padding-left: 25px;">
+                <label>周一至周五</label><br>
+                <label>上午&nbsp;9:00-12:00</label><br>
+                <label>下午&nbsp;1:30-5:00</label><br>
+                <label>(假日及法定假日除外)</label>
+            </div>
+            <p></p>
+            <div>
+                <label>售前服务电话：</label><br>
+                <label>{{ g_settings.call }}</label>
+            </div>
+            <p></p>
+            <div>
+                <label>售后服务电话：</label><br>
+                <label>{{ g_settings.call }}</label>
+            </div>
+            <p></p>
+            <div>
+                <label><a href="mailto:{{ g_settings.mail }}">Email至技术支持邮箱</a></label>
+            </div>
+        </div>
+    </div>
+ </div>
 {% endblock %}

@@ -157,6 +157,7 @@ class Solution(models.Model):
         (0, 'No'),
     )
     title = models.CharField(max_length=250, help_text='*Title of solution')
+    subtitle = models.CharField(max_length=250, null=True, blank=True, help_text='Subtitle')
     enable = models.IntegerField(default=1, choices=ENABLE_CHOICES, help_text='*Enable status')
     image = models.CharField(max_length=250, null=True, blank=True, help_text='Images of solution')
     sketch = models.TextField(null=True, blank=True, help_text='Sketch')
@@ -183,6 +184,7 @@ class Product(models.Model):
         (0, 'No'),
     )
     title = models.CharField(max_length=250, help_text='*Product name')
+    subtitle = models.CharField(max_length=250, null=True, blank=True, help_text='Subtitle')
     enable = models.IntegerField(default=1, choices=ENABLE_CHOICES, help_text='*Enable status')
     image = models.CharField(max_length=250, null=True, blank=True, help_text='Images of product')
     sketch = models.TextField(null=True, blank=True, help_text='Sketch')

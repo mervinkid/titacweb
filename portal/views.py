@@ -27,11 +27,25 @@ def solution(request):
     :param request:
     :return:
     '''
+    solution_list = Solution.objects.get_enabled_solution()
+    solutions = []
+    for solution_item in solution_list:
+        solution_id = convert_to_view_value(solution_item.id)
+        solution_title = solution_item.title
+        solution_subtitle = solution_item.subtitle
+        solution_data = {
+            'solution_id': solution_id,
+            'solution_title': solution_title,
+            'solution_subtitle': solution_subtitle,
+        }
+        solutions.append(solution_data)
+
     return render(
                 request,
                 'solution/solution.html',
                 generate_context(
                     current='solution',
+                    solutions=solutions
                 ))
 
 def solution_detail(request, id):
@@ -155,7 +169,7 @@ def search(request):
         product_result = Product.objects.get_search(query_list)
         for product_item in product_result:
             product_id = convert_to_view_value(product_item.id)
-            product_title = product_item.title
+            product_title  = product_item.title
             product_sketch = product_item.sketch
             if len(product_sketch) > 100:
                 product_sketch = product_sketch[0:100] + '...'
@@ -204,7 +218,7 @@ def search(request):
         )
     )
     #搜索历史保存在客户端本地Cookie
-    response.set_cookie('search', max_age=2)
+    response.set_cookie('search', max_age=1)
     #历史列表保存时间为2小时
     response.set_cookie('query_history', query_history, max_age=7200)
 

@@ -39,6 +39,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+    color: #6a6b6b;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, menu, nav, section {
@@ -67,8 +68,7 @@ table {
 body {
 	background: #f6f6f6;
 	font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 13px;
-	color: #6e6e6e;
+	font-size: 12px;
 	text-shadow: 0px 1px 0px #ffffff;
 	font-weight: 400;
 	line-height: 1.5em;
@@ -255,7 +255,7 @@ ul.list-bullet li {
   so that there will be sufficient space between header and scrolling divs*/
 #content {
 	width: 100%;
-	padding-top: 160px;
+	padding-top: 140px;
 }
 #services, #pricing, #contact {
 	width: 100%;
@@ -702,6 +702,7 @@ p.table-slug {
 	margin-top: 20px;
 	font-size: 11px;
     text-align: center;
+    color: #6c6c6c;
 }
 
 /*============================================================*/
@@ -759,87 +760,87 @@ p.table-slug {
 
 @media only screen and (max-width: 767px) {
 
-/*----- Need changes while customization -----*/
-.logo h1 {
-    width: 178px; /*change height and width as per your logo*/
-    height: 40px;
-    margin: 0 auto;
-}
-/*change following in case height of header changes*/
-#home {
-    padding-top: 0px;
-}
-#services, #pricing, #contact {
-    width: 100%;
-    padding-top: 20px;
-}
+    /*----- Need changes while customization -----*/
+    .logo h1 {
+        width: 178px; /*change height and width as per your logo*/
+        height: 40px;
+        margin: 0 auto;
+    }
+    /*change following in case height of header changes*/
+    #home {
+        padding-top: 0px;
+    }
+    #services, #pricing, #contact {
+        width: 100%;
+        padding-top: 20px;
+    }
 
-/*----- No need to change below unless heavy layout changes -----*/
-.container .columns, .container .column {
-    margin: 10px 0px 10px 0px !important;
-}
-#header-wrapper {
-    width: 100%;
-    position: relative !important;
-}
-.logo {
-    width: 300px;
-}
-#menu ul {
-    display: none;
-}
-#menu {
-    text-align:center;
-}
-#menu select {
-    display: inline-block;
-    width:60%;
-}
-#header-bottom {
-    width: 280px;
-    margin-bottom: 10px;
-}
-#header-bottom p {
-    float: left;
-}
-.features li {
-    width: 300px;
-    margin: 0px 0px;
-    display: block;
-}
-.services li {
-    margin-right: 0px;
-    display: block;
-    float: none;
-}
- .pricing.three-col .price-column, .pricing.four-col .price-column, .pricing.five-col .price-column {
-    width: 99.8%;
-    border: 1px solid #e6e6e6;
-    border-radius: 4px;
-    -moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -ms-border-radius: 4px;
-    -o-border-radius: 4px;
-    margin-bottom: 20px;
-}
-.price-column.focused {
-    margin-top: 0px;
-}
-    .map {
-    margin-left: 0px;
-}
-#copyright {
-    background: none;
-    border-top: 1px dotted #cccccc;
-}
-.page-divider {
-    background: none;
-    width: 100%;
-    height: auto;
-    margin: 20px auto 0px auto;
-    display: block;
-    border-top: 1px dotted #cccccc;
-}
+    /*----- No need to change below unless heavy layout changes -----*/
+    .container .columns, .container .column {
+        margin: 10px 0px 10px 0px !important;
+    }
+    #header-wrapper {
+        width: 100%;
+        position: relative !important;
+    }
+    .logo {
+        width: 300px;
+    }
+    #menu ul {
+        display: none;
+    }
+    #menu {
+        text-align:center;
+    }
+    #menu select {
+        display: inline-block;
+        width:60%;
+    }
+    #header-bottom {
+        width: 280px;
+        margin-bottom: 10px;
+    }
+    #header-bottom p {
+        float: left;
+    }
+    .features li {
+        width: 300px;
+        margin: 0px 0px;
+        display: block;
+    }
+    .services li {
+        margin-right: 0px;
+        display: block;
+        float: none;
+    }
+    .pricing.three-col .price-column, .pricing.four-col .price-column, .pricing.five-col .price-column {
+        width: 99.8%;
+        border: 1px solid #e6e6e6;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        margin-bottom: 20px;
+    }
+    .price-column.focused {
+        margin-top: 0px;
+    }
+        .map {
+        margin-left: 0px;
+    }
+    #copyright {
+        background: none;
+        border-top: 1px dotted #cccccc;
+    }
+    .page-divider {
+        background: none;
+        width: 100%;
+        height: auto;
+        margin: 20px auto 0px auto;
+        display: block;
+        border-top: 1px dotted #cccccc;
+    }
 }
 
 /*----------------------------------------*/
@@ -850,20 +851,20 @@ p.table-slug {
 
 /*-----No need to change below unless heavy layout changes-----*/
 /* Other properties are according to those specified for Mobile (Portrait)*/
-.logo {
-    width: 420px;
-}
-#header-bottom {
-    width: 400px;
-}
-.features li {
-    width: 420px;
-    margin: 0px 0px;
-}
-.services li {
-    width: 420px;
-    margin-right: 0px;
-}
+    .logo {
+        width: 420px;
+    }
+    #header-bottom {
+        width: 400px;
+    }
+    .features li {
+        width: 420px;
+        margin: 0px 0px;
+    }
+    .services li {
+        width: 420px;
+        margin-right: 0px;
+    }
 }
 /*Search box*/
 div .search_box {
@@ -886,9 +887,10 @@ div .search_box  #search_text{
 
 div .search_box  #search_submit{
     width: 20px;
-    height: 20px;
-    line-height: 20px;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAACL0lEQVQ4T63UP2wSURgA8Pd9j6OhRFlqTIc2mmKibu2ZlutxQWiim2gig4uDsx0cjH+GJt10M8bVOOkAizFNujSl3FGs1QhTJ1SuAq1RU2sIBeG9510TDI3lkNob3/u+3333ve8ekEN+4JA90hGMxWLUNM0R7nK5N9fXPxSLxZ1/eflfoCzLkveI774g5CZFHLARxlhdIMSh2bhjGMaGE7wHtLH+fu8cldwXOGuUicA5QqBKAEJIYZQ3m6Ua4dqqrn/qhO4BFVWbQcRZQJoomh+vFwqFWisxFIlMA8HHTLBlI5kMdgXtnpXKm1+IEDvlcvFUO9ZKDoYiL1wUr/2qNcYzmdTb/dA/FY4FAmc8Ut8a4/zJyrIxvV+wFg5HKdCXVswtY2nxkSN4TlFG+1zu90yIhytp/W4HcMoCFzgn9/SlhQeOoN/vP3rs+OB3ELCayejqfsGh8NQsAMzwJovqevKVI2hvTga1BABebTJ2400m/aw9YULTzlpf8FpwXt0ofT6Rz+frXUFrbIYlj/cdEjJAuHjKgMeBYZWgOG+t3aaS5LOQOhK4kkotzncF7QBZUU67ifQcXTDWnmAN9zdrpHyUUskJ7fTrwbiqBlGggghuLtha0TTnh4ZOXgQKcSe058tBUbTLTmjPoN2GiUktShESu5UC1CrbW8PZbParvXcg0E4MqOolBJqwWlKp/NweyeVyP/4L3D1AWR70eDy1dDq91TrAA1fY9XLoFNDr+m8QT9kVQ7a7wQAAAABJRU5ErkJggg==);
+    height: 16px;
+    line-height: 16px;
+    background: url(/static/portal/img/search.png);
+    background-repeat: no-repeat;
     border: none;
 }
 
@@ -901,14 +903,25 @@ div .position_split{
 
 /*Enterprise page layout*/
 div .left-block {
-    min-height: 500px;
     width: 750px;
     float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 div .right-block {
-    width: 170px;
+    width: 180px;
     float: right;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+div .hole-block {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 5px;
 }
 
 div .white-box {
@@ -919,4 +932,24 @@ div .white-box {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	-o-border-radius: 4px;
+}
+
+div .gray-box {
+    background: #eeeeee;
+    padding:10px;
+    border: 1px solid #e6e6e6;
+	border-radius: 4px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-o-border-radius: 4px;
+}
+
+div .item-block {
+    width: 340px;
+    display: inline-block;
+    margin: 10px;
+}
+
+div .space {
+    min-height: 550px;
 }
