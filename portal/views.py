@@ -185,7 +185,7 @@ def search(request):
         search_result= None
 
     query_history = request.COOKIES.get('query_history')
-    if not query_history:
+    if not query_history or query_history == 'None':
         if not query == '':
             query_history = query
     else:
@@ -198,11 +198,11 @@ def search(request):
                 in_history = True
                 break
         #不存在完全一样的项则将其加入搜索历史
-        if not in_history:
+        if not in_history and not query == '':
             query_history = query +  ',' + query_history
 
     #将cookie中取得的历史记录转换成list，该list将传递给页面模板
-    if query_history:
+    if query_history and not query_history == 'None':
         history_list = query_history.split(',')
     else:
         history_list = []
