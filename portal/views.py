@@ -149,7 +149,17 @@ def search(request):
     #将关键词按照空格分割成list
     query_list = query.split(' ')
     search_result = []
+    #判断用户行为是否允许进行查询
+    valid_rate = False
+    valid_keyword = False
+    #搜索频率是否正常
     if 'search' not in request.COOKIES:
+        valid_rate = True
+    #搜索词是否为空
+    if not query == '':
+        valid_keyword = True
+    #开始进行查询
+    if valid_rate and valid_keyword:
         #查询解决方案
         solution_result = Solution.objects.get_search(query_list)
         for solution_item in solution_result:
@@ -181,12 +191,27 @@ def search(request):
             }
             search_result.append(result_item)
 
+    '''
+    没有查询到数据的消息反馈
+    消息类型：
+    0：搜索频率过快
+    1：关键词为空
+    2：没有查询到结果
+    '''
+    message = ''
     if len(search_result) == 0:
         search_result= None
+        if not valid_rate:
+            message = 0
+        elif not valid_keyword:
+            message = 1
+        else:
+            message = 2
 
     query_history = request.COOKIES.get('query_history')
-    if query_history is None or query_history == 'None':
-        query_history = query
+    if not query_history or query_history == 'None':
+        if not query == '':
+            query_history = query
     else:
         #将本次关键词加入搜索历史
         tmp = query_history.split(',')
@@ -197,11 +222,14 @@ def search(request):
                 in_history = True
                 break
         #不存在完全一样的项则将其加入搜索历史
-        if not in_history:
+        if not in_history and not query == '':
             query_history = query +  ',' + query_history
 
     #将cookie中取得的历史记录转换成list，该list将传递给页面模板
-    history_list = query_history.split(',')
+    if query_history and not query_history == 'None':
+        history_list = query_history.split(',')
+    else:
+        history_list = []
 
     response = render(
         request,
@@ -211,6 +239,7 @@ def search(request):
             search_result=search_result,
             query=query,
             history_list=history_list,
+            message=message
         )
     )
     #搜索历史保存在客户端本地Cookie

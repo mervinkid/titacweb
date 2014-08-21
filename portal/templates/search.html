@@ -13,58 +13,65 @@
 
 {% block content %}
  <div class="container clearfix">
+    <!--left-->
     <div class="left-block">
         <div class="white-box space">
-        <h3>关键词&nbsp;"{{ query }}"&nbsp;的搜索结果</h3>
-        <p></p>
+        {% if search_result == None %}
+        {% else %}
+        <label>关键词&nbsp;"{{ query }}"&nbsp;的搜索结果</label>
+        <hr>
+        {% endif %}
+        <p></p><p></p>
         {% if search_result == None %}
         <div style="text-align: center; padding: 50px;">
-            <p>没有查到任何结果或您搜索的频率过快，请稍后再试。</p>
+            {% if message == 0 %}
+            <p>您搜索的频率过快超过了网站系统限制，请稍后再试。</p>
+            {% elif message == 1 %}
+            <p>您搜索的关键字不合法，请使用其他关键词进行搜索。</p>
+            {% else %}
+            <p>没有查询到任何结果，请使用其他关键词进行搜索。</p>
+            {% endif %}
         </div>
         {% else %}
             {% for result_item in search_result %}
-                <div class="">
-                    <div style="width:50px; height:100%; float:left; _margin-right:-3px;">
-                        <h3><label>{{ forloop.counter }}</label></h3>
+                <div style="margin-left: 10px;margin-right: 10px;">
+                    <div style="position:absolute;width: 40px;">
+                        <img src="{% static 'portal/img/search-item.png' %}" style="margin-top: 5px;">
                     </div>
-                    <div style="height:100%;">
-                        {% if result_item.type == 'solution' %}
-                        <a href="/solution/{{ result_item.id }}">
-                        {% elif result_item.type == 'product' %}
-                        <a href="/product/{{ result_item.id }}">
-                        {% endif %}
-                            <div>
-                                <h3>{{ result_item.title }}</h3>
-                            </div>
-                            <div style="max-height: 40px;padding-left: 50px;">
-                                <p>{{ result_item.sketch }}</p>
-                            </div>
-                        </a>
+                    <div style="margin-left:40px;">
+                            {% if result_item.type == 'solution' %}
+                            <a href="/solution/{{ result_item.id }}">
+                            {% elif result_item.type == 'product' %}
+                            <a href="/product/{{ result_item.id }}">
+                            {% endif %}
+                                <h4 style="margin-bottom: 5px;">{{ result_item.title }}</h4>
+                                {{ result_item.sketch }}
+                            </a>
                     </div>
                 </div>
-                <p></p>
+                <div style="height: 15px;"></div>
             {% endfor %}
         {% endif %}
         </div>
-    </div>
+    </div><!--end left-->
+    <!--right-->
     <div class="right-block">
         <div class="white-box">
             <label>您的搜索历史</label>
             <hr/>
             <p></p>
+            {% if not history_list %}
+            <p><label>还未进行过有效搜索</label></p>
+            {% endif %}
             {% for history_item in history_list %}
             <p>
                 <a href="/search/?s={{ history_item }}">
                     <img src="{% static 'portal/img/search.png' %}" style="width: 12px;height: 12px;">
-                    {% ifequal history_item '' %}
-                    搜索
-                    {% else %}
                     {{ history_item }}
-                    {% endifequal %}
                 </a>
             </p>
             {% endfor %}
         </div>
-    </div>
+    </div><!--end right-->
 </div>
 {% endblock %}
