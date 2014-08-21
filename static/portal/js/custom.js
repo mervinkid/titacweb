@@ -54,13 +54,22 @@ $(document).ready(function() {
 	    window.location = $(this).find("option:selected").val();
     });
     //Search Box
-    var search = $('#search_text');
-    search.focus(function(){
-        search.attr('placeholder', '');
+    var search_text = $('#search_text');
+    search_text.focus(function(){
+        search_text.attr('placeholder', '');
     });
-    search.focusout(function(){
-        search.attr('placeholder', '搜索');
+    search_text.focusout(function(){
+        search_text.attr('placeholder', '搜索');
     });
+    var search_submit = $('#search_submit');
+    search_submit.click(function(){
+        var query_string = search_text.val();
+        query_string = query_string.trim();
+        if(query_string == ''){
+            return false;
+        }
+        return true;
+    })
 }); //close document.ready
 
     // Below scripts do not require modification
