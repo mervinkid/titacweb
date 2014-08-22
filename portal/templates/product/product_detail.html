@@ -7,13 +7,49 @@
 {% block position %}
     <ul>
         <li><a href="/">首页</a></li>
-        <li><div class="position_split"></div></li>
+        <li><div class="position-split"></div></li>
         <li><a href="/product">产品</a></li>
-        <li><div class="position_split"></div></li>
-        <li><a href="#">{{ product.title }}</a></li>
+        <li><div class="position-split"></div></li>
+        <li><label>{{ product_item.title }}</label></li>
     </ul>
 {% endblock %}
 
 <!--content-->
 {% block content %}
+<div class="container clearfix">
+   <div class="left-large-block">
+       <div class="white-box space">
+           <div class="main-content-box">
+               <h4><label>{{ product_item.title }}</label></h4>
+               <h5><label>{{ product_item.subtitle }}</label></h5>
+           </div>
+           <div class="main-content-box">
+               <p><label>{{ product_item.sketch }}</label></p>
+           </div>
+           <div class="main-content-box">
+               {% autoescape off %}
+               {{ product_item.content }}
+               {% endautoescape %}
+           </div>
+       </div>
+   </div>
+   <div class="right-small-block">
+       <div class="white-box">
+           {% include 'common/contact.html' %}
+       </div>
+       <p></p>
+       <div class="white-box">
+            <div>
+                <label>相关解决方案</label>
+                <div class="line"></div>
+                <p></p>
+            </div>
+            {% for solution_item in solution_list %}
+            <p>
+                <a href="/solution/{{ solution_item.id }}">{{ solution_item.title }}</a>
+            </p>
+           {% endfor %}
+       </div>
+   </div>
+</div>
 {% endblock %}

@@ -1,0 +1,27 @@
+{% load staticfiles %}
+<div>
+    <label>与我们联系</label>
+    <div class="line"></div>
+    <p></p>
+    <label>服务时间：</label><br>
+</div>
+    <div style="padding-left: 25px;">
+    <label>周一至周五</label><br>
+    <label>上午&nbsp;9:00-12:00</label><br>
+    <label>下午&nbsp;1:30-5:00</label><br>
+    <label>(假日及法定假日除外)</label>
+    </div>
+    <p></p>
+    <div>
+    <label>售前服务电话：</label><br>
+    <label>{{ g_settings.call }}</label>
+    </div>
+    <p></p>
+    <div>
+    <label>售后服务电话：</label><br>
+    <label>{{ g_settings.call }}</label>
+    <p></p>
+</div>
+<div>
+    <label><a href="mailto:{{ g_settings.mail }}">Email至技术支持邮箱</a></label>
+</div>

@@ -872,7 +872,6 @@ div .search_box {
     background: #ffffff;
     border-radius: 2px;
 }
-
 div .search_box  #search_text{
     width: 120px;
     height: 18px;
@@ -884,7 +883,6 @@ div .search_box  #search_text{
     -webkit-appearance: none;
     box-sizing: content-box;
 }
-
 div .search_box  #search_submit{
     width: 20px;
     height: 16px;
@@ -893,37 +891,32 @@ div .search_box  #search_submit{
     background-repeat: no-repeat;
     border: none;
 }
-
-/*position bar split*/
-div .position_split{
+/*head bottom bar images*/
+div .position-split{
     width: 16px;
     height: 16px;
-    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAe0lEQVQ4T2NkoBAwUqifgWYGlAFdxgTEHYRciMsFnUCNIEMqCRmCzwuNQM11QAyiG3C5hFAYNAE11uIzhJABIIvxGkKMAfVQL4DCpQLdK4QM6AFqKCbXC31AjYXkBmI71LldQLocX1rA5QWQv7kIaQYZTCgMCCXEQWAAAIpIEhFQed/YAAAAAElFTkSuQmCC);
+    background: url("/static/portal/img/right-arrow.png");
 }
-
 /*Enterprise page layout*/
-div .left-block {
+div .left-large-block {
     width: 750px;
     float: left;
     margin-left: 10px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-
-div .right-block {
+div .right-small-block {
     width: 180px;
     float: right;
     margin-right: 10px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
-
 div .hole-block {
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 5px;
 }
-
 div .white-box {
     background: #ffffff;
     padding:10px;
@@ -933,7 +926,14 @@ div .white-box {
 	-webkit-border-radius: 4px;
 	-o-border-radius: 4px;
 }
-
+div .white-box .main-content-box {
+    margin: 10px;
+}
+/*
+div .white-box h1, h2, h3, h4, h5 {
+    margin: 0;
+}
+*/
 div .gray-box {
     background: #eeeeee;
     padding:10px;
@@ -943,13 +943,18 @@ div .gray-box {
 	-webkit-border-radius: 4px;
 	-o-border-radius: 4px;
 }
-
 div .item-block {
     width: 340px;
     display: inline-block;
     margin: 10px;
 }
-
 div .space {
-    min-height: 550px;
+    min-height: 400px;
+}
+div .line {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    height: 1px;
+    border: none;
+    background: #b4b4b4;
 }

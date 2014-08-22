@@ -6,7 +6,7 @@
 {% block position %}
     <ul>
         <li><a href="/">首页</a></li>
-        <li><div class="position_split"></div></li>
+        <li><div class="position-split"></div></li>
         <li><label>搜索结果</label></li>
     </ul>
 {% endblock %}
@@ -14,26 +14,28 @@
 {% block content %}
  <div class="container clearfix">
     <!--left-->
-    <div class="left-block">
+    <div class="left-large-block">
         <div class="white-box space">
-        {% if search_result == None %}
-        {% else %}
-        <label>关键词&nbsp;"{{ query }}"&nbsp;的搜索结果</label>
-        <hr>
-        {% endif %}
-        <p></p><p></p>
-        {% if search_result == None %}
-        <div style="text-align: center; padding: 50px;">
-            {% if message == 0 %}
-            <p>您搜索的频率过快超过了网站系统限制，请稍后再试。</p>
-            {% elif message == 1 %}
-            <p>您搜索的关键字不合法，请使用其他关键词进行搜索。</p>
-            {% else %}
-            <p>没有查询到任何结果，请使用其他关键词进行搜索。</p>
-            {% endif %}
-        </div>
-        {% else %}
-            {% for result_item in search_result %}
+            <div class="main-content-box">
+                <h4><label>搜索&nbsp;|&nbsp;Search</label></h4>
+                {% if search_result == None %}
+                {% else %}
+                <label>共{{ search_result_count }}条结果与&nbsp;"{{ query }}"&nbsp;相关</label>
+                <div class="line"></div>
+                {% endif %}
+                <p></p><p></p>
+                {% if search_result == None %}
+                <div style="text-align: center; padding: 50px;">
+                    {% if message == 0 %}
+                    <p>您搜索的频率过快超过了网站系统限制，请稍后再试。</p>
+                    {% elif message == 1 %}
+                    <p>您搜索的关键字不合法，请使用其他关键词进行搜索。</p>
+                    {% else %}
+                    <p>没有查询到任何结果，请使用其他关键词进行搜索。</p>
+                    {% endif %}
+                </div>
+                {% else %}
+                {% for result_item in search_result %}
                 <div style="margin-left: 10px;margin-right: 10px;">
                     <div style="position:absolute;width: 40px;">
                         <img src="{% static 'portal/img/search-item.png' %}" style="margin-top: 5px;">
@@ -50,15 +52,16 @@
                     </div>
                 </div>
                 <div style="height: 15px;"></div>
-            {% endfor %}
-        {% endif %}
+                {% endfor %}
+                {% endif %}
+            </div>
         </div>
     </div><!--end left-->
     <!--right-->
-    <div class="right-block">
+    <div class="right-small-block">
         <div class="white-box">
             <label>您的搜索历史</label>
-            <hr/>
+            <div class="line"></div>
             <p></p>
             {% if not history_list %}
             <p><label>还未进行过有效搜索</label></p>

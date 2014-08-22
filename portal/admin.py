@@ -1,6 +1,6 @@
 #coding=utf-8
 from django.contrib import admin
-from portal.models import GlobalSetting, Media, Slide, News, Solution, Product
+from portal.models import GlobalSetting, Media, Slide, News, Solution, Product, SolutionProduct
 
 class GlobalSettingAdmin(admin.ModelAdmin):
     model = GlobalSetting
@@ -44,4 +44,5 @@ admin.site.register(News, NewsAdmin)
 admin.site.register(Media, MediaAdmin)
 admin.site.register(Solution, SolutionAdmin)
 admin.site.register(Product, ProductAdmin)
+admin.site.register(SolutionProduct)
 

@@ -3,7 +3,7 @@
     {% for slide in slides %}
     <li>
         <div class="eight columns alpha">
-            <h1>{{ slide.title }}<span>{{ slide.subtitle }}</span></h1>
+            <h1>{{ slide.title }}<br><span>{{ slide.subtitle }}</span></h1>
             <h2>{{ slide.heading }}</h2>
             {% autoescape off %}
             <p>{{ slide.content }}</p>

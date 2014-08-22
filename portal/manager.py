@@ -67,6 +67,24 @@ class SolutionManager(models.Manager):
         return query_result
 
 class ProductManager(models.Manager):
+    def get_enabled_product(self):
+        '''
+        获取所有处于有效状态的数据
+        :return:
+        '''
+        return self.get_queryset().filter(enable=1)
+
+    def get_product_by_id(self, product_id):
+        '''
+        使用主键查询数据
+        :param product_id:
+        :return:
+        '''
+        try:
+            return self.get_queryset().get(id=product_id)
+        except Exception:
+            return None
+
     def get_search(self, query_list):
         '''
         多词模糊搜索
@@ -91,3 +109,10 @@ class ProductManager(models.Manager):
                     models.Q(title__icontains=query_item)|models.Q(content__icontains=query_item) | models.Q(sketch__icontains=query_item),
                     enable=1)
         return query_result
+
+class SolutionProductManager(models.Manager):
+    def get_product_by_solution_id(self, solution_id):
+        return self.get_queryset().filter(solution=solution_id)
+
+    def get_solution_by_product_id(self, product_id):
+        return self.get_queryset().filter(product=product_id)

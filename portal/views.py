@@ -3,7 +3,7 @@ import datetime
 from django.conf import settings
 from django.shortcuts import render
 from django.http.response import Http404
-from portal.models import GlobalSetting, Slide, Solution, Product
+from portal.models import GlobalSetting, Slide, Solution, Product, SolutionProduct
 from portal.utils import convert_to_data_value, convert_to_view_value
 
 def home(request):
@@ -58,6 +58,20 @@ def solution_detail(request, id):
     solution_item = Solution.objects.get_solution_by_id(solution_id)
     if not solution_item:
         raise Http404
+    #获取关键词
+    solution_keyword = solution_item.keyword
+    #获取相关产品
+    solution_product_list = SolutionProduct.objects.get_product_by_solution_id(solution_id)
+    product_list = []
+    for solution_product_item in solution_product_list:
+        product_id = solution_product_item.product
+        product_item = Product.objects.get_product_by_id(product_id)
+        if not product_item:
+            solution_product_item.delete()
+        if product_item.enable == 0:
+            continue
+        product_item.id = convert_to_view_value(product_item.id)
+        product_list.append(product_item)
 
     return render(
                 request,
@@ -65,6 +79,8 @@ def solution_detail(request, id):
                 generate_context(
                     current='solution',
                     solution_item=solution_item,
+                    product_list=product_list,
+                    keyword=solution_keyword,
                 ))
 
 def product(request):
@@ -72,18 +88,60 @@ def product(request):
     :param request:
     :return:
     '''
-    context = generate_context(current='product')
-    return render(request, 'product/product.html', context)
+    product_list = Product.objects.get_enabled_product()
+    products = []
+    for product_item in product_list:
+        product_id = convert_to_view_value(product_item.id)
+        product_title = product_item.title
+        product_subtitle = product_item.subtitle
+        product_data = {
+            'product_id': product_id,
+            'product_title': product_title,
+            'product_subtitle': product_subtitle,
+        }
+        products.append(product_data)
+    return render(
+        request,
+        'product/product.html',
+        generate_context(
+            current='product',
+            products=products,
+        )
+    )
 
-def product_detail(request, param):
+def product_detail(request, id):
     '''
     :param request:
-    :param param:
+    :param id:
     :return:
     '''
-    context = generate_context(current='product')
-    context['current'] = 'product'
-    return render(request, 'product/product_detail.html', context)
+    product_id = convert_to_data_value(id)
+    product_item = Product.objects.get_product_by_id(product_id)
+    if not product_item:
+        raise Http404
+    keyword = product_item.keyword
+    #获取相关方案
+    solution_product_list = SolutionProduct.objects.get_solution_by_product_id(product_id)
+    solution_list = []
+    for solution_product_item in solution_product_list:
+        solution_id = solution_product_item.solution
+        solution_item = Solution.objects.get_solution_by_id(solution_id)
+        if not solution_item:
+            solution_product_item.delete()
+        if solution_item.enable == 0:
+            continue
+        solution_item.id = convert_to_view_value(solution_item.id)
+        solution_list.append(solution_item)
+    return render(
+        request,
+        'product/product_detail.html',
+        generate_context(
+            current='product',
+            product_item=product_item,
+            keyword=keyword,
+            solution_list=solution_list,
+        )
+    )
 def service(request):
     '''
     :param request:
@@ -199,7 +257,8 @@ def search(request):
     2：没有查询到结果
     '''
     message = ''
-    if len(search_result) == 0:
+    search_result_count = len(search_result)
+    if search_result_count == 0:
         search_result= None
         if not valid_rate:
             message = 0
@@ -233,10 +292,11 @@ def search(request):
 
     response = render(
         request,
-        'search.html',
+        'search/search.html',
         generate_context(
             current='home',
             search_result=search_result,
+            search_result_count=search_result_count,
             query=query,
             history_list=history_list,
             message=message
@@ -250,10 +310,10 @@ def search(request):
     return response
 
 def h404(request):
-    return render(request, '404.html', generate_context(current='home'))
+    return render(request, 'common/http404.html', generate_context(current='home'))
 
 def h500(request):
-    return render(request, '500.html', generate_context(current='home'))
+    return render(request, 'common/http500.html', generate_context(current='home'))
 
 def generate_context(**contexts):
     '''

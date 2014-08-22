@@ -16,7 +16,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="description" content="{{ g_settings.description }}" />
-        <meta name="keywords" content="{{ g_settings.keyword }}" />
+        <meta name="keywords" content="{% if keyword == None or keyword == ''%}{{ g_settings.keyword }}{% else %}{{ keyword }}{% endif %}" />
         <meta name="author" content="Mervin" />
         <link rel="icon" type="image/png" href="{% static 'portal/img/favicon.png' %}" />
         <title>泰科泰格&nbsp;-&nbsp;{% block title %}{% endblock %}</title>
@@ -49,12 +49,12 @@
                     {% block position %}{% endblock %}
                     <p>
                         {% ifnotequal g_settings.call None %}
-                        <span><img src="{% static 'portal/img/phone.png' %} " style="width: 14px;height: 14px;"/></span>
+                        <span><img src="{% static 'portal/img/phone.png' %}" style="width: 12px;height: 12px;"></span>
                         <span>&nbsp;{{ g_settings.call }}</span>
                         {% endifnotequal %}
-                        <span>&nbsp;&nbsp;</span>
+                        <span><label>&nbsp;&nbsp;&nbsp;</label></span>
                         {% ifnotequal g_settings.mail None %}
-                        <span><img src="{% static 'portal/img/mail.png' %} " style="width: 14px;height: 14px;"/></span>
+                        <span><img src="{% static 'portal/img/mail.png' %} " style="width: 12px;height: 12px;"/></span>
                         <span>&nbsp;<a href="mailto:{{ g_settings.mail }}">{{ g_settings.mail }}</a></span>
                         {% endifnotequal %}
                     </p>

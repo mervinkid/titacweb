@@ -7,39 +7,64 @@
 {% block position %}
     <ul>
         <li><a href="/">首页</a></li>
-        <li><div class="position_split"></div></li>
+        <li><div class="position-split"></div></li>
         <li><a href="/solution">解决方案</a></li>
-        <li><div class="position_split"></div></li>
+        <li><div class="position-split"></div></li>
         <li><label>{{ solution_item.title }}</label></li>
     </ul>
 {% endblock %}
 
 {% block content %}
- <div class="container clearfix">
-    <div class="two-thirds column" style="width:700px;">
-        <div class="">
-            <div class="one-third column alpha" style="width: 240px;">
-                <p class="text-big" style="padding-top: 20px;">{{ solution_item.title }}</p>
+<div class="container clearfix">
+   <div class="left-large-block">
+       <div class="white-box space">
+           <div class="main-content-box">
+               <h4><label>{{ solution_item.title }}</label></h4>
+               <h5><label>{{ solution_item.subtitle }}</label></h5>
+           </div>
+           <div class="main-content-box">
+               <p><label>{{ solution_item.sketch }}</label></p>
+           </div>
+           <div class="main-content-box">
+               {% autoescape off %}
+               {{ solution_item.content }}
+               {% endautoescape %}
+           </div>
+            <div class="main-content-box">
+                <div class="line"></div>
             </div>
-            <div class="one-third column omega" style="width: 400px;">
-                <p>{{ solution_item.sketch }}</p>
+            <div class="main-content-box">
+                <h4><label>相关产品</label></h4>
             </div>
-        </div>
-    </div>
-    <div class="one-third column" style="width: 220px;">
-      <div class="box" style="height: 100px;">
-          <h6></h6>
-      </div>
-    </div>
-    <div class="divider-dotted sixteen columns"></div>
-    </div>
- <div class="container clearfix">
-    <div class="sixteen columns">
-        <div class="box">
-            {% autoescape off %}
-            {{ solution_item.content }}
-            {% endautoescape %}
-        </div>
-    </div>
- </div>
+           {% for product_item in product_list %}
+           <div class="item-block">
+           <a href="/product/{{ product_item.id }}">
+               <h5>{{ product_item.title }}</h5>
+               {{ product_item.subtitle }}
+           </a>
+           </div>
+           {% endfor %}
+       </div>
+   </div>
+   <div class="right-small-block">
+       <div class="white-box">
+           {% include 'common/contact.html' %}
+       </div>
+       <p></p>
+       <div class="white-box">
+           <div>
+               <label>相关产品</label>
+               <div class="line"></div>
+               <p></p>
+           </div>
+           <div>
+               {% for product_item in product_list %}
+               <p>
+                    <a href="/product/{{ product_item.id }}">{{ product_item.title }}</a>
+               </p>
+               {% endfor %}
+           </div>
+       </div>
+   </div>
+</div>
 {% endblock %}

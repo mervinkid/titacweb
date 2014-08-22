@@ -5,7 +5,7 @@ import datetime
 from django.conf import settings
 from django.db import models
 from portal.utils import generate_random_string
-from portal.manager import SlideManager, SolutionManager, GlobalSettingManager, ProductManager
+from portal.manager import SlideManager, SolutionManager, GlobalSettingManager, ProductManager, SolutionProductManager
 
 class Media(models.Model):
     UPLOAD_ROOT = 'upload/'
@@ -202,3 +202,11 @@ class Product(models.Model):
         #保存时自动更新数据修改时间
         self.update = datetime.datetime.now()
         return super(Product, self).save(*args, **kwargs)
+
+class SolutionProduct(models.Model):
+    '''
+    管理方案和产品的关联
+    '''
+    solution = models.IntegerField(help_text='solution id')
+    product = models.IntegerField(help_text='product id')
+    objects = SolutionProductManager()
