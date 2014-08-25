@@ -3,7 +3,7 @@ import datetime
 from django.conf import settings
 from django.shortcuts import render
 from django.http.response import Http404
-from portal.models import GlobalSetting, Slide, Solution, Product, SolutionProduct
+from portal.models import GlobalSetting, Slide, Solution, Product, SP
 from portal.utils import convert_to_data_value, convert_to_view_value
 
 def home(request):
@@ -61,7 +61,7 @@ def solution_detail(request, id):
     #获取关键词
     solution_keyword = solution_item.keyword
     #获取相关产品
-    solution_product_list = SolutionProduct.objects.get_product_by_solution_id(solution_id)
+    solution_product_list = SP.objects.get_product_by_solution_id(solution_id)
     product_list = []
     for solution_product_item in solution_product_list:
         product_id = solution_product_item.product
@@ -121,7 +121,7 @@ def product_detail(request, id):
         raise Http404
     keyword = product_item.keyword
     #获取相关方案
-    solution_product_list = SolutionProduct.objects.get_solution_by_product_id(product_id)
+    solution_product_list = SP.objects.get_solution_by_product_id(product_id)
     solution_list = []
     for solution_product_item in solution_product_list:
         solution_id = solution_product_item.solution

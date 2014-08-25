@@ -110,7 +110,7 @@ class ProductManager(models.Manager):
                     enable=1)
         return query_result
 
-class SolutionProductManager(models.Manager):
+class SPManager(models.Manager):
     def get_product_by_solution_id(self, solution_id):
         return self.get_queryset().filter(solution=solution_id)
 
