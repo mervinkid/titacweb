@@ -3,7 +3,7 @@ import datetime
 from django.conf import settings
 from django.shortcuts import render
 from django.http.response import Http404
-from portal.models import GlobalSetting, Slide, Solution, Product, SP
+from portal.models import GlobalSetting, Slide, Solution, SolutionContent, Product, ProductContent, SolutionProduct
 from portal.utils import convert_to_data_value, convert_to_view_value
 
 def home(request):
@@ -61,7 +61,7 @@ def solution_detail(request, id):
     #获取关键词
     solution_keyword = solution_item.keyword
     #获取相关产品
-    solution_product_list = SP.objects.get_product_by_solution_id(solution_id)
+    solution_product_list = SolutionProduct.objects.get_product_by_solution_id(solution_id)
     product_list = []
     for solution_product_item in solution_product_list:
         product_id = solution_product_item.product
@@ -121,7 +121,7 @@ def product_detail(request, id):
         raise Http404
     keyword = product_item.keyword
     #获取相关方案
-    solution_product_list = SP.objects.get_solution_by_product_id(product_id)
+    solution_product_list = SolutionProduct.objects.get_solution_by_product_id(product_id)
     solution_list = []
     for solution_product_item in solution_product_list:
         solution_id = solution_product_item.solution
@@ -233,6 +233,32 @@ def search(request):
                 'sketch': solution_sketch,
             }
             search_result.append(result_item)
+
+        #查询解决方案内容
+        solution_content_result = SolutionContent.objects.get_search(query_list)
+        #检查所属解决方案在查询结果是否已存在
+        for solution_content_item in solution_content_result:
+            solution_id = solution_content_item.solution
+            exist = False
+            for search_result_item in search_result:
+                if search_result_item['type'] == 'solution' and search_result_item['id'] == solution_id:
+                    exist = True
+                    break
+            if not exist:
+                solution_item = Solution.objects.get_solution_by_id(solution_id)
+                if not solution_item:
+                    continue
+                solution_id = convert_to_view_value(solution_id)
+                solution_title = solution_item.title
+                solution_sketch = solution_item.sketch
+                result_item = {
+                    'type': 'solution',
+                    'id': solution_id,
+                    'title': solution_title,
+                    'sketch': solution_sketch
+                }
+                search_result.append(result_item)
+
         #查询产品
         product_result = Product.objects.get_search(query_list)
         for product_item in product_result:
@@ -248,6 +274,31 @@ def search(request):
                 'sketch': product_sketch,
             }
             search_result.append(result_item)
+
+        #查询产品内容
+        product_content_result = ProductContent.objects.get_search(query_list)
+        #检查所属产品在查询结果是否已存在
+        for product_content_item in product_content_result:
+            product_id = product_content_item.product
+            exist = False
+            for search_result_item in search_result:
+                if search_result_item['type'] == 'product' and search_result_item['id'] == product_id:
+                    exist = True
+                    break
+            if not exist:
+                product_item = Product.objects.get_product_by_id(product_id)
+                if not product_item:
+                    continue
+                product_id = convert_to_view_value(product_id)
+                product_title = product_item.title
+                product_sketch = product_item.sketch
+                result_item = {
+                    'type': 'product',
+                    'id': product_id,
+                    'title': product_title,
+                    'sketch': product_sketch
+                }
+                search_result.append(result_item)
 
     '''
     没有查询到数据的消息反馈

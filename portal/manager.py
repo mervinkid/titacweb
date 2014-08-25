@@ -22,6 +22,25 @@ class SlideManager(models.Manager):
         '''
         return self.get_queryset().filter(enable=1).order_by('-update')
 
+class PartnerManager(models.Manager):
+    def get_partners(self):
+        '''
+        获取所有合作伙伴信息
+        :return:
+        '''
+        return self.get_queryset().all()
+
+    def get_partner_by_id(self, partner_id):
+        '''
+        使用主键查询数据
+        :param partner_id:
+        :return:
+        '''
+        try:
+            return self.get_queryset().get(id=partner_id)
+        except Exception:
+            return None
+
 class SolutionManager(models.Manager):
     def get_enabled_solution(self):
         '''
@@ -49,21 +68,48 @@ class SolutionManager(models.Manager):
         '''
         query_result = []
         #对query_list中的关键词项遍历筛选
-        #查询项为title,content,sketch
+        #查询项为title,keyword,sketch
         for i in range(0, len(query_list), 1):
             query_item = query_list[i]
             if i == 0:
                 #第一次遍历
                 #进行全新查询
                 query_result = self.get_queryset().filter(
-                    models.Q(title__icontains=query_item) | models.Q(content__icontains=query_item) | models.Q(sketch__icontains=query_item),
+                    models.Q(title__icontains=query_item) | models.Q(keyword__icontains=query_item) | models.Q(sketch__icontains=query_item),
                     enable=1)
             else:
                 #第N次遍历
                 #对上一次遍历的结果进行筛选
                 query_result = query_result.filter(
-                    models.Q(title__icontains=query_item) | models.Q(content__icontains=query_item) | models.Q(sketch__icontains=query_item),
+                    models.Q(title__icontains=query_item) | models.Q(keyword__icontains=query_item) | models.Q(sketch__icontains=query_item),
                     enable=1)
+        return query_result
+
+class SolutionContentManager(models.Manager):
+    def get_content_by_solution_id(self, solution_id):
+        return self.get_queryset().filter(solution=solution_id)
+
+    def get_search(self, query_list):
+        '''
+        多词模糊搜索
+        :param query_list:
+        :return:
+        '''
+        query_result = []
+        #对query_list中的关键词项遍历筛选
+        #查询项为title,content
+        for i in range(0, len(query_list), 1):
+            query_item = query_list[i]
+            if i == 0:
+                #第一次遍历
+                #进行全新查询
+                query_result = self.get_queryset().filter(
+                    models.Q(title__icontains=query_item) | models.Q(content__icontains=query_item))
+            else:
+                #第N次遍历
+                #对上一次遍历的结果进行筛选
+                query_result = query_result.filter(
+                    models.Q(title__icontains=query_item) | models.Q(content__icontains=query_item))
         return query_result
 
 class ProductManager(models.Manager):
@@ -93,24 +139,51 @@ class ProductManager(models.Manager):
         '''
         query_result = []
         #对query_list中的关键词项遍历筛选
-        #查询项为title,content,sketch
+        #查询项为title,keyword,sketch
         for i in range(0, len(query_list), 1):
             query_item = query_list[i]
             if i == 0:
                 #第一次遍历
                 #进行全新查询
                 query_result = self.get_queryset().filter(
-                    models.Q(title__icontains=query_item) | models.Q(content__icontains=query_item) | models.Q(sketch__icontains=query_item),
+                    models.Q(title__icontains=query_item) | models.Q(keyword__icontains=query_item) | models.Q(sketch__icontains=query_item),
                     enable=1)
             else:
                 #第N次遍历
                 #对上一次遍历的结果进行筛选
                 query_result = query_result.filter(
-                    models.Q(title__icontains=query_item)|models.Q(content__icontains=query_item) | models.Q(sketch__icontains=query_item),
+                    models.Q(title__icontains=query_item) | models.Q(keyword__icontains=query_item) | models.Q(sketch__icontains=query_item),
                     enable=1)
         return query_result
 
-class SPManager(models.Manager):
+class ProductContentManager(models.Manager):
+    def get_content_by_product_id(self, product_id):
+        return self.get_queryset().filter(product=product_id)
+
+    def get_search(self, query_list):
+        '''
+        多词模糊搜索
+        :param query_list:
+        :return:
+        '''
+        query_result = []
+        #对query_list中的关键词项遍历筛选
+        #查询项为title,content
+        for i in range(0, len(query_list), 1):
+            query_item = query_list[i]
+            if i == 0:
+                #第一次遍历
+                #进行全新查询
+                query_result = self.get_queryset().filter(
+                    models.Q(title__icontains=query_item) | models.Q(content__icontains=query_item))
+            else:
+                #第N次遍历
+                #对上一次遍历的结果进行筛选
+                query_result = query_result.filter(
+                    models.Q(title__icontains=query_item) | models.Q(content__icontains=query_item))
+        return query_result
+
+class SolutionProductManager(models.Manager):
     def get_product_by_solution_id(self, solution_id):
         return self.get_queryset().filter(solution=solution_id)
 

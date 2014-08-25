@@ -5,13 +5,33 @@ import datetime
 from django.conf import settings
 from django.db import models
 from portal.utils import generate_random_string
-from portal.manager import SlideManager, SolutionManager, GlobalSettingManager, ProductManager, SPManager
+from portal.manager import SlideManager, PartnerManager, SolutionManager, SolutionContentManager, GlobalSettingManager, ProductManager, ProductContentManager,  SolutionProductManager
 
 class Media(models.Model):
     UPLOAD_ROOT = 'upload/'
-    title = models.CharField(max_length=250, help_text='*Title of media')
-    file = models.FileField(upload_to=UPLOAD_ROOT)
-    update = models.DateTimeField(default=datetime.datetime.now(), editable=False)
+    title = models.CharField(
+        db_column='title',
+        max_length=250,
+        help_text='*媒体文件标题',
+        verbose_name='标题'
+    )
+    file = models.FileField(
+        db_column='file',
+        upload_to=UPLOAD_ROOT,
+        help_text='选择本地文件',
+        verbose_name='文件'
+    )
+    update = models.DateTimeField(
+        db_column='update',
+        default=datetime.datetime.now(),
+        editable=False,
+        help_text='*更新时间',
+        verbose_name='更新时间'
+    )
+
+    class Meta:
+        db_table = 'portal_media'
+        verbose_name_plural = '媒体文件'
 
     def __unicode__(self):
         return \
@@ -63,9 +83,9 @@ class Media(models.Model):
 
 
 class Slide(models.Model):
-    '''
+    """
     用于管理站点首页幻灯片信息
-    '''
+    """
     ENABLE_CHOICES = (
         (1, '启用'),
         (0, '禁用'),
@@ -212,9 +232,9 @@ class GlobalSetting(models.Model):
         super(GlobalSetting, self).save(*args, **kwargs)
 
 class News(models.Model):
-    '''
+    """
     用于管理站点新闻消息
-    '''
+    """
     ENABLE_CHOICES = (
         (1, '启用'),
         (0, '禁用'),
@@ -268,10 +288,46 @@ class News(models.Model):
         self.update = datetime.datetime.now()
         super(News, self).save(*args, **kwargs)
 
+class Partner(models.Model):
+    """
+    管理合作伙伴信息
+    """
+    title = models.CharField(
+        db_column='title',
+        max_length=250,
+        help_text='长度限制为250个字符',
+        verbose_name='合作伙伴名称'
+    )
+    logo = models.CharField(
+        db_column='logo',
+        max_length=250,
+        null=True,
+        blank=True,
+        help_text='LOGO URL地址,支持base64数据',
+        verbose_name='LOGO'
+    )
+    website = models.CharField(
+        db_column='website',
+        max_length=250,
+        null=True,
+        blank=True,
+        help_text='合作伙伴网址',
+        verbose_name='网址'
+    )
+    objects = PartnerManager()
+
+    class Meta:
+        db_table = 'portal_partner'
+        verbose_name_plural = '合作伙伴'
+
+    def __unicode__(self):
+        return \
+            self.title
+
 class Solution(models.Model):
-    '''
+    """
     用于管理解决方案信息
-    '''
+    """
     ENABLE_CHOICES = (
         (1, '启用'),
         (0, '禁用'),
@@ -312,13 +368,6 @@ class Solution(models.Model):
         help_text='显示在标题下',
         verbose_name='简介'
     )
-    content = models.TextField(
-        db_column='content',
-        null=True,
-        blank=True,
-        help_text='解决方案内容,支持HTML代码',
-        verbose_name='内容'
-    )
     keyword = models.CharField(
         db_column='keyword',
         max_length=250,
@@ -349,9 +398,9 @@ class Solution(models.Model):
         return super(Solution, self).save(*args, **kwargs)
 
 class SolutionContent(models.Model):
-    '''
+    """
     用于管理解决方案内容
-    '''
+    """
     solution = models.ForeignKey(
         Solution,
         db_column='solution_id',
@@ -369,6 +418,14 @@ class SolutionContent(models.Model):
         help_text='支持HTML代码',
         verbose_name='内容'
     )
+    update = models.DateTimeField(
+        db_column='update',
+        default=datetime.datetime.now(),
+        editable=False,
+        help_text='更新时间',
+        verbose_name='更新时间'
+    )
+    objects = SolutionContentManager()
 
     class Meta:
         db_table = 'portal_solution_content'
@@ -377,10 +434,15 @@ class SolutionContent(models.Model):
     def __unicode__(self):
             return self.title
 
+    def save(self, *args, **kwargs):
+        #保存时自动更新数据修改时间
+        self.update = datetime.datetime.now()
+        return super(SolutionContent, self).save(*args, **kwargs)
+
 class Product(models.Model):
-    '''
+    """
     用于管理产品数据
-    '''
+    """
     ENABLE_CHOICES = (
         (1, '启用'),
         (0, '禁用'),
@@ -421,13 +483,6 @@ class Product(models.Model):
         help_text='显示在标题之下',
         verbose_name='简介'
     )
-    content = models.TextField(
-        db_column='content',
-        null=True,
-        blank=True,
-        help_text='支持HTML代码',
-        verbose_name='内容'
-    )
     keyword = models.CharField(
         db_column='keyword',
         max_length=250,
@@ -458,10 +513,53 @@ class Product(models.Model):
         self.update = datetime.datetime.now()
         return super(Product, self).save(*args, **kwargs)
 
+class ProductContent(models.Model):
+    """
+    用于管理产品内容
+    """
+    product = models.ForeignKey(
+        Product,
+        db_column='product_id',
+        help_text='*选择所属解决方案',
+        verbose_name='解决方案'
+    )
+    title = models.CharField(
+        db_column='title',
+        max_length=250,
+        help_text='*内容标题,250个字符内',
+        verbose_name='标题'
+    )
+    content = models.TextField(
+        db_column='content',
+        help_text='支持HTML代码',
+        verbose_name='内容'
+    )
+    update = models.DateTimeField(
+        db_column='update',
+        default=datetime.datetime.now(),
+        editable=False,
+        help_text='更新时间',
+        verbose_name='更新时间'
+    )
+    objects = ProductContentManager()
+
+    class Meta:
+        db_table = 'portal_product_content'
+        verbose_name_plural = '产品内容'
+
+    def __unicode__(self):
+        return \
+            self.title
+
+    def save(self, *args, **kwargs):
+        #保存时自动更新数据修改时间
+        self.update = datetime.datetime.now()
+        return super(ProductContent, self).save(*args, **kwargs)
+
 class SolutionProduct(models.Model):
-    '''
+    """
     管理方案和产品的关联
-    '''
+    """
     solution = models.ForeignKey(
         Solution,
         db_column='solution_id',
@@ -474,8 +572,29 @@ class SolutionProduct(models.Model):
         help_text='*选择产品',
         verbose_name='产品'
     )
-    objects = SPManager()
+    objects = SolutionProductManager()
 
     class Meta:
         db_table = 'portal_solution_product'
         verbose_name_plural = '解决方案与产品关联'
+
+class ProductPartner(models.Model):
+    """
+    管理产品和合作伙伴的关联
+    """
+    product = models.ForeignKey(
+        Product,
+        db_column='product_id',
+        help_text='*选择产品',
+        verbose_name='产品'
+    )
+    partner = models.ForeignKey(
+        Partner,
+        db_column='partner_id',
+        help_text='*选择合作伙伴',
+        verbose_name='合作伙伴'
+    )
+
+    class Meta:
+        db_table = 'portal_product_partner'
+        verbose_name_plural = '产品与合作伙伴关联'
