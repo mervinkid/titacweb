@@ -912,6 +912,20 @@ div .right-small-block {
     margin-top: 5px;
     margin-bottom: 5px;
 }
+div .left-small-block {
+    width: 180px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+div .right-large-block {
+    width: 750px;
+    float: right;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
 div .hole-block {
     margin-left: 10px;
     margin-right: 10px;
