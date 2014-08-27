@@ -6,9 +6,9 @@
 <!--position-->
 {% block position %}
     <ul>
-        <li><a href="/">首页</a></li>
+        <li><a href="{% url 'portal.views.home' %}">首页</a></li>
         <li><div class="position-split"></div></li>
-        <li><a href="/product">产品</a></li>
+        <li><a href="{% url 'portal.views.product' %}">产品</a></li>
         <li><div class="position-split"></div></li>
         <li><label>{{ product_item.title }}</label></li>
     </ul>

@@ -68,7 +68,7 @@ def solution_detail(request, solution_id):
     solution_product_list = SolutionProduct.objects.get_product_by_solution_id(solution_id)
     product_list = []
     for solution_product_item in solution_product_list:
-        product_id = solution_product_item.product
+        product_id = solution_product_item.product.id
         product_item = Product.objects.get_product_by_id(product_id)
         if not product_item:
             solution_product_item.delete()

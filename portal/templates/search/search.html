@@ -5,7 +5,7 @@
 
 {% block position %}
     <ul>
-        <li><a href="/">首页</a></li>
+        <li><a href="{% url 'portal.views.home' %}">首页</a></li>
         <li><div class="position-split"></div></li>
         <li><label>搜索结果</label></li>
     </ul>
@@ -68,7 +68,7 @@
             {% endif %}
             {% for history_item in history_list %}
             <p>
-                <a href="/search/?s={{ history_item }}">
+                <a href="{% url 'portal.views.search' %}?s={{ history_item }}">
                     <img src="{% static 'portal/img/search.png' %}" style="width: 12px;height: 12px;">
                     {{ history_item }}
                 </a>
