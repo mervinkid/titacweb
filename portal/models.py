@@ -5,7 +5,16 @@ import datetime
 from django.conf import settings
 from django.db import models
 from portal.utils import generate_random_string
-from portal.manager import SlideManager, PartnerManager, SolutionManager, SolutionContentManager, GlobalSettingManager, ProductManager, ProductContentManager,  SolutionProductManager
+from portal.manager import \
+    SlideManager, \
+    PartnerManager, \
+    SolutionManager, \
+    SolutionContentManager, \
+    GlobalSettingManager, \
+    ProductManager, \
+    ProductContentManager,  \
+    SolutionProductManager
+
 
 class Media(models.Model):
     UPLOAD_ROOT = 'upload/'
@@ -39,9 +48,9 @@ class Media(models.Model):
 
     def save(self, *args, **kwargs):
         #判断文件是否改变
-        file = str(self.file)
+        media_file = str(self.file)
         file_changed = False
-        if str(file).find(Media.UPLOAD_ROOT) == -1:
+        if str(media_file).find(Media.UPLOAD_ROOT) == -1:
             file_changed = True
         if file_changed:
             #查找原数据中的值并尝试删除原文件
@@ -70,7 +79,6 @@ class Media(models.Model):
                 super(Media, media_item).save(*args, **kwargs)
             except Exception, error:
                 print error
-
 
     def delete(self, *args, **kwargs):
         #删除数据记录
@@ -181,12 +189,13 @@ class Slide(models.Model):
         self.update = datetime.datetime.now()
         super(Slide, self).save(*args, **kwargs)
 
+
 class GlobalSetting(models.Model):
-    '''
+    """
     用于管理站点通用设置
     key:键
     value:值
-    '''
+    """
     KEY_CHOICES = (
         ('keyword', '页面Keyword'),
         ('description', '页面Description'),
@@ -230,6 +239,7 @@ class GlobalSetting(models.Model):
     def save(self, *args, **kwargs):
         self.update = datetime.datetime.now()
         super(GlobalSetting, self).save(*args, **kwargs)
+
 
 class News(models.Model):
     """
@@ -288,6 +298,7 @@ class News(models.Model):
         self.update = datetime.datetime.now()
         super(News, self).save(*args, **kwargs)
 
+
 class Partner(models.Model):
     """
     管理合作伙伴信息
@@ -323,6 +334,7 @@ class Partner(models.Model):
     def __unicode__(self):
         return \
             self.title
+
 
 class Solution(models.Model):
     """
@@ -397,6 +409,7 @@ class Solution(models.Model):
         self.update = datetime.datetime.now()
         return super(Solution, self).save(*args, **kwargs)
 
+
 class SolutionContent(models.Model):
     """
     用于管理解决方案内容
@@ -438,6 +451,7 @@ class SolutionContent(models.Model):
         #保存时自动更新数据修改时间
         self.update = datetime.datetime.now()
         return super(SolutionContent, self).save(*args, **kwargs)
+
 
 class Product(models.Model):
     """
@@ -513,6 +527,7 @@ class Product(models.Model):
         self.update = datetime.datetime.now()
         return super(Product, self).save(*args, **kwargs)
 
+
 class ProductContent(models.Model):
     """
     用于管理产品内容
@@ -556,6 +571,7 @@ class ProductContent(models.Model):
         self.update = datetime.datetime.now()
         return super(ProductContent, self).save(*args, **kwargs)
 
+
 class SolutionProduct(models.Model):
     """
     管理方案和产品的关联
@@ -577,6 +593,7 @@ class SolutionProduct(models.Model):
     class Meta:
         db_table = 'portal_solution_product'
         verbose_name_plural = '解决方案与产品关联'
+
 
 class ProductPartner(models.Model):
     """
