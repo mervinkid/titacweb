@@ -3,7 +3,8 @@ import datetime
 from django.conf import settings
 from django.shortcuts import render
 from django.http.response import Http404
-from portal.models import GlobalSetting, Slide, Solution, SolutionContent, Product, ProductContent, SolutionProduct
+from portal.models import \
+    GlobalSetting, Slide, Solution, SolutionContent, Product, ProductContent, SolutionProduct
 from portal.utils import convert_to_data_value, convert_to_view_value
 
 
@@ -64,6 +65,8 @@ def solution_detail(request, solution_id):
         raise Http404
     #获取关键词
     solution_keyword = solution_item.keyword
+    #获取内容
+    solution_content_list = SolutionContent.objects.get_content_by_solution_id(solution_id)
     #获取相关产品
     solution_product_list = SolutionProduct.objects.get_product_by_solution_id(solution_id)
     product_list = []
@@ -83,6 +86,7 @@ def solution_detail(request, solution_id):
         generate_context(
             current='solution',
             solution_item=solution_item,
+            solution_content_list=solution_content_list,
             product_list=product_list,
             keyword=solution_keyword,
         )
@@ -131,7 +135,7 @@ def product_detail(request, product_id):
     solution_product_list = SolutionProduct.objects.get_solution_by_product_id(product_id)
     solution_list = []
     for solution_product_item in solution_product_list:
-        solution_id = solution_product_item.solution
+        solution_id = solution_product_item.solution.id
         solution_item = Solution.objects.get_solution_by_id(solution_id)
         if not solution_item:
             solution_product_item.delete()
