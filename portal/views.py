@@ -131,6 +131,8 @@ def product_detail(request, product_id):
     if not product_item:
         raise Http404
     keyword = product_item.keyword
+    #获取内容
+    product_content_list = ProductContent.objects.get_content_by_product_id(product_id)
     #获取相关方案
     solution_product_list = SolutionProduct.objects.get_solution_by_product_id(product_id)
     solution_list = []
@@ -151,6 +153,7 @@ def product_detail(request, product_id):
             product_item=product_item,
             keyword=keyword,
             solution_list=solution_list,
+            product_content_list=product_content_list
         )
     )
 

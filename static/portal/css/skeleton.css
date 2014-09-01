@@ -375,23 +375,11 @@ width: 420px;
 		border: solid 1px #d4d4d4;
 		border-width: 1px 1px 0 0;
 		margin: 0;
-		background: #f6f6f6;
-		font-size: 13px; }
+		font-size: 12px; }
 	ul.tabs li a.active {
-		background: #ededed;
-		height: 30px;
-		position: relative;
-		top: -4px;
-		padding-top: 4px;
-		border-left-width: 1px;
-		margin: 0 0 0 -1px;
-		color: #111;
-		-moz-border-radius-topleft: 2px;
-		-webkit-border-top-left-radius: 2px;
-		border-top-left-radius: 2px;
-		-moz-border-radius-topright: 2px;
-		-webkit-border-top-right-radius: 2px;
-		border-top-right-radius: 2px; }
+        background: #df3a65;
+        color: #ffffff;
+		 }
 	ul.tabs li:first-child a.active {
 		margin-left: 0; }
 	ul.tabs li:first-child a {

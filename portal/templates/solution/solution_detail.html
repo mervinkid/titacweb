@@ -15,6 +15,7 @@
 {% endblock %}
 
 {% block content %}
+<script type="text/javascript" src="{% static 'portal/js/tabcontrol.js' %}"></script>
 <div class="container clearfix">
    <div class="left-large-block">
        <div class="white-box space">
@@ -27,30 +28,35 @@
            </div>
            <div class="main-content-box">
                 <section id="solution-details" role="main">
-                    <ul class="tabs" role="navigation">
+                    <ul class="tabs">
                         {% for solution_content in solution_content_list %}
-                        <li><a>{{ solution_content.title }}</a></li>
+                        <li><label><a id="tab-button-{{ forloop.counter }}" onclick="activeTab('{{ forloop.counter }}');" {% if forloop.first %}class="active"{% endif %}>{{ solution_content.title }}</a></label></li>
                         {% endfor %}
-                        <li><a>相关产品</a></li>
+                        <li><label><a id="tab-button-relate" onclick="activeTab('relate')">相关信息</a></label></li>
                     </ul>
                     <div id="main">
                         <div class="panes">
                             {% for solution_content in solution_content_list %}
-                            <div class="table-content" id="tab{{ forloop.counter }}" style="{% if not forloop.first %}display: none{% endif %}">
+                            <div class="table-content" id="tab-content-{{ forloop.counter }}" style="{% if not forloop.first %}display: none{% endif %}">
                                 {% autoescape off %}
                                 {{ solution_content.content }}
                                 {% endautoescape %}
                             </div>
                             {% endfor %}
-                            <div class="table-content" id="tab-products" style="display: none">
-                            {% for product_item in product_list %}
-                                <div class="item-block">
-                                    <a href="{% url 'portal.views.product_detail' product_item.id%}">
-                                        <h5>{{ product_item.title }}</h5>
-                                        <label>{{ product_item.subtitle }}</label>
-                                    </a>
+                            <div class="table-content" id="tab-content-relate" style="display: none">
+                                <div>
+                                    <div><label><strong>相关产品</strong></label></div>
+                                    {% for product_item in product_list %}
+                                    <div class="item-block">
+                                        <a href="{% url 'portal.views.product_detail' product_item.id%}">
+                                            <h5>{{ product_item.title }}</h5>
+                                            <label>{{ product_item.subtitle }}</label>
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                    <div><label><strong>相关客户</strong></label></div>
+                                    <div><label><strong>相关合作伙伴</strong></label></div>
                                 </div>
-                            {% endfor %}
                             </div>
                         </div>
                     </div>
@@ -79,5 +85,4 @@
        </div>
    </div>
 </div>
-<script
 {% endblock %}

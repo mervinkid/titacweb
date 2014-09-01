@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-
+{% load staticfiles %}
 <!--title-->
 {% block title %}{{ product.title }}{% endblock %}
 
@@ -16,6 +16,7 @@
 
 <!--content-->
 {% block content %}
+<script type="text/javascript" src="{% static 'portal/js/tabcontrol.js' %}"></script>
 <div class="container clearfix">
    <div class="left-large-block">
        <div class="white-box space">
@@ -27,9 +28,38 @@
                <p><label>{{ product_item.sketch }}</label></p>
            </div>
            <div class="main-content-box">
-               {% autoescape off %}
-               {{ product_item.content }}
-               {% endautoescape %}
+                <section id="solution-details" role="main">
+                    <ul class="tabs">
+                        {% for product_content in product_content_list %}
+                        <li><a  id="tab-button-{{ forloop.counter }}" onclick="activeTab('{{ forloop.counter }}');" {% if forloop.first %}class="active"{% endif %}>{{ product_content.title }}</a></li>
+                        {% endfor %}
+                        <li><a id="tab-button-relate" onclick="activeTab('relate')">相关信息</a></li>
+                    </ul>
+                    <div id="main">
+                        <div class="panes">
+                            {% for product_content in product_content_list %}
+                            <div class="table-content" id="tab-content-{{ forloop.counter }}" style="{% if not forloop.first %}display: none{% endif %}">
+                                {% autoescape off %}
+                                {{ product_content.content }}
+                                {% endautoescape %}
+                            </div>
+                            {% endfor %}
+                            <div class="table-content" id="tab-content-relate" style="display: none">
+                                <div>
+                                    <div><label><strong>相关解决方案</strong></label></div>
+                                    {% for solution_item in solution_list %}
+                                    <div class="item-block">
+                                        <a href="{% url 'portal.views.solution_detail' solution_item.id%}">
+                                            <h5>{{ solution_item.title }}</h5>
+                                            <label>{{ solution_item.subtitle }}</label>
+                                        </a>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
            </div>
        </div>
    </div>
@@ -39,16 +69,18 @@
        </div>
        <p></p>
        <div class="white-box">
-            <div>
-                <label>相关解决方案</label>
-                <div class="line"></div>
-                <p></p>
-            </div>
-            {% for solution_item in solution_list %}
-            <p>
-                <a href="/solution/{{ solution_item.id }}">{{ solution_item.title }}</a>
-            </p>
-           {% endfor %}
+           <div>
+               <label>相关产品</label>
+               <div class="line"></div>
+               <p></p>
+           </div>
+           <div>
+               {% for solution_item in solution_list %}
+               <p>
+                    <a href="/solution/{{ solution_item.id }}">{{ solution_item.title }}</a>
+               </p>
+               {% endfor %}
+           </div>
        </div>
    </div>
 </div>
