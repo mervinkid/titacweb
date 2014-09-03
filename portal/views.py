@@ -4,7 +4,14 @@ from django.conf import settings
 from django.shortcuts import render
 from django.http.response import Http404
 from portal.models import \
-    GlobalSetting, Slide, Solution, SolutionContent, Product, ProductContent, SolutionProduct
+    GlobalSetting, \
+    Slide, \
+    Solution, \
+    SolutionContent, \
+    Product, \
+    ProductContent, \
+    ProductCustomer, \
+    SolutionProduct
 from portal.utils import convert_to_data_value, convert_to_view_value
 
 
@@ -145,6 +152,13 @@ def product_detail(request, product_id):
             continue
         solution_item.id = convert_to_view_value(solution_item.id)
         solution_list.append(solution_item)
+    #获取相关客户信息
+    product_customer_list = ProductCustomer.objects.get_customer_by_product_id(product_id)
+    customer_list = []
+    for product_customer_item in product_customer_list:
+        customer = product_customer_item.customer
+        customer_list.append(customer)
+
     return render(
         request,
         'product/product_detail.html',
@@ -153,7 +167,8 @@ def product_detail(request, product_id):
             product_item=product_item,
             keyword=keyword,
             solution_list=solution_list,
-            product_content_list=product_content_list
+            product_content_list=product_content_list,
+            customer_list=customer_list
         )
     )
 
@@ -172,8 +187,13 @@ def download(request):
     :param request:
     :return:
     """
-    context = generate_context(current='download')
-    return render(request, 'download/download.html', context)
+    return render(
+        request,
+        'download/download.html',
+        generate_context(
+            current='download'
+        )
+    )
 
 
 def partner(request):
@@ -181,8 +201,13 @@ def partner(request):
     :param request:
     :return:
     """
-    context = generate_context(current='partner')
-    return render(request, 'partner/parter.html', context)
+    return render(
+        request,
+        'partner/partner.html',
+        generate_context(
+            current='partner'
+        )
+    )
 
 
 def career(request):
@@ -199,8 +224,13 @@ def company(request):
     :param request:
     :return:
     """
-    context = generate_context(current='company')
-    return render(request, 'company/company.html', context)
+    return render(
+        request,
+        'company/company.html',
+        generate_context(
+            current='company'
+        )
+    )
 
 
 def privacy(request):
@@ -208,8 +238,13 @@ def privacy(request):
     :param request:
     :return:
     """
-    context = generate_context(current='company')
-    return render(request, 'company/privacy.html', context)
+    return render(
+        request,
+        'company/privacy.html',
+        generate_context(
+            current='company'
+        )
+    )
 
 
 def term(request):
@@ -217,8 +252,13 @@ def term(request):
     :param request:
     :return:
     """
-    context = generate_context(current='company')
-    return render(request, 'company/term.html', context)
+    return render(
+        request,
+        'company/term.html',
+        generate_context(
+            current='company'
+        )
+    )
 
 
 def search(request):
@@ -388,7 +428,9 @@ def h404(request):
     return render(
         request,
         'common/http404.html',
-        generate_context(current='home')
+        generate_context(
+            current='home'
+        )
     )
 
 
@@ -396,7 +438,9 @@ def h500(request):
     return render(
         request,
         'common/http500.html',
-        generate_context(current='home')
+        generate_context(
+            current='home'
+        )
     )
 
 

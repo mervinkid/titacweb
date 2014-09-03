@@ -45,6 +45,26 @@ class PartnerManager(models.Manager):
             print str(e)
             return None
 
+class CustomerManager(models.Manager):
+    def get_all_customer(self):
+        """
+        获取所有客户信息
+        :return:
+        """
+        return self.get_queryset().all()
+
+    def get_customer_by_id(self, customer_id):
+        """
+        通过主键查询数据
+        :param customer_id:
+        :return:
+        """
+        try:
+            return self.get_queryset().get(id=customer_id)
+        except Exception, e:
+            print(str(e))
+            return None
+
 
 class SolutionManager(models.Manager):
     def get_enabled_solution(self):
@@ -105,7 +125,7 @@ class SolutionContentManager(models.Manager):
         :param solution_id:
         :return:
         """
-        return self.get_queryset().filter(solution=solution_id)
+        return self.get_queryset().filter(solution=solution_id).order_by('position')
 
     def get_search(self, query_list):
         """
@@ -190,7 +210,7 @@ class ProductContentManager(models.Manager):
         :param product_id:
         :return:
         """
-        return self.get_queryset().filter(product=product_id)
+        return self.get_queryset().filter(product=product_id).order_by('position')
 
     def get_search(self, query_list):
         """
@@ -219,6 +239,22 @@ class ProductContentManager(models.Manager):
                 )
         return query_result
 
+class ProductCustomerManager(models.Manager):
+    def get_customer_by_product_id(self, product_id):
+        """
+        通过产品查询客户
+        :param product_id:
+        :return:
+        """
+        return self.get_queryset().filter(product=product_id)
+
+    def get_product_by_customer_id(self, customer_id):
+        """
+        通过客户查询产品
+        :param customer_id:
+        :return:
+        """
+        return self.get_queryset().filter(customer=customer_id)
 
 class SolutionProductManager(models.Manager):
     def get_product_by_solution_id(self, solution_id):

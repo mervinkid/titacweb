@@ -8,11 +8,13 @@ from portal.utils import generate_random_string
 from portal.manager import \
     SlideManager, \
     PartnerManager, \
+    CustomerManager, \
     SolutionManager, \
     SolutionContentManager, \
     GlobalSettingManager, \
     ProductManager, \
     ProductContentManager,  \
+    ProductCustomerManager, \
     SolutionProductManager
 
 
@@ -309,7 +311,8 @@ class Partner(models.Model):
         help_text='长度限制为250个字符',
         verbose_name='合作伙伴名称'
     )
-    logo = models.CharField(
+    logo = models.ForeignKey(
+        Media,
         db_column='logo',
         max_length=250,
         null=True,
@@ -334,6 +337,43 @@ class Partner(models.Model):
     def __unicode__(self):
         return \
             self.title
+
+
+class Customer(models.Model):
+    """
+    管理客户信息
+    """
+    title = models.CharField(
+        db_column='title',
+        max_length=250,
+        help_text='客户名称',
+        verbose_name='客户'
+    )
+    fullname = models.CharField(
+        db_column='fullname',
+        max_length=250,
+        null=True,
+        blank=True,
+        help_text='客户全称',
+        verbose_name='全称',
+    )
+    logo = models.ForeignKey(
+        Media,
+        db_column='logo',
+        null=True,
+        blank=True,
+        help_text='客户公司LOGO图片链接',
+        verbose_name='LOGO'
+    )
+    objects = CustomerManager()
+
+    def __unicode__(self):
+        return \
+            self.title
+
+    class Meta:
+        db_table = 'portal_customer'
+        verbose_name_plural = '客户信息'
 
 
 class Solution(models.Model):
@@ -414,6 +454,13 @@ class SolutionContent(models.Model):
     """
     用于管理解决方案内容
     """
+    POSITION_CHOICES = {
+        (0, '位置0'),
+        (1, '位置1'),
+        (2, '位置2'),
+        (3, '位置3'),
+        (4, '位置4'),
+        }
     solution = models.ForeignKey(
         Solution,
         db_column='solution_id',
@@ -437,6 +484,13 @@ class SolutionContent(models.Model):
         editable=False,
         help_text='更新时间',
         verbose_name='更新时间'
+    )
+    position = models.IntegerField(
+        db_column='position',
+        default=0,
+        choices=POSITION_CHOICES,
+        help_text='位置从左至右',
+        verbose_name='位置'
     )
     objects = SolutionContentManager()
 
@@ -512,6 +566,14 @@ class Product(models.Model):
         help_text='*更新时间',
         verbose_name='更新时间'
     )
+    partner = models.ForeignKey(
+        Partner,
+        db_column='partner',
+        null=True,
+        blank=True,
+        help_text='选择产品所属合作伙伴',
+        verbose_name='合作伙伴'
+    )
     objects = ProductManager()
 
     class Meta:
@@ -532,6 +594,13 @@ class ProductContent(models.Model):
     """
     用于管理产品内容
     """
+    POSITION_CHOICES = {
+        (0, '位置0'),
+        (1, '位置1'),
+        (2, '位置2'),
+        (3, '位置3'),
+        (4, '位置4'),
+    }
     product = models.ForeignKey(
         Product,
         db_column='product_id',
@@ -556,6 +625,13 @@ class ProductContent(models.Model):
         help_text='更新时间',
         verbose_name='更新时间'
     )
+    position = models.IntegerField(
+        db_column='position',
+        default=0,
+        choices=POSITION_CHOICES,
+        help_text='位置从左至右',
+        verbose_name='位置'
+    )
     objects = ProductContentManager()
 
     class Meta:
@@ -570,6 +646,30 @@ class ProductContent(models.Model):
         #保存时自动更新数据修改时间
         self.update = datetime.datetime.now()
         return super(ProductContent, self).save(*args, **kwargs)
+
+
+class ProductCustomer(models.Model):
+    product = models.ForeignKey(
+        Product,
+        db_column='product_id',
+        help_text='选择产品',
+        verbose_name='产品'
+    )
+    customer = models.ForeignKey(
+        Customer,
+        db_column='customer_id',
+        help_text='选择客户',
+        verbose_name='客户'
+    )
+    objects = ProductCustomerManager()
+
+    def __unicode__(self):
+        return \
+            str(self.id)
+
+    class Meta:
+        db_table = 'portal_product_customer'
+        verbose_name_plural = '产品客户关联'
 
 
 class SolutionProduct(models.Model):
@@ -592,26 +692,4 @@ class SolutionProduct(models.Model):
 
     class Meta:
         db_table = 'portal_solution_product'
-        verbose_name_plural = '解决方案与产品关联'
-
-
-class ProductPartner(models.Model):
-    """
-    管理产品和合作伙伴的关联
-    """
-    product = models.ForeignKey(
-        Product,
-        db_column='product_id',
-        help_text='*选择产品',
-        verbose_name='产品'
-    )
-    partner = models.ForeignKey(
-        Partner,
-        db_column='partner_id',
-        help_text='*选择合作伙伴',
-        verbose_name='合作伙伴'
-    )
-
-    class Meta:
-        db_table = 'portal_product_partner'
-        verbose_name_plural = '产品与合作伙伴关联'
+        verbose_name_plural = '解决方案产品关联'

@@ -1,8 +1,18 @@
 #coding=utf-8
 from django.contrib import admin
 from portal.models import \
-    GlobalSetting, Media, Slide, News, Partner, Solution, SolutionContent, \
-    Product, ProductContent, SolutionProduct, ProductPartner
+    GlobalSetting, \
+    Media, \
+    Slide, \
+    News, \
+    Partner, \
+    Customer, \
+    Solution, \
+    SolutionContent, \
+    Product, \
+    ProductContent, \
+    ProductCustomer, \
+    SolutionProduct
 
 
 class GlobalSettingAdmin(admin.ModelAdmin):
@@ -39,6 +49,12 @@ class PartnerAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'website')
 
 
+class CustomerAdmin(admin.ModelAdmin):
+    model = Customer
+    ordering = ['id']
+    list_display = ('id', 'title', 'fullname')
+
+
 class SolutionAdmin(admin.ModelAdmin):
     model = Solution
     ordering = ['id']
@@ -49,44 +65,44 @@ class SolutionAdmin(admin.ModelAdmin):
 class SolutionContentAdmin(admin.ModelAdmin):
     model = SolutionContent
     ordering = ['id']
-    list_display = ('id', 'solution', 'title', 'update')
+    list_display = ('id', 'solution', 'title', 'position', 'update')
     list_filter = ('solution', 'update')
 
 
 class ProductAdmin(admin.ModelAdmin):
     model = Product
     ordering = ['id']
-    list_display = ('id', 'title', 'keyword', 'enable', 'update')
+    list_display = ('id', 'title', 'keyword', 'enable', 'partner', 'update')
     list_filter = ('enable', 'update')
 
 
-class ProductContentManager(admin.ModelAdmin):
+class ProductContentAdmin(admin.ModelAdmin):
     model = ProductContent
     ordering = ['id']
-    list_display = ('id', 'product', 'title', 'update')
+    list_display = ('id', 'product', 'title', 'position', 'update')
     list_filter = ('product', 'update')
 
+
+class ProductCustomerAdmin(admin.ModelAdmin):
+    model = ProductCustomer
+    ordering = ['id']
+    list_display = ['id', 'product', 'customer']
+    list_filter = ['product', 'customer']
 
 class SolutionProductAdmin(admin.ModelAdmin):
     model = SolutionProduct
     ordering = ['id']
     list_display = ('id', 'solution', 'product')
 
-
-class ProductPartnerAdmin(admin.ModelAdmin):
-    model = ProductPartner
-    ordering = ['id']
-    list_display = ('id', 'product', 'partner')
-
-
 admin.site.register(GlobalSetting, GlobalSettingAdmin)
 admin.site.register(Slide, SlideAdmin)
 admin.site.register(News, NewsAdmin)
 admin.site.register(Media, MediaAdmin)
 admin.site.register(Partner, PartnerAdmin)
+admin.site.register(Customer, CustomerAdmin)
 admin.site.register(Solution, SolutionAdmin)
 admin.site.register(SolutionContent, SolutionContentAdmin)
 admin.site.register(Product, ProductAdmin)
-admin.site.register(ProductContent, ProductContentManager)
+admin.site.register(ProductContent, ProductContentAdmin)
+admin.site.register(ProductCustomer, ProductCustomerAdmin)
 admin.site.register(SolutionProduct, SolutionProductAdmin)
-admin.site.register(ProductPartner, ProductPartnerAdmin)
