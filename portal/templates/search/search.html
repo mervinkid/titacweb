@@ -18,12 +18,13 @@
         <div class="white-box space">
             <div class="main-content-box">
                 <h4><label>搜索&nbsp;|&nbsp;Search</label></h4>
+                <div class="spacer-10px"></div>
                 {% if search_result == None %}
                 {% else %}
-                <label>共{{ search_result_count }}条结果与&nbsp;"{{ query }}"&nbsp;相关</label>
+                <label>共&nbsp;{{ search_result_count }}&nbsp;条结果与&nbsp;"{{ query }}"&nbsp;相关</label>
                 <div class="line"></div>
                 {% endif %}
-                <p></p><p></p>
+                <div class="spacer-20px"></div>
                 {% if search_result == None %}
                 <div style="text-align: center; padding: 50px;">
                     {% if message == 0 %}
@@ -38,7 +39,7 @@
                 {% for result_item in search_result %}
                 <div style="margin-left: 10px;margin-right: 10px;">
                     <div style="position:absolute;width: 40px;">
-                        <img src="{% static 'portal/img/search-item.png' %}" style="margin-top: 5px;">
+                        <h1><label>{{ forloop.counter }}.</label></h1>
                     </div>
                     <div style="margin-left:40px;">
                             {% if result_item.type == 'solution' %}
@@ -46,12 +47,12 @@
                             {% elif result_item.type == 'product' %}
                             <a href="/product/{{ result_item.id }}">
                             {% endif %}
-                                <h4 style="margin-bottom: 5px;">{{ result_item.title }}</h4>
+                                <h5 style="margin-bottom: 5px;">{{ result_item.title }}</h5>
                                 {{ result_item.sketch }}
                             </a>
                     </div>
                 </div>
-                <div style="height: 15px;"></div>
+                <div class="spacer-15px"></div>
                 {% endfor %}
                 {% endif %}
             </div>
@@ -60,6 +61,10 @@
     <!--right-->
     <div class="right-small-block">
         <div class="white-box">
+            {% include 'common/contact.html' %}
+        </div>
+        <div class="spacer-10px"></div>
+        <div class="white-box">
             <label>您的搜索历史</label>
             <div class="line"></div>
             <p></p>
@@ -67,12 +72,12 @@
             <p><label>还未进行过有效搜索</label></p>
             {% endif %}
             {% for history_item in history_list %}
-            <p>
-                <a href="{% url 'portal.views.search' %}?s={{ history_item }}">
-                    <img src="{% static 'portal/img/search.png' %}" style="width: 12px;height: 12px;">
-                    {{ history_item }}
-                </a>
-            </p>
+                <p>
+                    <a href="{% url 'portal.views.search' %}?s={{ history_item }}">
+                        <img src="{% static 'portal/img/search.png' %}" style="width: 12px;height: 12px;">
+                        {{ history_item }}
+                    </a>
+                </p>
             {% endfor %}
         </div>
     </div><!--end right-->

@@ -24,6 +24,7 @@
                <h4><label>{{ product_item.title }}</label></h4>
                <h5><label>{{ product_item.subtitle }}</label></h5>
            </div>
+           <div class="spacer-10px"></div>
            <div class="main-content-box">
                <p><label>{{ product_item.sketch }}</label></p>
            </div>
@@ -50,46 +51,46 @@
                                     {% for solution_item in solution_list %}
                                     <div class="item-block">
                                         <a href="{% url 'portal.views.solution_detail' solution_item.id%}">
-                                            <div style="width: 40px;height: 40px;float: left">
+                                            <div class="image-block">
                                                 <img src="{% static 'portal/img/solution.png' %}" style="width: 40px;height: 40px;" />
                                             </div>
-                                            <div style="margin-left: 50px;">
+                                            <div class="content-block">
                                                 <h5>{{ solution_item.title }}</h5>
                                                 <label>{{ solution_item.subtitle }}</label>
                                             </div>
                                         </a>
                                     </div>
                                     {% endfor %}
-                                    <div style="padding: 10px;"></div>
+                                    <div class="spacer-20px"></div>
                                     <div><label><strong>合作伙伴</strong></label></div>
                                     <div class="item-block">
                                         <a href="http://{{ product_item.partner.website }}" target="_blank">
-                                            <div style="width: 40px;height: 40px;float: left">
+                                            <div class="image-block">
                                                 {% if not product_item.partner.logo %}
                                                 <img src="{% static 'portal/img/partner.png' %}" style="width: 40px;height: 40px;" />
                                                 {% else %}
                                                 <img src="{{ product_item.partner.logo.file }}" style="width: 40px;height: 40px;" />
                                                 {% endif %}
                                             </div>
-                                            <div style="margin-left: 50px;">
+                                            <div class="content-block">
                                                 <h5>{{ product_item.partner.title }}</h5>
                                                 <label>{{ product_item.partner.website }}</label>
                                             </div>
                                         </a>
                                     </div>
-                                    <div style="padding: 10px;"></div>
+                                    <div class="spacer-20px"></div>
                                     <div><label><strong>成功案例</strong></label></div>
                                     {% for customer_item in customer_list %}
                                     <div class="item-block">
                                         <a>
-                                            <div style="width: 40px;height: 40px;float: left">
+                                            <div class="image-block">
                                                 {% if not customer_item.logo %}
                                                 <img src="{% static 'portal/img/customer.png' %}" style="width: 40px;height: 40px;" />
                                                 {% else %}
                                                 <img src="{{ customer_item.logo.file }}" style="width: 40px;height: 40px;" />
                                                 {% endif %}
                                             </div>
-                                            <div style="margin-left: 50px;">
+                                            <div class="content-block">
                                                 <h5>{{ customer_item.title }}</h5>
                                                 <label>{{ customer_item.fullname }}</label>
                                             </div>

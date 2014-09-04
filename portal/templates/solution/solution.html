@@ -20,15 +20,16 @@
        <div class="white-box space">
            <div class="main-content-box">
                <h4><label>解决方案&nbsp;|&nbsp;Solution</label></h4>
+               <div class="spacer-10px"></div>
                <p><label>泰科泰格面向客户，提供安全、可靠、高质量、易扩展的行业解决方案，帮助您实现信息化管理最佳实践，以满足您业务快速发展的<br>不同需求。</label></p>
                <p><label>解决方案涵盖的领域包括：电信、电力、金融、政府（社会保障、财政、税务、公共安全、国土资源、海洋、质量监督检验检疫、工<br>商、电子政务、环保、农业等）、制造与商贸流通业、医疗卫生、教育、交通、新闻出版等行业。</label></p>
-               <div class="line"></div>
            </div>
+           <div class="spacer-10px"></div>
            {% for solution_item in solutions %}
            <div class="item-block">
                <a href="{% url 'portal.views.solution_detail' solution_item.solution_id%}">
-                   <h5>{{ solution_item.solution_title }}</h5>
-                   <p>{{ solution_item.solution_subtitle }}</p>
+                    <h5>{{ solution_item.solution_title }}</h5>
+                    <p>{{ solution_item.solution_subtitle }}</p>
                </a>
            </div>
            {% endfor %}

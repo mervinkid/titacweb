@@ -1,7 +1,9 @@
 *.pyc
+*.pyo
 *.db
 *.sqlite
 *.sqlite3
 *.css.map
+__pycache__
 .idea/
 media/*

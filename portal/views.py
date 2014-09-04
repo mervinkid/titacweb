@@ -74,9 +74,12 @@ def solution_detail(request, solution_id):
     solution_keyword = solution_item.keyword
     #获取内容
     solution_content_list = SolutionContent.objects.get_content_by_solution_id(solution_id)
+    #获取相关信息
     #获取相关产品
     solution_product_list = SolutionProduct.objects.get_product_by_solution_id(solution_id)
-    product_list = []
+    product_list = list()
+    customer_list = list()
+    partner_list = list()
     for solution_product_item in solution_product_list:
         product_id = solution_product_item.product.id
         product_item = Product.objects.get_product_by_id(product_id)
@@ -84,8 +87,19 @@ def solution_detail(request, solution_id):
             solution_product_item.delete()
         if product_item.enable == 0:
             continue
+        #获取相关用户
+        product_customer_list = ProductCustomer.objects.get_customer_by_product_id(product_id)
+        for product_customer_item in product_customer_list:
+            customer_item = product_customer_item.customer
+            #检查重复项
+            if customer_item not in customer_list:
+                customer_list.append(customer_item)
         product_item.id = convert_to_view_value(product_item.id)
         product_list.append(product_item)
+        #获取相关合作伙伴
+        partner_item = product_item.partner
+        if partner_item not in partner_list and partner_item:
+            partner_list.append(partner_item)
 
     return render(
         request,
@@ -95,6 +109,11 @@ def solution_detail(request, solution_id):
             solution_item=solution_item,
             solution_content_list=solution_content_list,
             product_list=product_list,
+            product_count=len(product_list),
+            customer_list=customer_list,
+            customer_count=len(customer_list),
+            partner_list=partner_list,
+            partner_count=len(partner_list),
             keyword=solution_keyword,
         )
     )
@@ -363,13 +382,11 @@ def search(request):
                 }
                 search_result.append(result_item)
 
-    '''
-    没有查询到数据的消息反馈
-    消息类型：
-    0：搜索频率过快
-    1：关键词为空
-    2：没有查询到结果
-    '''
+    #没有查询到数据的消息反馈
+    #消息类型：
+    #0：搜索频率过快
+    #1：关键词为空
+    #2：没有查询到结果
     message = ''
     search_result_count = len(search_result)
     if search_result_count == 0:
@@ -384,25 +401,26 @@ def search(request):
     query_history = request.COOKIES.get('query_history')
     if not query_history or query_history == 'None':
         if not query == '':
-            query_history = query
+            query_history = list()
+            query_history.append(query)
     else:
         #将本次关键词加入搜索历史
-        tmp = query_history.split(',')
-        in_history = False
+        query_history = query_history.split(',')
         #遍历搜索历史的每一项，检查是否有与本次关键词完全一样的项目
-        for tmp_item in tmp:
-            if query == tmp_item:
-                in_history = True
+        for i in range(0, len(query_history), 1):
+            if query == query_history[i]:
+                del query_history[i]
                 break
         #不存在完全一样的项则将其加入搜索历史
-        if not in_history and not query == '':
-            query_history = query + ',' + query_history
+        if not query == '':
+            query_history.insert(0,query)
+        #保持历史记录项目数量不超过6
+        while len(query_history) > 6:
+            del query_history[len(query_history)-1]
 
     #将cookie中取得的历史记录转换成list，该list将传递给页面模板
-    if query_history and not query_history == 'None':
-        history_list = query_history.split(',')
-    else:
-        history_list = []
+    history_list = query_history
+    query_history = ','.join(query_history)
 
     response = render(
         request,
