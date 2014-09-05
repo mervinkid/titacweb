@@ -186,8 +186,10 @@ def product_detail(request, product_id):
             product_item=product_item,
             keyword=keyword,
             solution_list=solution_list,
+            solution_count=len(solution_list),
             product_content_list=product_content_list,
-            customer_list=customer_list
+            customer_list=customer_list,
+            customer_count=len(customer_list)
         )
     )
 

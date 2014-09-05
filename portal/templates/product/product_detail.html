@@ -47,6 +47,7 @@
                             {% endfor %}
                             <div class="table-content" id="tab-content-relate" style="display: none">
                                 <div>
+                                    {% if solution_count > 0 %}
                                     <div><label><strong>解决方案</strong></label></div>
                                     {% for solution_item in solution_list %}
                                     <div class="item-block">
@@ -61,6 +62,9 @@
                                         </a>
                                     </div>
                                     {% endfor %}
+                                    {% endif %}
+
+                                    {% if  product_item.partner %}
                                     <div class="spacer-20px"></div>
                                     <div><label><strong>合作伙伴</strong></label></div>
                                     <div class="item-block">
@@ -79,6 +83,9 @@
                                         </a>
                                     </div>
                                     <div class="spacer-20px"></div>
+                                    {% endif %}
+
+                                    {% if customer_count > 0 %}
                                     <div><label><strong>成功案例</strong></label></div>
                                     {% for customer_item in customer_list %}
                                     <div class="item-block">
@@ -97,6 +104,7 @@
                                         </a>
                                     </div>
                                     {% endfor %}
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
