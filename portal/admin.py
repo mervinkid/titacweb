@@ -15,81 +15,89 @@ from portal.models import \
     SolutionProduct
 
 
-class GlobalSettingAdmin(admin.ModelAdmin):
+class BaseModelAdmin(admin.ModelAdmin):
+    class Media:
+        js = (
+            '/static/common/widget/tinymce/tinymce.min.js',
+            '/static/common/js/textareas.js',
+        )
+
+
+class GlobalSettingAdmin(BaseModelAdmin):
     model = GlobalSetting
     ordering = ['key']
     list_display = ('key', 'value', 'update')
     list_filter = ['update']
 
 
-class SlideAdmin(admin.ModelAdmin):
+class SlideAdmin(BaseModelAdmin):
     model = Slide
     ordering = ['id']
     list_display = ('id', 'title', 'subtitle', 'enable', 'update')
     list_filter = ('enable', 'update')
 
 
-class NewsAdmin(admin.ModelAdmin):
+class NewsAdmin(BaseModelAdmin):
     model = News
     ordering = ['id']
     list_display = ('id', 'title', 'enable', 'update')
     list_filter = ('enable', 'update')
 
 
-class MediaAdmin(admin.ModelAdmin):
+class MediaAdmin(BaseModelAdmin):
     model = Media
     ordering = ['id']
     list_display = ('id', 'title', 'file', 'update')
     list_filter = ('update', 'title')
 
 
-class PartnerAdmin(admin.ModelAdmin):
+class PartnerAdmin(BaseModelAdmin):
     model = Partner
     ordering = ['id']
     list_display = ('id', 'title', 'website')
 
 
-class CustomerAdmin(admin.ModelAdmin):
+class CustomerAdmin(BaseModelAdmin):
     model = Customer
     ordering = ['id']
     list_display = ('id', 'title', 'fullname')
 
 
-class SolutionAdmin(admin.ModelAdmin):
+class SolutionAdmin(BaseModelAdmin):
     model = Solution
     ordering = ['id']
     list_display = ('id', 'title', 'keyword', 'enable', 'update')
     list_filter = ('enable', 'update')
 
 
-class SolutionContentAdmin(admin.ModelAdmin):
+class SolutionContentAdmin(BaseModelAdmin):
     model = SolutionContent
     ordering = ['id']
     list_display = ('id', 'solution', 'title', 'position', 'update')
     list_filter = ('solution', 'update')
 
 
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(BaseModelAdmin):
     model = Product
     ordering = ['id']
     list_display = ('id', 'title', 'keyword', 'enable', 'partner', 'update')
     list_filter = ('enable', 'update')
 
 
-class ProductContentAdmin(admin.ModelAdmin):
+class ProductContentAdmin(BaseModelAdmin):
     model = ProductContent
     ordering = ['id']
     list_display = ('id', 'product', 'title', 'position', 'update')
     list_filter = ('product', 'update')
 
 
-class ProductCustomerAdmin(admin.ModelAdmin):
+class ProductCustomerAdmin(BaseModelAdmin):
     model = ProductCustomer
     ordering = ['id']
     list_display = ['id', 'product', 'customer']
     list_filter = ['product', 'customer']
 
-class SolutionProductAdmin(admin.ModelAdmin):
+class SolutionProductAdmin(BaseModelAdmin):
     model = SolutionProduct
     ordering = ['id']
     list_display = ('id', 'solution', 'product')
