@@ -22,12 +22,44 @@ def home(request):
     """
     #load slide data
     slide_list = Slide.objects.get_enabled_slide()
+    #load top data
+    TOP_DATA_COUNT = 7
+    #load solution top data
+    solution_list = list()
+    solutions = Solution.objects.get_enabled_solution()
+    counter = 0
+    while counter < len(solutions):
+        solution_item = dict()
+        solution_data = solutions[counter]
+        solution_item['title'] = solution_data.title
+        solution_item['sid'] = convert_to_view_value(solution_data.id)
+        solution_list.append(solution_item)
+        if counter == TOP_DATA_COUNT:
+            break
+        counter += 1
+
+    #load product top data
+    product_list = list()
+    products = Product.objects.get_enabled_product()
+    counter = 0
+    while counter < len(products):
+        product_item = dict()
+        product_data = products[counter]
+        product_item['title'] = product_data.title
+        product_item['pid'] = convert_to_view_value(product_data.id)
+        product_list.append(product_item)
+        if counter == TOP_DATA_COUNT:
+            break
+        counter += 1
+
     return render(
         request,
         'home/home.html',
         generate_context(
             current='home',
-            slides=slide_list
+            slides=slide_list,
+            solution_list=solution_list,
+            product_list=product_list,
         )
     )
 

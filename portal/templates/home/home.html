@@ -6,43 +6,159 @@
 
 <!--position-->
 {% block position %}
-    <ul>
+    <ul xmlns="http://www.w3.org/1999/html">
         <li><a href="{% url 'portal.views.home' %}">首页</a></li>
     </ul>
 {% endblock %}
 
 <!--content-->
 {% block content %}
+<style type="text/css">
+div .style-01 {
+    height: 40px;
+    padding: 5px;;
+}
+div .style-02 {
+    height: 160px;
+}
+div .style-03 {
+    height: 250px;
+}
+div .style-04 {
+    float: left;
+    width: 130px;
+    line-height: 25px;
+    vertical-align: middle;
+}
+div .style-05 {
+    margin-left: 130px;
+    border-left: 1px solid #e6e6e6;
+}
+</style>
 <div class="container clearfix">
+    <div class="spacer-5px"></div>
     <!--slider starts-->
-    <div class="flexslider slider sixteen columns">
-        {% include 'home/slide.html' %}
+    <div class="hole-block">
+    <div class="flexslider slider">
+        <ul class="slides">
+            {% for slide in slides %}
+                <li>
+                    {% autoescape off %}
+                        <a href="{{ slide.link }}">
+                            <div class="style-03">
+                                <div id="content-slider">
+                                {{ slide.content }}
+                                </div>
+                            </div>
+                        </a>
+                    {% endautoescape %}
+                </li>
+            {% endfor %}
+        </ul><!--slides end-->
+    </div>
     </div>
 </div>
 <div class="container clearfix">
+    <div class="hole-block">
+        <div class="white-box">
+            <div class="style-01 style-04">
+                <h6><label>合作伙伴</label></h6>
+                <label>Partner</label>
+            </div>
+            <div class="style-01 style-05">
+                <div id="content-partner">123</div>
+            </div>
+        </div>
+    </div>
+    <div class="spacer-20px"></div>
+</div>
+    <div class="container clearfix">
+        <div class="hole-block">
+            <div class="white-box">
+                <div class="style-01 style-04">
+                    <h6><label>客户</label></h6>
+                    <label>Customer</label>
+                </div>
+                <div class="style-01 style-05">
+                    <div id="content-customer">123</div>
+                </div>
+            </div>
+        </div>
+        <div class="spacer-30px"></div>
+    </div>
+<div class="container clearfix">
     <div class="four columns">
-        <div class="white-box" style="height: 150px;">
-            <div class="left"><h6><label>解决方案&nbsp;|&nbsp;Solution</label></h6></div>
-            <div class="right"><a>more</a></div>
+        <div class="white-box style-02">
+            <div>
+                <div class="left"><h6><label>解决方案&nbsp;|&nbsp;Solution</label></h6></div>
+                <div class="right"><a href="{% url 'portal.views.solution' %}">more</a></div>
+            </div>
+            <div class="spacer-20px"></div>
+            <div class="line"></div>
+            <div class="spacer-5px"></div>
+            <div id="content-solution">
+                <ul>
+                {% for solution in solution_list %}
+                    <li><a href="{% url 'portal.views.solution_detail' solution.sid %}">{{ solution.title }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
     <div class="four columns">
-        <div class="white-box" style="height: 150px;">
-            <div class="left"><h6><label>产品&nbsp;|&nbsp;Product</label></h6></div>
-            <div class="right"><a>more</a></div>
+        <div class="white-box style-02">
+            <div>
+                <div class="left"><h6><label>产品&nbsp;|&nbsp;Product</label></h6></div>
+                <div class="right"><a href="{% url 'portal.views.product' %}">more</a></div>
+            </div>
+            <div class="spacer-20px"></div>
+            <div class="line"></div>
+            <div class="spacer-5px"></div>
+            <div id="content-product">
+                <ul>
+                    {% for product in product_list %}
+                        <li><a href="{% url 'portal.views.product_detail' product.pid %}">{{ product.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
     <div class="four columns">
-        <div class="white-box" style="height: 150px;">
-            <div class="left"><h6><label>合作伙伴&nbsp;|&nbsp;Partner</label></h6></div>
-            <div class="right"><a>more</a></div>
+        <div class="white-box style-02">
+            <div>
+                <div class="left"><h6><label>服务&nbsp;|&nbsp;Service</label></h6></div>
+                <div class="right"><a href="{% url 'portal.views.service' %}">more</a></div>
+            </div>
+            <div class="spacer-20px"></div>
+            <div class="line"></div>
+            <div class="spacer-5px"></div>
+            <div id="content-service">
+                <lable>7X24的技术支持<br>确保您的IT不间断。<br></lable>
+            </div>
         </div>
     </div>
     <div class="four columns">
-        <div class="white-box" style="height: 150px;">
-            <div class="left"><h6><label>关于我们&nbsp;|&nbsp;Company</label></h6></div>
-            <div class="right"><a href="{% url 'portal.views.company' %}">more</a></div>
+        <div class="white-box style-02">
+            <div>
+                <div class="left"><h6><label>公司&nbsp;|&nbsp;Company</label></h6></div>
+                <div class="right"><a href="{% url 'portal.views.company' %}">more</a></div>
+            </div>
+            <div class="spacer-20px"></div>
+            <div class="line"></div>
+            <div class="spacer-5px"></div>
+            <div id="content-company">
+                <label>泰科泰格是IT解决方案与服务供应商。 <br>公司主营业务包括：<br>行业解决方案、产品工程解决方案及相关软件产品、平台及服务等。</label>
+            </div>
         </div>
     </div>
+    <script type="application/javascript">
+        $(document).ready(function(){
+            $("div [id^='content-']").attr("style", "display:none");
+            setTimeout(function(){
+                var content = $("div [id^='content-']");
+                content.fadeIn(500);
+            }, 500);
+        });
+    </script>
 </div>
  {% endblock %}

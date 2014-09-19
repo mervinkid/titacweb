@@ -33,7 +33,7 @@ class GlobalSettingAdmin(BaseModelAdmin):
 class SlideAdmin(BaseModelAdmin):
     model = Slide
     ordering = ['id']
-    list_display = ('id', 'title', 'subtitle', 'enable', 'update')
+    list_display = ('id', 'title', 'enable', 'update')
     list_filter = ('enable', 'update')
 
 

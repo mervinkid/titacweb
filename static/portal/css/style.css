@@ -67,7 +67,7 @@ table {
 /*----------------------------------------*/
 body {
 	background: #f6f6f6;
-	font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Microsoft YaHei","proxima-nova", "Arial", sans-serif;
 	font-size: 12px;
 	/*text-shadow: 0px 1px 0px #ffffff;*/
 	font-weight: 400;
@@ -89,7 +89,7 @@ strong {
 /*----------------------------------------*/
 /*----- headings -----*/
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-family: "Microsoft YaHei",'Helvetica Neue', Helvetica, Arial, sans-serif;
 	color: #434343;
 	font-weight: 600;
 	line-height: 1.2em;
@@ -125,7 +125,7 @@ a {
 	outline: none;
 }
 a:hover {
-	color: #54c2e6;
+	color: #df3a65;
 }
 h1 a, h2 a, h3 a, h4 a, h5 a {
 	color: #434343;
@@ -240,6 +240,12 @@ ul.list-bullet li {
 	margin: 85px auto 0px auto;
 	display: block;
 }
+.spacer-30px {
+    height: 30px;
+}
+.spacer-25px {
+    height: 25px;
+}
 .spacer-20px {
 	height: 20px;
 }
@@ -262,7 +268,7 @@ ul.list-bullet li {
   so that there will be sufficient space between header and scrolling divs*/
 #content {
 	width: 100%;
-	padding-top: 140px;
+	padding-top: 125px;
 }
 #services, #pricing, #contact {
 	width: 100%;
@@ -302,14 +308,14 @@ ul.list-bullet li {
 	float: right;
 }
 #menu ul li {
-	margin: 0px 10px;
+	margin: 0px 5px;
 	text-align: right;
 	background: none;
 	list-style-type: none;
 	float: left;
 }
 #menu ul li a {
-	font-family:  'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: "Microsoft YaHei","proxima-nova", "Arial", sans-serif;
 	font-size: 14px;
 	color: #231f20;
 	font-weight: 400;
@@ -326,8 +332,8 @@ ul.list-bullet li {
 	color: #df3a65 !important;
 }
 #menu ul li span {
-	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-	font-size: 11px;
+	font-family: "proxima-nova", "Arial", sans-serif;
+	font-size: 12px;
 	color: #a4a4a4;
 	line-height: 1.2em;
 	font-weight: 400;
@@ -360,7 +366,7 @@ ul.list-bullet li {
 	width: 920px;
 	padding: 10px 10px 5px 10px;
 	margin: 0px auto 35px auto;
-	font-size: 11px;
+	font-size: 12px;
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
 	-moz-border-radius-bottomleft: 4px;
@@ -572,14 +578,6 @@ p.table-slug {
 	margin-left: 20px;
 	display: block;
 	line-height: 1em;
-}
-.sign-available {
-	background: url(/static/portal/img/correct.png) no-repeat right 0px;
-	padding-right: 30px;
-}
-.sign-notavailable {
-	background: url(/static/portal/img/cross.png) no-repeat right 0px;
-	padding-right: 30px;
 }
 /*----------------------------------------*/
 /*----- 2.7 contact section -----*/
@@ -876,28 +874,42 @@ p.table-slug {
 }
 /*Search box*/
 div .search_box {
-    border: 1px solid;
-    background: #ffffff;
+    margin-left: 5px;
+    /*border: 1px solid;*/
+    /*background: #df3a65;*/
+    background: url(/static/portal/img/search.png);
+    background-repeat: no-repeat;
+    background-position: right;
     border-radius: 2px;
 }
 div .search_box  #search_text{
+    top: 0px;
     width: 120px;
-    height: 18px;
-    line-height: 18px;
+    height: 16px;
+    line-height: 16px;
     vertical-align: middle;
     font-size: 12px;
     border: none;
     outline: none;
     -webkit-appearance: none;
     box-sizing: content-box;
+    border: 1px solid #b6b6b6;
+    border-radius: 2px;
+    border-right: none;
+    padding-left: 5px;
 }
 div .search_box  #search_submit{
-    width: 20px;
+    width: 18px;
     height: 16px;
     line-height: 16px;
+    /*
     background: url(/static/portal/img/search.png);
     background-repeat: no-repeat;
+    */
+    background: none;
     border: none;
+    text-align: center;
+    text-indent: -500px;
 }
 /*head bottom bar images*/
 div .position-split{
@@ -907,14 +919,14 @@ div .position-split{
 }
 /*Enterprise page layout*/
 div .left-large-block {
-    width: 750px;
+    width: 770px;
     float: left;
     margin-left: 10px;
     margin-top: 5px;
     margin-bottom: 5px;
 }
 div .right-small-block {
-    width: 180px;
+    width: 160px;
     float: right;
     margin-right: 10px;
     margin-top: 5px;
@@ -938,6 +950,7 @@ div .hole-block {
     margin-left: 10px;
     margin-right: 10px;
     margin-bottom: 5px;
+    margin-top: 5px;
 }
 div .white-box {
     background: #ffffff;
@@ -985,7 +998,7 @@ div .line {
     margin-bottom: 5px;
     height: 1px;
     border: none;
-    background: #b4b4b4;
+    background: #f6f6f6;
 }
 div .left {
     float: left;

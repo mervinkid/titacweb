@@ -23,12 +23,13 @@
                 <div class="spacer-10px"></div>
                 <p><label>泰科泰格坚持研发创新与实际应用相结合，形成面向政府、公用事业、公共安全、金融、能源、制造等行业丰富的应用软件产品以及信息安全、平台工具、基础设施类产品。</label></p>
             </div>
+            <div class="line"></div>
             <div class="spacer-10px"></div>
             {% for product_item in products %}
             <div class="item-block">
                 <a href="/product/{{ product_item.product_id }}">
                     <h5>{{ product_item.product_title }}</h5>
-                    <p>{{ product_item.product_subtitle }}</p>
+                    {{ product_item.product_subtitle }}
                 </a>
             </div>
             {% endfor %}

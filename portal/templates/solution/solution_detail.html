@@ -50,15 +50,15 @@
                                         <div><label><strong>相关产品</strong></label></div>
                                         {% for product_item in product_list %}
                                         <div class="item-block">
-                                            <a href="{% url 'portal.views.product_detail' product_item.id%}">
-                                                <div class="image-block">
-                                                    <img src="{% static 'portal/img/product.png' %}" alt="{{ product_item.title }}">
-                                                </div>
-                                                <div class="content-block">
+                                            <div class="image-block">
+                                                <img src="{% static 'portal/img/product.png' %}" alt="{{ product_item.title }}">
+                                            </div>
+                                            <div class="content-block">
+                                                <a href="{% url 'portal.views.product_detail' product_item.id%}">
                                                     <h5>{{ product_item.title }}</h5>
                                                     <label>{{ product_item.subtitle }}</label>
-                                                </div>
-                                            </a>
+                                                </a>
+                                            </div>
                                         </div>
                                         {% endfor %}
                                         <div class="spacer-20px"></div>

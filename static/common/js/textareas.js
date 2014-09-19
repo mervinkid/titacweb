@@ -17,5 +17,6 @@ tinyMCE.init({
     toolbar_items_size: 'small',
     relative_urls : false,
     remove_script_host: false,
-    language: 'zh_CN'
+    language: 'zh_CN',
+    height: 400
 });

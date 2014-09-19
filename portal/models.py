@@ -108,58 +108,12 @@ class Slide(models.Model):
         help_text='幻灯片主标题,长度限制250个字符',
         verbose_name='标题'
     )
-    subtitle = models.CharField(
-        db_column='subtitle',
-        max_length=250,
-        null=True,
-        blank=True,
-        help_text='幻灯片副标题，显示在主标题之下,长度限制250个字符',
-        verbose_name='副标题'
-    )
-    heading = models.CharField(
-        db_column='heading',
-        max_length=250,
-        null=True,
-        blank=True,
-        help_text='显示在内容上部,长度限制250个字符',
-        verbose_name='加粗文本'
-    )
     content = models.TextField(
         db_column='content',
         null=True,
         blank=True,
         help_text='幻灯片内容,可使用HTML代码',
         verbose_name='幻灯片内容'
-    )
-    note = models.TextField(
-        db_column='note',
-        null=True,
-        blank=True,
-        help_text='幻灯片注解,先是在内容最下部',
-        verbose_name='幻灯片注解'
-    )
-    image = models.TextField(
-        db_column='image',
-        null=True,
-        blank=True,
-        help_text='配图地址,可使用base64数据',
-        verbose_name='配图地址'
-    )
-    link = models.TextField(
-        db_column='link',
-        null=True,
-        blank=True,
-        default='/',
-        help_text='链接地址',
-        verbose_name='链接地址'
-    )
-    link_text = models.CharField(
-        db_column='link_text',
-        max_length=250,
-        null=True,
-        blank=True,
-        help_text='链接上显示的文本',
-        verbose_name='链接文本'
     )
     enable = models.IntegerField(
         db_column='enable',
