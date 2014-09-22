@@ -74,7 +74,6 @@
             {% for history_item in history_list %}
                 <p>
                     <a href="{% url 'portal.views.search' %}?s={{ history_item }}">
-                        <img src="{% static 'portal/img/search.png' %}" style="width: 12px;height: 12px;">
                         {{ history_item }}
                     </a>
                 </p>

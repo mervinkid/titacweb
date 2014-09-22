@@ -11,7 +11,9 @@ from portal.models import \
     Product, \
     ProductContent, \
     ProductCustomer, \
-    SolutionProduct
+    SolutionProduct, \
+    Partner, \
+    Customer
 from portal.utils import convert_to_data_value, convert_to_view_value
 
 
@@ -52,12 +54,45 @@ def home(request):
             break
         counter += 1
 
+    #load partner top data
+    PARTNER_DATA_COUNT = 8
+    partner_list = list()
+    partners = Partner.objects.get_partners()
+    counter = 0
+    while counter < len(partners):
+        partner_item = dict()
+        partner_data = partners[counter]
+        partner_item['title'] = partner_data.title
+        partner_item['website'] = partner_data.website
+        partner_item['logo'] = partner_data.logo
+        partner_list.append(partner_item)
+        if counter == PARTNER_DATA_COUNT:
+            break
+        counter += 1
+
+    #load customer top data
+    CUSTOMER_DATA_COUNT = 8
+    customer_list = list()
+    customers = Customer.objects.get_all_customer()
+    counter = 0
+    while counter < len(customers):
+        customer_item = dict()
+        customer_data = customers[counter]
+        customer_item['title'] = customer_data.title
+        customer_item['logo'] = customer_data.logo
+        customer_list.append(customer_item)
+        if counter == CUSTOMER_DATA_COUNT:
+            break
+        counter += 1
+
     return render(
         request,
         'home/home.html',
         generate_context(
             current='home',
             slides=slide_list,
+            partner_list=partner_list,
+            customer_list=customer_list,
             solution_list=solution_list,
             product_list=product_list,
         )

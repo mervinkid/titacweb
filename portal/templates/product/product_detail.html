@@ -18,17 +18,17 @@
 {% block content %}
 <script type="text/javascript" src="{% static 'portal/js/tabcontrol.js' %}"></script>
 <div class="container clearfix">
-   <div class="left-large-block">
-       <div class="white-box space">
-           <div class="main-content-box">
-               <h4><label>{{ product_item.title }}</label></h4>
-               <h5><label>{{ product_item.subtitle }}</label></h5>
-           </div>
-           <div class="spacer-10px"></div>
-           <div class="main-content-box">
-               <p><label>{{ product_item.sketch }}</label></p>
-           </div>
-           <div class="main-content-box">
+    <div class="left-large-block">
+        <div class="white-box space">
+            <div class="main-content-box">
+                <h4><label>{{ product_item.title }}</label></h4>
+                <h5><label>{{ product_item.subtitle }}</label></h5>
+            </div>
+            <div class="spacer-10px"></div>
+            <div class="main-content-box">
+                <p><label>{{ product_item.sketch }}</label></p>
+            </div>
+            <div class="main-content-box">
                 <section id="solution-details" role="main">
                     <ul class="tabs">
                         {% for product_content in product_content_list %}
@@ -110,28 +110,30 @@
                         </div>
                     </div>
                 </section>
-           </div>
-       </div>
-   </div>
-   <div class="right-small-block">
-       <div class="white-box">
-           {% include 'common/contact.html' %}
-       </div>
-       <p></p>
-       <div class="white-box">
-           <div>
-               <label>解决方案</label>
-               <div class="line"></div>
-               <p></p>
-           </div>
-           <div>
-               {% for solution_item in solution_list %}
-               <p>
-                    <a href="/solution/{{ solution_item.id }}">{{ solution_item.title }}</a>
-               </p>
-               {% endfor %}
-           </div>
-       </div>
-   </div>
+            </div>
+        </div>
+    </div>
+    <div class="right-small-block">
+        <div class="float">
+            <div class="white-box">
+                {% include 'common/contact.html' %}
+            </div>
+            <div class="spacer-10px"></div>
+            <div class="white-box">
+                <div>
+                    <label>解决方案</label>
+                    <div class="line"></div>
+                    <div class="spacer-10px"></div>
+                </div>
+                <div>
+                    {% for solution_item in solution_list %}
+                    <p>
+                        <a href="/solution/{{ solution_item.id }}">{{ solution_item.title }}</a>
+                    </p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

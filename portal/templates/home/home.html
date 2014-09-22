@@ -16,7 +16,7 @@
 <style type="text/css">
 div .style-01 {
     height: 40px;
-    padding: 5px;;
+    padding: 5px;
 }
 div .style-02 {
     height: 160px;
@@ -33,6 +33,15 @@ div .style-04 {
 div .style-05 {
     margin-left: 130px;
     border-left: 1px solid #e6e6e6;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+div .style-06 {
+    width: 80px;
+    height: 45px;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 </style>
 <div class="container clearfix">
@@ -66,7 +75,15 @@ div .style-05 {
                 <label>Partner</label>
             </div>
             <div class="style-01 style-05">
-                <div id="content-partner">123</div>
+                <div id="content-partner">
+                    {% for partner in partner_list %}
+                    <div class="style-06">
+                        <div>
+                            <label>{{ partner.title }}</label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
@@ -80,7 +97,13 @@ div .style-05 {
                     <label>Customer</label>
                 </div>
                 <div class="style-01 style-05">
-                    <div id="content-customer">123</div>
+                    <div id="content-customer">
+                        {% for customer in customer_list %}
+                        <div class="style-06">
+                            <label>{{ customer.title }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
         </div>
@@ -133,7 +156,7 @@ div .style-05 {
             <div class="line"></div>
             <div class="spacer-5px"></div>
             <div id="content-service">
-                <lable>7X24的技术支持<br>确保您的IT不间断。<br></lable>
+                <label>7X24的技术支持<br>确保您的IT不间断。<br></label>
             </div>
         </div>
     </div>

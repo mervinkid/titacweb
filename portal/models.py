@@ -274,9 +274,8 @@ class Partner(models.Model):
         help_text='LOGO URL地址,支持base64数据',
         verbose_name='LOGO'
     )
-    website = models.CharField(
+    website = models.URLField(
         db_column='website',
-        max_length=250,
         null=True,
         blank=True,
         help_text='合作伙伴网址',
