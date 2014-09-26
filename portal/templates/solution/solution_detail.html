@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block content %}
-<script type="text/javascript" src="{% static 'portal/js/tabcontrol.js' %}"></script>
+<script type="text/javascript" src="{% static 'portal/js/tab.js' %}"></script>
 <div class="container clearfix">
    <div class="left-large-block">
        <div class="white-box space">
@@ -48,48 +48,38 @@
                                 <div>
                                     {% if product_count > 0 %}
                                         <div><label><strong>相关产品</strong></label></div>
+                                        <div class="spacer-10px"></div>
                                         {% for product_item in product_list %}
                                         <div class="item-block">
-                                            <div class="image-block">
-                                                <img src="{% static 'portal/img/product.png' %}" alt="{{ product_item.title }}">
-                                            </div>
-                                            <div class="content-block">
-                                                <a href="{% url 'portal.views.product_detail' product_item.id%}">
-                                                    <h5>{{ product_item.title }}</h5>
-                                                    <label>{{ product_item.subtitle }}</label>
-                                                </a>
-                                            </div>
+                                            <a href="{% url 'portal.views.product_detail' product_item.id%}">
+                                                <h5>{% if product_item.partner %}{{ product_item.partner.title }}&nbsp;{% endif %}{{ product_item.title }}</h5>
+                                                {{ product_item.subtitle }}
+                                            </a>
                                         </div>
                                         {% endfor %}
+                                        <div class="spacer-10px"></div>
+                                        <div class="line"></div>
                                         <div class="spacer-20px"></div>
                                     {% endif %}
 
                                     {% if partner_count > 0 %}
                                         <div><label><strong>合作伙伴</strong></label></div>
+                                        <div class="spacer-10px"></div>
                                         {% for partner_item in partner_list %}
-                                        <div class="item-block">
-                                            <div class="image-block">
-                                                <img src="{% static 'portal/img/partner.png' %}" >
-                                            </div>
-                                            <div class="content-block">
-                                                <h5><label>{{ partner_item.title }}</label></h5>
-                                                <label>{{ partner_item.website }}</label>
-                                            </div>
+                                        <div class="item-block-small">
+                                            <img src="{{ partner_item.logo.file }}" class="logo-img" alt="{{  partner_item.title }}">
                                         </div>
                                         {% endfor %}
+                                        <div class="spacer-10px"></div>
+                                        <div class="line"></div>
                                         <div class="spacer-20px"></div>
                                     {% endif %}
                                     {% if customer_count > 0 %}
                                         <div><label><strong>成功案例</strong></label></div>
+                                        <div class="spacer-10px"></div>
                                         {% for customer_item in customer_list %}
-                                        <div class="item-block">
-                                            <div class="image-block">
-                                                <img src="{% static 'portal/img/customer.png' %}" >
-                                            </div>
-                                            <div class="content-block">
-                                                <h5><label>{{ customer_item.title }}</label></h5>
-                                                <label>{{ customer_item.fullname }}</label>
-                                            </div>
+                                        <div class="item-block-small">
+                                            <img src="{{ customer_item.logo.file }}" class="logo-img" alt="{{  customer_item.title }}">
                                         </div>
                                         {% endfor %}
                                     {% endif %}

@@ -50,6 +50,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.gzip.GZipMiddleware',
+    'portal.middleware.domain_redirect.DomainRedirectMiddleware',
 )
 
 ROOT_URLCONF = 'titacweb.urls'
@@ -113,4 +114,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+DOMAIN = 'www.titac.com.cn'
 

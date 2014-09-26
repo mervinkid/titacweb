@@ -1,15 +1,16 @@
 {% extends 'base/base.html' %}
 {% load staticfiles %}
-
 <!--title-->
-{% block title %}服务{% endblock %}
+{% block title %}{{ product_item.title }}{% endblock %}
 
 <!--position-->
 {% block position %}
     <ul>
         <li><a href="{% url 'portal.views.home' %}">首页</a></li>
         <li><div class="position-split"></div></li>
-        <li><label>服务</label></li>
+        <li><a href="{% url 'portal.views.service' %}">服务</a></li>
+        <li><div class="position-split"></div></li>
+        <li><label>{{ service_item.title }}</label></li>
     </ul>
 {% endblock %}
 
@@ -19,21 +20,17 @@
         <div class="left-large-block">
             <div class="white-box space">
                 <div class="main-content-box">
-                    <h4><label>服务&nbsp;|&nbsp;Service</label></h4>
-                    <div class="spacer-10px"></div>
-                    <div><label>IT系统规模不断扩大，设施越来越复杂，要求的运行效率和服务质量越来越高。</label></div>
+                    <h4><label>{{ service_item.title }}</label></h4>
                 </div>
-                <div class="spacer-5px"></div>
+                <div class="spacer-10px"></div>
+                <div class="main-content-box">
+                    {% autoescape off %}{{ service_item.sketch }}{% endautoescape %}
+                </div>
                 <div class="line"></div>
                 <div class="spacer-10px"></div>
-                {% for service_item in services %}
-                <div class="item-block-service">
-                    <a href="{% url 'portal.views.service_detail' service_item.service_id %}">
-                        <h5>{{ service_item.service_title }}</h5>
-                        {% autoescape off %}{{ service_item.service_sketch }}{% endautoescape %}
-                    </a>
+                <div class="main-content-box">
+                    {% autoescape off %}{{ service_item.content }}{% endautoescape %}
                 </div>
-                {% endfor %}
             </div>
         </div>
         <div class="right-small-block">

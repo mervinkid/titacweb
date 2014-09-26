@@ -1,22 +1,13 @@
 #coding=utf-8
 from django.contrib import admin
-from portal.models import \
-    GlobalSetting, \
-    Media, \
-    Slide, \
-    News, \
-    Partner, \
-    Customer, \
-    Solution, \
-    SolutionContent, \
-    Product, \
-    ProductContent, \
-    ProductCustomer, \
-    SolutionProduct
+from portal.models import *
 
 
 class BaseModelAdmin(admin.ModelAdmin):
     class Media:
+        def __init__(self):
+            pass
+
         js = (
             '/static/common/widget/tinymce/tinymce.min.js',
             '/static/common/js/textareas.js',
@@ -91,11 +82,19 @@ class ProductContentAdmin(BaseModelAdmin):
     list_filter = ('product', 'update')
 
 
+class ServiceAdmin(BaseModelAdmin):
+    model = Service
+    ordering = ['id']
+    list_display = ('id', 'title', 'enable', 'update')
+    list_filter = ('enable', 'update')
+
+
 class ProductCustomerAdmin(BaseModelAdmin):
     model = ProductCustomer
     ordering = ['id']
     list_display = ['id', 'product', 'customer']
     list_filter = ['product', 'customer']
+
 
 class SolutionProductAdmin(BaseModelAdmin):
     model = SolutionProduct
@@ -113,4 +112,5 @@ admin.site.register(SolutionContent, SolutionContentAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductContent, ProductContentAdmin)
 admin.site.register(ProductCustomer, ProductCustomerAdmin)
+admin.site.register(Service, ServiceAdmin)
 admin.site.register(SolutionProduct, SolutionProductAdmin)

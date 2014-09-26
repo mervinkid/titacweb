@@ -1,18 +1,16 @@
 {% load staticfiles %}
                 <div class="container clearfix">
-                    <!--logo starts-->
                     <div class="four columns logo">
-                        <a href="/"><img src="{% static 'portal/img/logo.png' %}" style="height: 40px;"></a>
-                    </div><!--logo ends-->
-                    <!--menu starts-->
+                        <a href="/"><div id="image"></div></a>
+                    </div>
                     <div id="menu" class="twelve columns">
                         <ul>
-                            <li><span>Welcome</span><a href="{% url 'portal.views.home' %}" class="nav-home nav {% ifequal current 'home' %}selected{% endifequal %}">首页</a></li>
-                            <li><span>Solution</span><a href="{% url 'portal.views.solution' %}" class="nav-services nav {% ifequal current 'solution' %}selected{% endifequal %}">解决方案</a></li>
-                            <li><span>Product</span><a href="{% url 'portal.views.product' %}" class="nav-pricing nav {% ifequal current 'product' %}selected{% endifequal %}">产品</a></li>
-                            <li><span>Service</span><a href="{% url 'portal.views.service' %}" class="nav-contact nav {% ifequal current 'service' %}selected{% endifequal %}">服务</a></li>
-                            <li><span>Partner</span><a href="{% url 'portal.views.partner' %}" class="nav-contact nav {% ifequal current 'partner' %}selected{% endifequal %}">合作伙伴</a></li>
-                            <li><span>Company</span><a href="{% url 'portal.views.company' %}" class="nav-contact nav {% ifequal current 'company' %}selected{% endifequal %}">公司</a></li>
+                            <li><span><label>Welcome</label></span><a href="{% url 'portal.views.home' %}" class="nav-home nav {% ifequal current 'home' %}selected{% endifequal %}">首页</a></li>
+                            <li><span><label>Solution</label></span><a href="{% url 'portal.views.solution' %}" class="nav-services nav {% ifequal current 'solution' %}selected{% endifequal %}">解决方案</a></li>
+                            <li><span><label>Product</label></span><a href="{% url 'portal.views.product' %}" class="nav-pricing nav {% ifequal current 'product' %}selected{% endifequal %}">产品</a></li>
+                            <li><span><label>Service</label></span><a href="{% url 'portal.views.service' %}" class="nav-contact nav {% ifequal current 'service' %}selected{% endifequal %}">服务</a></li>
+                            <li><span><label>Partner</label></span><a href="{% url 'portal.views.partner' %}" class="nav-contact nav {% ifequal current 'partner' %}selected{% endifequal %}">合作伙伴</a></li>
+                            <li><span><label>Company</label></span><a href="{% url 'portal.views.company' %}" class="nav-contact nav {% ifequal current 'company' %}selected{% endifequal %}">公司</a></li>
                             <li>
                                 <div class="search_box">
                                         <form accept-charset="utf-8" action="{% url 'portal.views.search' %}" method="get">
@@ -22,6 +20,6 @@
                                 </div>
                             </li>
                         </ul>
-                    </div><!--menu ends-->
+                    </div>
                 </div>
                 <div class="clear"></div>

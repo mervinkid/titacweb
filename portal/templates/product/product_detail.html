@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% load staticfiles %}
 <!--title-->
-{% block title %}{{ product.title }}{% endblock %}
+{% block title %}{{ product_item.title }}{% endblock %}
 
 <!--position-->
 {% block position %}
@@ -10,23 +10,23 @@
         <li><div class="position-split"></div></li>
         <li><a href="{% url 'portal.views.product' %}">产品</a></li>
         <li><div class="position-split"></div></li>
-        <li><label>{{ product_item.title }}</label></li>
+        <li><label>{% if product_item.partner %}{{ product_item.partner.title }}&nbsp;{% endif %}{{ product_item.title }}</label></li>
     </ul>
 {% endblock %}
 
 <!--content-->
 {% block content %}
-<script type="text/javascript" src="{% static 'portal/js/tabcontrol.js' %}"></script>
+<script type="text/javascript" src="{% static 'portal/js/tab.js' %}"></script>
 <div class="container clearfix">
     <div class="left-large-block">
         <div class="white-box space">
             <div class="main-content-box">
-                <h4><label>{{ product_item.title }}</label></h4>
+                <h4><label>{% if product_item.partner %}{{ product_item.partner.title }}&nbsp;{% endif %}{{ product_item.title }}</label></h4>
                 <h5><label>{{ product_item.subtitle }}</label></h5>
             </div>
             <div class="spacer-10px"></div>
             <div class="main-content-box">
-                <p><label>{{ product_item.sketch }}</label></p>
+                {% autoescape off %}{{ product_item.sketch }}{% endautoescape %}
             </div>
             <div class="main-content-box">
                 <section id="solution-details" role="main">
@@ -49,59 +49,37 @@
                                 <div>
                                     {% if solution_count > 0 %}
                                     <div><label><strong>解决方案</strong></label></div>
+                                    <div class="spacer-10px"></div>
                                     {% for solution_item in solution_list %}
                                     <div class="item-block">
-                                        <div class="image-block">
-                                            <img src="{% static 'portal/img/solution.png' %}" style="width: 40px;height: 40px;" />
-                                        </div>
-                                        <div class="content-block">
                                             <a href="{% url 'portal.views.solution_detail' solution_item.id%}">
                                                 <h5>{{ solution_item.title }}</h5>
                                                 {{ solution_item.subtitle }}
                                             </a>
-                                        </div>
                                     </div>
                                     {% endfor %}
+                                    <div class="spacer-10px"></div>
+                                    <div class="line"></div>
+                                    <div class="spacer-20px"></div>
                                     {% endif %}
 
                                     {% if  product_item.partner %}
-                                    <div class="spacer-20px"></div>
                                     <div><label><strong>合作伙伴</strong></label></div>
-                                    <div class="item-block">
-                                        <a href="http://{{ product_item.partner.website }}" target="_blank">
-                                            <div class="image-block">
-                                                {% if not product_item.partner.logo %}
-                                                <img src="{% static 'portal/img/partner.png' %}" style="width: 40px;height: 40px;" />
-                                                {% else %}
-                                                <img src="{{ product_item.partner.logo.file }}" style="width: 40px;height: 40px;" />
-                                                {% endif %}
-                                            </div>
-                                            <div class="content-block">
-                                                <h5>{{ product_item.partner.title }}</h5>
-                                                <label>{{ product_item.partner.website }}</label>
-                                            </div>
-                                        </a>
+                                    <div class="spacer-10px"></div>
+                                    <div class="item-block-small">
+                                        <img src="{{ product_item.partner.logo.file }}" class="logo-img" alt="{{  product_item.partner.title }}">
                                     </div>
+                                    <div class="spacer-10px"></div>
+                                    <div class="line"></div>
                                     <div class="spacer-20px"></div>
                                     {% endif %}
 
                                     {% if customer_count > 0 %}
                                     <div><label><strong>成功案例</strong></label></div>
+                                    <div class="spacer-10px"></div>
                                     {% for customer_item in customer_list %}
-                                    <div class="item-block">
-                                        <a>
-                                            <div class="image-block">
-                                                {% if not customer_item.logo %}
-                                                <img src="{% static 'portal/img/customer.png' %}" style="width: 40px;height: 40px;" />
-                                                {% else %}
-                                                <img src="{{ customer_item.logo.file }}" style="width: 40px;height: 40px;" />
-                                                {% endif %}
-                                            </div>
-                                            <div class="content-block">
-                                                <h5>{{ customer_item.title }}</h5>
-                                                <label>{{ customer_item.fullname }}</label>
-                                            </div>
-                                        </a>
+                                    <div class="item-block-small">
+                                        <img src="{{ customer_item.logo.file }}" class="logo-img" alt="{{  customer_item.title }}">
                                     </div>
                                     {% endfor %}
                                     {% endif %}

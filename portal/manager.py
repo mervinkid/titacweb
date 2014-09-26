@@ -45,13 +45,14 @@ class PartnerManager(models.Manager):
             print str(e)
             return None
 
+
 class CustomerManager(models.Manager):
     def get_all_customer(self):
         """
         获取所有客户信息
         :return:
         """
-        return self.get_queryset().all()
+        return self.get_queryset().all().order_by('title')
 
     def get_customer_by_id(self, customer_id):
         """
@@ -239,6 +240,28 @@ class ProductContentManager(models.Manager):
                 )
         return query_result
 
+
+class ServiceManager(models.Manager):
+    def get_enabled_service(self):
+        """
+        查询所有可用服务
+        :return:
+        """
+        return self.get_queryset().filter(enable=1)
+
+    def get_service_by_id(self, service_id):
+        """
+        通过主键查询数据
+        :param service_id:
+        :return:
+        """
+        try:
+            return self.get_queryset().get(id=service_id)
+        except Exception, e:
+            print str(e)
+            return None
+
+
 class ProductCustomerManager(models.Manager):
     def get_customer_by_product_id(self, product_id):
         """
@@ -255,6 +278,7 @@ class ProductCustomerManager(models.Manager):
         :return:
         """
         return self.get_queryset().filter(customer=customer_id)
+
 
 class SolutionProductManager(models.Manager):
     def get_product_by_solution_id(self, solution_id):

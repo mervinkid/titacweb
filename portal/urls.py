@@ -11,6 +11,7 @@ urlpatterns = patterns(
     url(r'^product/$', 'product'),
     url(r'^product/(\d+)/$', 'product_detail'),
     url(r'^service/$', 'service'),
+    url(r'^service/(\d+)/$', 'service_detail'),
     url(r'^partner/$', 'partner'),
     url(r'^career/$', 'career'),
     url(r'^company/$', 'company'),

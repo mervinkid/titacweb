@@ -14,35 +14,13 @@
 <!--content-->
 {% block content %}
 <style type="text/css">
-div .style-01 {
-    height: 40px;
-    padding: 5px;
-}
-div .style-02 {
-    height: 160px;
-}
-div .style-03 {
-    height: 250px;
-}
-div .style-04 {
-    float: left;
-    width: 130px;
-    line-height: 25px;
-    vertical-align: middle;
-}
-div .style-05 {
-    margin-left: 130px;
-    border-left: 1px solid #e6e6e6;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-div .style-06 {
-    width: 80px;
-    height: 45px;
-    display: inline-block;
-    margin-left: 10px;
-    margin-right: 10px;
-}
+div .style-01 {height: 35px;padding: 5px;}
+div .style-02 {height: 160px;}
+div .style-03 {height: 250px;}
+div .style-04 {float: left;width: 110px;line-height: 25px;vertical-align: middle;}
+div .style-05 {margin-left: 110px;border-left: 1px solid #e6e6e6;padding-left: 20px;padding-right: 20px;}
+div .style-05 .more-button {float: right;margin-right: -10px;margin-top: -5px;}
+div .style-06 {width: 90px;height: 30px;display: inline-block;margin-left: 5px;margin-right: 5px;text-align: center;}
 </style>
 <div class="container clearfix">
     <div class="spacer-5px"></div>
@@ -78,11 +56,12 @@ div .style-06 {
                 <div id="content-partner">
                     {% for partner in partner_list %}
                     <div class="style-06">
-                        <div>
-                            <label>{{ partner.title }}</label>
-                        </div>
+                        <img src="{{ partner.logo.file }}" alt="{{ partner.title }}" class="logo-img">
                     </div>
                     {% endfor %}
+                    <div class="more-button">
+                        <a href="{% url 'portal.views.partner' %}">Detail</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -100,9 +79,12 @@ div .style-06 {
                     <div id="content-customer">
                         {% for customer in customer_list %}
                         <div class="style-06">
-                            <label>{{ customer.title }}</label>
+                            <img src="{{ customer.logo.file }}" alt="{{ customer.title }}" class="logo-img">
                         </div>
                         {% endfor %}
+                        <div class="more-button">
+                            <a>Detail</a>
+                        </div>
                     </div>
                 </div>
             </div>

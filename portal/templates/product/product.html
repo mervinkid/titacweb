@@ -28,7 +28,7 @@
             {% for product_item in products %}
             <div class="item-block">
                 <a href="/product/{{ product_item.product_id }}">
-                    <h5>{{ product_item.product_title }}</h5>
+                    <h5>{% if product_item.product_partner %}{{ product_item.product_partner }}&nbsp;{% endif %}{{ product_item.product_title }}</h5>
                     {{ product_item.product_subtitle }}
                 </a>
             </div>

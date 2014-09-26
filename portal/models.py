@@ -5,17 +5,7 @@ import datetime
 from django.conf import settings
 from django.db import models
 from portal.utils import generate_random_string
-from portal.manager import \
-    SlideManager, \
-    PartnerManager, \
-    CustomerManager, \
-    SolutionManager, \
-    SolutionContentManager, \
-    GlobalSettingManager, \
-    ProductManager, \
-    ProductContentManager,  \
-    ProductCustomerManager, \
-    SolutionProductManager
+from portal.manager import *
 
 
 class Media(models.Model):
@@ -112,7 +102,7 @@ class Slide(models.Model):
         db_column='content',
         null=True,
         blank=True,
-        help_text='幻灯片内容,可使用HTML代码',
+        help_text='幻灯片内容,可使用HTML代码,区域大小930x250',
         verbose_name='幻灯片内容'
     )
     enable = models.IntegerField(
@@ -271,7 +261,7 @@ class Partner(models.Model):
         max_length=250,
         null=True,
         blank=True,
-        help_text='LOGO URL地址,支持base64数据',
+        help_text='120x40规格png图像',
         verbose_name='LOGO'
     )
     website = models.URLField(
@@ -315,7 +305,7 @@ class Customer(models.Model):
         db_column='logo',
         null=True,
         blank=True,
-        help_text='客户公司LOGO图片链接',
+        help_text='120x40规格png图像',
         verbose_name='LOGO'
     )
     objects = CustomerManager()
@@ -358,14 +348,6 @@ class Solution(models.Model):
         help_text='*启用状态',
         verbose_name='状态'
     )
-    image = models.CharField(
-        db_column='image',
-        max_length=250,
-        null=True,
-        blank=True,
-        help_text='支持base64数据',
-        verbose_name='配图地址'
-    )
     sketch = models.TextField(
         db_column='sketch',
         null=True,
@@ -407,13 +389,13 @@ class SolutionContent(models.Model):
     """
     用于管理解决方案内容
     """
-    POSITION_CHOICES = {
+    POSITION_CHOICES = (
         (0, '位置0'),
         (1, '位置1'),
         (2, '位置2'),
         (3, '位置3'),
         (4, '位置4'),
-        }
+    )
     solution = models.ForeignKey(
         Solution,
         db_column='solution_id',
@@ -488,14 +470,6 @@ class Product(models.Model):
         choices=ENABLE_CHOICES,
         help_text='*启用状态',
         verbose_name='状态'
-    )
-    image = models.CharField(
-        db_column='image',
-        max_length=250,
-        null=True,
-        blank=True,
-        help_text='配图地址,支持base64数据',
-        verbose_name='配图地址'
     )
     sketch = models.TextField(
         db_column='sketch',
@@ -599,6 +573,61 @@ class ProductContent(models.Model):
         #保存时自动更新数据修改时间
         self.update = datetime.datetime.now()
         return super(ProductContent, self).save(*args, **kwargs)
+
+
+class Service(models.Model):
+    """
+    用于管理服务数据
+    """
+    ENABLE_CHOICES = (
+        (1, '启用'),
+        (0, '禁用'),
+    )
+    title = models.CharField(
+        db_column='title',
+        max_length=250,
+        help_text='*标题,250个字符内',
+        verbose_name='名称'
+    )
+    sketch = models.TextField(
+        db_column='sketch',
+        help_text='显示在标题之下',
+        verbose_name='简介',
+        null=True,
+        blank=True
+    )
+    content = models.TextField(
+        db_column='content',
+        help_text='支持HTML代码',
+        verbose_name='内容'
+    )
+    update = models.DateTimeField(
+        db_column='update',
+        default=datetime.datetime.now(),
+        editable=False,
+        help_text='更新时间',
+        verbose_name='更新时间'
+    )
+    enable = models.IntegerField(
+        db_column='enable',
+        default=1,
+        choices=ENABLE_CHOICES,
+        help_text='*启用状态',
+        verbose_name='状态'
+    )
+    objects = ServiceManager()
+
+    class Meta:
+        db_table = 'portal_service'
+        verbose_name_plural = '服务'
+
+    def __unicode__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        #保存时自动更新数据修改时间
+        self.update = datetime.datetime.now()
+        return super(Service, self).save(*args, **kwargs)
 
 
 class ProductCustomer(models.Model):

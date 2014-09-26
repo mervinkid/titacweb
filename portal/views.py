@@ -3,17 +3,7 @@ import datetime
 from django.conf import settings
 from django.shortcuts import render
 from django.http.response import Http404
-from portal.models import \
-    GlobalSetting, \
-    Slide, \
-    Solution, \
-    SolutionContent, \
-    Product, \
-    ProductContent, \
-    ProductCustomer, \
-    SolutionProduct, \
-    Partner, \
-    Customer
+from portal.models import *
 from portal.utils import convert_to_data_value, convert_to_view_value
 
 
@@ -192,15 +182,17 @@ def product(request):
     :return:
     """
     product_list = Product.objects.get_enabled_product()
-    products = []
+    products = list()
     for product_item in product_list:
         product_id = convert_to_view_value(product_item.id)
         product_title = product_item.title
         product_subtitle = product_item.subtitle
+        product_partner = product_item.partner
         product_data = {
             'product_id': product_id,
             'product_title': product_title,
             'product_subtitle': product_subtitle,
+            'product_partner': product_partner,
         }
         products.append(product_data)
     return render(
@@ -266,8 +258,48 @@ def service(request):
     :param request:
     :return:
     """
-    context = generate_context(current='service')
-    return render(request, 'service/service.html', context)
+    #load enabled service
+    service_list = Service.objects.get_enabled_service()
+    services = list()
+    for service_item in service_list:
+        service_id = convert_to_view_value(service_item.id)
+        service_title = service_item.title
+        service_sketch = service_item.sketch
+        service_data = {
+            'service_id': service_id,
+            'service_title': service_title,
+            'service_sketch': service_sketch,
+        }
+        services.append(service_data)
+    return render(
+        request,
+        'service/service.html',
+        generate_context(
+            current='service',
+            services=services
+        )
+    )
+
+
+def service_detail(request, service_id):
+    """
+    :param request:
+    :param service_id:
+    :return:
+    """
+    service_id = convert_to_data_value(service_id)
+    service_item = Service.objects.get_service_by_id(service_id)
+    if not service_item:
+        raise Http404
+
+    return render(
+        request,
+        'service/service_detail.html',
+        generate_context(
+            current='service',
+            service_item=service_item
+        )
+    )
 
 
 def download(request):
@@ -289,11 +321,14 @@ def partner(request):
     :param request:
     :return:
     """
+    #load data
+    partner_list = Partner.objects.get_partners()
     return render(
         request,
         'partner/partner.html',
         generate_context(
-            current='partner'
+            current='partner',
+            partner_list=partner_list,
         )
     )
 
