@@ -26,13 +26,27 @@
                 <div class="line"></div>
                 <div class="spacer-10px"></div>
                 <div class="main-content-box">
-                    <div><h6>我们的合作伙伴</strong></h6></div>
+                    <div><h6>我们的合作伙伴</h6></div>
                     <div class="spacer-10px"></div>
                     <div>
                         {% for partner_item in partner_list %}
                         <div class="item-block-small">
                             <img src="{{ partner_item.logo.file }}" class="logo-img" alt="{{  partner_item.title }}">
                         </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="spacer-10px"></div>
+                <div class="line"></div>
+                <div class="spacer-10px"></div>
+                <div class="main-content-box">
+                    <div><h6>我们的用户</h6></div>
+                    <div class="spacer-10px"></div>
+                    <div>
+                        {% for customer_item in customer_list %}
+                            <div class="item-block-small">
+                                <img src="{{ customer_item.logo.file }}" class="logo-img" alt="{{  customer_item.title }}">
+                            </div>
                         {% endfor %}
                     </div>
                 </div>

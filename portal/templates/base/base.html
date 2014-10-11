@@ -3,15 +3,15 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="description" content="{{ g_settings.description }}" />
-        <meta name="keywords" content="{% if keyword == None or keyword == ''%}{{ g_settings.keyword }}{% else %}{{ keyword }}{% endif %}" />
+        <meta name="description" content="{{ description_setting }}" />
+        <meta name="keywords" content="{{ keywords }}" />
         <meta name="author" content="Mervin" />
         <link rel="icon" type="image/png" href="{% static 'portal/img/favicon.png' %}" />
         <title>泰科泰格&nbsp;-&nbsp;{% block title %}{% endblock %}</title>
         <link rel="stylesheet" media="screen" href="{% static 'portal/css/style.css' %}" />
         <link rel="stylesheet" media="screen" href="{% static 'portal/css/skeleton.css' %}" />
         <link rel="stylesheet" media="screen" href="{% static 'portal/css/flexslider.css' %}" />
-        {% if debug == True %}
+        {% if use_cdn == False %}
         <script src="{% static 'portal/js/jquery.min.js' %}" type="text/javascript"></script>
         <script src="{% static 'portal/js/modernizr.js' %}" type="text/javascript"></script>
         <script src="{% static 'portal/js/jquery.flexslider-min.js' %}" type="text/javascript"></script>
@@ -30,14 +30,14 @@
                 <div id="header-bottom" xmlns="http://www.w3.org/1999/html">
                     {% block position %}{% endblock %}
                     <p>
-                        {% ifnotequal g_settings.call None %}
+                        {% ifnotequal call_setting None %}
                         <span><img src="{% static 'portal/img/phone.png' %}" style="width: 12px;height: 12px;"></span>
-                        <span>&nbsp;{{ g_settings.call }}</span>
+                        <span>&nbsp;{{ call_setting }}</span>
                         {% endifnotequal %}
                         <span><label>&nbsp;&nbsp;|&nbsp;&nbsp;</label></span>
-                        {% ifnotequal g_settings.mail None %}
+                        {% ifnotequal mail_setting None %}
                         <span><img src="{% static 'portal/img/mail.png' %} " style="width: 12px;height: 12px;"/></span>
-                        <span>&nbsp;<a href="mailto:{{ g_settings.mail }}">{{ g_settings.mail }}</a></span>
+                        <span>&nbsp;<a href="mailto:{{ mail_setting }}">{{ mail_setting }}</a></span>
                         {% endifnotequal %}
                     </p>
                     <div class="clear"></div>

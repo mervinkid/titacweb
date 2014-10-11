@@ -10,7 +10,7 @@
         <li><div class="position-split"></div></li>
         <li><a href="{% url 'portal.views.product' %}">产品</a></li>
         <li><div class="position-split"></div></li>
-        <li><label>{% if product_item.partner %}{{ product_item.partner.title }}&nbsp;{% endif %}{{ product_item.title }}</label></li>
+        <li><label>{{ product_item.title }}</label></li>
     </ul>
 {% endblock %}
 
@@ -21,7 +21,7 @@
     <div class="left-large-block">
         <div class="white-box space">
             <div class="main-content-box">
-                <h4><label>{% if product_item.partner %}{{ product_item.partner.title }}&nbsp;{% endif %}{{ product_item.title }}</label></h4>
+                <h4><label>{{ product_item.title }}</label></h4>
                 <h5><label>{{ product_item.subtitle }}</label></h5>
             </div>
             <div class="spacer-10px"></div>

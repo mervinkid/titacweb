@@ -46,9 +46,11 @@
                             <a href="/solution/{{ result_item.id }}">
                             {% elif result_item.type == 'product' %}
                             <a href="/product/{{ result_item.id }}">
+                            {% elif result_item.type == 'service' %}
+                                <a href="/service/{{ result_item.id }}">
                             {% endif %}
                                 <h5 style="margin-bottom: 5px;">{{ result_item.title }}</h5>
-                                {{ result_item.sketch }}
+                                {% autoescape off %}{{ result_item.sketch }}{% endautoescape %}
                             </a>
                     </div>
                 </div>

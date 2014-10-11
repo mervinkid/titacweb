@@ -1,7 +1,9 @@
 #coding=utf-8
 __author__ = 'Mervin'
 import string
+import re
 from random import choice
+
 
 def convert_to_view_value(param):
     '''
@@ -14,6 +16,7 @@ def convert_to_view_value(param):
     except:
         data_id = 0
     return data_id + 1000
+
 
 def convert_to_data_value(param):
     '''
@@ -29,8 +32,26 @@ def convert_to_data_value(param):
         page_id = 1000
     return page_id - 1000
 
+
 def generate_random_string(length=16):
-    #生成随机字符串
+    """
+    生成随机字符串
+    :param length:
+    :return:
+    """
     chars = string.letters + string.digits
     random_string =  ''.join([ choice(chars) for i in range(length)])
     return random_string
+
+
+def remove_html_tag(source):
+    """
+    移除字符串中的HTML格式标签
+    :param source:
+    :return:
+    """
+    if source:
+        result = re.sub('<[^>]+>','',source)
+        return result
+    else:
+        return str()

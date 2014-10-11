@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 't=vrxe(%19p1!(q49@u^xvn+%))x)lz&saa572@vcwgv@3@b9('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = True
 
@@ -116,4 +116,5 @@ STATICFILES_FINDERS = (
 )
 
 DOMAIN = 'www.titac.com.cn'
+USE_CDN = False
 

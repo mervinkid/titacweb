@@ -147,7 +147,6 @@ class GlobalSetting(models.Model):
         ('description', '页面Description'),
         ('call', '联系电话'),
         ('mail', '联系邮箱'),
-        ('qq', '联系QQ'),
     )
     key = models.CharField(
         db_column='key',
@@ -600,6 +599,14 @@ class Service(models.Model):
         db_column='content',
         help_text='支持HTML代码',
         verbose_name='内容'
+    )
+    keyword = models.CharField(
+        db_column='keyword',
+        max_length=250,
+        help_text='页面keyword信息',
+        verbose_name='关键词',
+        null=True,
+        blank=True
     )
     update = models.DateTimeField(
         db_column='update',

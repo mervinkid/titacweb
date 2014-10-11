@@ -5,14 +5,32 @@
 {% block position %}
     <ul>
         <li><a href="/">首页</a></li>
-        <li><div class="position_split"></div></li>
+        <li><div class="position-split"></div></li>
         <li>404</li>
     </ul>
 {% endblock %}
 
 {% block content %}
-<div class="columns">
-    <h1>Http 404</h1>
-    <h1>抱歉，您要访问的页面不存在。</h1>
+<div class="container clearfix">
+    <div class="left-large-block">
+        <div class="white-box space">
+            <div class="main-content-box">
+                <div class="error-page-message-area">
+                    <h1><label>错误&nbsp;404.</label></h1>
+                    <div><label>抱歉,&nbsp;您要访问的页面不存在!</label></div>
+                    <div><label>PAGE NOT EXIST,&nbsp;SORRY!</label></div>
+                    <div class="spacer-10px"></div>
+                    <div><a href="/">回到首页</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="right-small-block">
+        <div class="float">
+            <div class="white-box">
+            {% include 'common/contact.html' %}
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

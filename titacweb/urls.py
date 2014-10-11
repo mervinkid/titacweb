@@ -7,7 +7,7 @@ import portal.urls
 admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/console/', include(admin.site.urls)),
     url(r'^', include(portal.urls)),
 )
 

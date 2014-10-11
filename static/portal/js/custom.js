@@ -16,16 +16,15 @@ $(document).ready(function() {
     var search_submit = $('#search_submit');
     search_text.focus(function(){
         search_text.attr('placeholder', '');
-        search_text.attr('style', 'border-color:#df3a65;');
+        search_text.css('border-color', '#df3a65')
     });
     search_text.focusout(function(){
         search_text.attr('placeholder', '搜索');
-        search_text.attr('style', 'border-color:#b6b6b6;');
+        search_text.css('border-color', '#b6b6b6')
     });
     search_submit.click(function(){
         var query_string = search_text.val();
-        query_string = query_string.trim();
-        if(query_string == '')
+        if(query_string.trim() == '')
             return false;
         return true;
     })

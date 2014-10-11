@@ -25,7 +25,7 @@
            </div>
            <div class="spacer-10px"></div>
            <div class="main-content-box">
-               <p><label>{{ solution_item.sketch }}</label></p>
+               {% autoescape off %}{{ solution_item.sketch }}{% endautoescape %}
            </div>
            <div class="main-content-box">
                 <section id="solution-details" role="main">
@@ -52,7 +52,7 @@
                                         {% for product_item in product_list %}
                                         <div class="item-block">
                                             <a href="{% url 'portal.views.product_detail' product_item.id%}">
-                                                <h5>{% if product_item.partner %}{{ product_item.partner.title }}&nbsp;{% endif %}{{ product_item.title }}</h5>
+                                                <h5>{{ product_item.title }}</h5>
                                                 {{ product_item.subtitle }}
                                             </a>
                                         </div>

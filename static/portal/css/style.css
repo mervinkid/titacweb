@@ -120,3 +120,8 @@ div .line {margin-top: 5px;margin-bottom: 5px;height: 1px;border: none;backgroun
 div .left {float: left;display: inline-block;}
 div .right {float: right;}
 .logo-img {border: 1px solid #e6e6e6;vertical-align: middle;width: 90px;height: 30px;}
+div .highlight-header {padding: 2px;padding-left:10px;background: #df3a65;width: 60px;}
+div .highlight-header .white-color-text {color: #ffffff;}
+div .company-page-nav {width: 80px;float: left;padding: 5px;}
+div .company-page-content {margin-left: 90px;border-left: 1px solid #f6f6f6;padding: 5px;min-height: 500px;}
+div .error-page-message-area {text-align: center;margin-top: 30px;}

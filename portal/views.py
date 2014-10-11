@@ -4,7 +4,7 @@ from django.conf import settings
 from django.shortcuts import render
 from django.http.response import Http404
 from portal.models import *
-from portal.utils import convert_to_data_value, convert_to_view_value
+from portal.utils import convert_to_data_value, convert_to_view_value, remove_html_tag
 
 
 def home(request):
@@ -128,7 +128,7 @@ def solution_detail(request, solution_id):
     if not solution_item:
         raise Http404
     #获取关键词
-    solution_keyword = solution_item.keyword
+    solution_keywords = solution_item.keyword
     #获取内容
     solution_content_list = SolutionContent.objects.get_content_by_solution_id(solution_id)
     #获取相关信息
@@ -171,7 +171,7 @@ def solution_detail(request, solution_id):
             customer_count=len(customer_list),
             partner_list=partner_list,
             partner_count=len(partner_list),
-            keyword=solution_keyword,
+            keywords=solution_keywords,
         )
     )
 
@@ -215,7 +215,7 @@ def product_detail(request, product_id):
     product_item = Product.objects.get_product_by_id(product_id)
     if not product_item:
         raise Http404
-    keyword = product_item.keyword
+    keywords = product_item.keyword
     #获取内容
     product_content_list = ProductContent.objects.get_content_by_product_id(product_id)
     #获取相关方案
@@ -243,7 +243,7 @@ def product_detail(request, product_id):
         generate_context(
             current='product',
             product_item=product_item,
-            keyword=keyword,
+            keywords=keywords,
             solution_list=solution_list,
             solution_count=len(solution_list),
             product_content_list=product_content_list,
@@ -292,12 +292,15 @@ def service_detail(request, service_id):
     if not service_item:
         raise Http404
 
+    keywords = service_item.keyword
+
     return render(
         request,
         'service/service_detail.html',
         generate_context(
             current='service',
-            service_item=service_item
+            service_item=service_item,
+            keywords=keywords
         )
     )
 
@@ -323,12 +326,14 @@ def partner(request):
     """
     #load data
     partner_list = Partner.objects.get_partners()
+    customer_list = Customer.objects.get_all_customer()
     return render(
         request,
         'partner/partner.html',
         generate_context(
             current='partner',
             partner_list=partner_list,
+            customer_list=customer_list,
         )
     )
 
@@ -409,7 +414,7 @@ def search(request):
         for solution_item in solution_result:
             solution_id = convert_to_view_value(solution_item.id)
             solution_title = solution_item.title
-            solution_sketch = solution_item.sketch
+            solution_sketch = remove_html_tag(solution_item.sketch)
             if len(solution_sketch) > 100:
                 solution_sketch = solution_sketch[0:100] + '...'
             result_item = {
@@ -424,10 +429,11 @@ def search(request):
         solution_content_result = SolutionContent.objects.get_search(query_list)
         #检查所属解决方案在查询结果是否已存在
         for solution_content_item in solution_content_result:
-            solution_id = solution_content_item.solution
+            solution_id = solution_content_item.solution.id
             exist = False
             for search_result_item in search_result:
-                if search_result_item['type'] == 'solution' and search_result_item['id'] == solution_id:
+                if search_result_item['type'] == 'solution' \
+                    and search_result_item['id'] == convert_to_view_value(solution_id):
                     exist = True
                     break
             if not exist:
@@ -450,7 +456,7 @@ def search(request):
         for product_item in product_result:
             product_id = convert_to_view_value(product_item.id)
             product_title = product_item.title
-            product_sketch = product_item.sketch
+            product_sketch = remove_html_tag(product_item.sketch)
             if len(product_sketch) > 100:
                 product_sketch = product_sketch[0:100] + '...'
             result_item = {
@@ -465,10 +471,11 @@ def search(request):
         product_content_result = ProductContent.objects.get_search(query_list)
         #检查所属产品在查询结果是否已存在
         for product_content_item in product_content_result:
-            product_id = product_content_item.product
+            product_id = product_content_item.product.id
             exist = False
             for search_result_item in search_result:
-                if search_result_item['type'] == 'product' and search_result_item['id'] == product_id:
+                if search_result_item['type'] == 'product' \
+                    and search_result_item['id'] == convert_to_view_value(product_id):
                     exist = True
                     break
             if not exist:
@@ -485,6 +492,22 @@ def search(request):
                     'sketch': product_sketch
                 }
                 search_result.append(result_item)
+
+        #查询服务
+        service_result = Service.objects.get_search(query_list)
+        for service_item in service_result:
+            service_id = convert_to_view_value(service_item.id)
+            service_title = service_item.title
+            service_sketch = remove_html_tag(service_item.sketch)
+            if len(service_sketch) > 100:
+                service_sketch = service_sketch[0:100] + '...'
+            result_item = {
+                'type': 'service',
+                'id': service_id,
+                'title': service_title,
+                'sketch': service_sketch
+            }
+            search_result.append(result_item)
 
     #没有查询到数据的消息反馈
     #消息类型：
@@ -517,7 +540,7 @@ def search(request):
                 break
         #不存在完全一样的项则将其加入搜索历史
         if not query == '':
-            query_history.insert(0,query)
+            query_history.insert(0, query)
         #保持历史记录项目数量不超过6
         while len(query_history) > 6:
             del query_history[len(query_history)-1]
@@ -574,16 +597,26 @@ def generate_context(**contexts):
     #获取传入的上下文
     input_context = dict(contexts)
     #获取DEBUG状态
-    debug = settings.DEBUG
-    #获取全局设置
-    g_settings = GlobalSetting.objects.get_settings()
+    use_cdn = settings.USE_CDN
+    #获取设置
+    call_setting = GlobalSetting.objects.get_phone_setting()
+    mail_setting = GlobalSetting.objects.get_mail_setting()
+    keyword_setting = GlobalSetting.objects.get_keyword_setting()
+    description_setting = GlobalSetting.objects.get_description_setting()
     #获取当前年份
     year = datetime.datetime.now().year
     #将数据装入页面上下文
     setting_context = {
-        'debug': debug,
-        'g_settings': g_settings,
+        'use_cdn': use_cdn,
         'year': year,
+        'call_setting': call_setting,
+        'mail_setting': mail_setting,
+        'description_setting': description_setting,
     }
     context = dict(input_context.items() + setting_context.items())
+    if ('keywords' in context) is False:
+        context['keywords'] = keyword_setting
+    else:
+        if context['keywords'] == str():
+            context['keywords'] = keyword_setting
     return context
