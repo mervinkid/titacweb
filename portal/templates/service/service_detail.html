@@ -3,6 +3,11 @@
 <!--title-->
 {% block title %}{{ service_item.title }}{% endblock %}
 
+<!--page style-->
+{% block style %}
+<link rel="stylesheet" media="screen" href="{% static 'portal/css/rca.css' %}" />
+{% endblock %}
+
 <!--position-->
 {% block position %}
     <ul>
@@ -29,7 +34,9 @@
                 <div class="line"></div>
                 <div class="spacer-10px"></div>
                 <div class="main-content-box">
+                    <div class="rich-content-area">
                     {% autoescape off %}{{ service_item.content }}{% endautoescape %}
+                    </div>
                 </div>
             </div>
         </div>

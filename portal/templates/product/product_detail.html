@@ -3,6 +3,16 @@
 <!--title-->
 {% block title %}{{ product_item.title }}{% endblock %}
 
+<!--page style-->
+{% block style %}
+<link rel="stylesheet" media="screen" href="{% static 'portal/css/rca.css' %}" />
+{% endblock %}
+
+<!--page script-->
+{% block script %}
+<script type="text/javascript" src="{% static 'portal/js/tab.js' %}"></script>
+{% endblock %}
+
 <!--position-->
 {% block position %}
     <ul>
@@ -16,7 +26,6 @@
 
 <!--content-->
 {% block content %}
-<script type="text/javascript" src="{% static 'portal/js/tab.js' %}"></script>
 <div class="container clearfix">
     <div class="left-large-block">
         <div class="white-box space">
@@ -40,9 +49,11 @@
                         <div class="panes">
                             {% for product_content in product_content_list %}
                             <div class="table-content" id="tab-content-{{ forloop.counter }}" style="{% if not forloop.first %}display: none{% endif %}">
+                                <div class="rich-content-area">
                                 {% autoescape off %}
                                 {{ product_content.content }}
                                 {% endautoescape %}
+                                </div>
                             </div>
                             {% endfor %}
                             <div class="table-content" id="tab-content-relate" style="display: none">
