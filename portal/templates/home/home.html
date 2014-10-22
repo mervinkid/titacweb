@@ -15,12 +15,13 @@
 {% block content %}
 <style type="text/css">
 div .style-01 {height: 35px;padding: 5px;}
-div .style-02 {height: 160px;}
+div .style-02 {height: 180px;}
 div .style-03 {height: 250px;}
 div .style-04 {float: left;width: 110px;line-height: 25px;vertical-align: middle;}
 div .style-05 {margin-left: 110px;border-left: 1px solid #e6e6e6;padding-left: 20px;padding-right: 20px;}
 div .style-05 .more-button {float: right;margin-right: -10px;margin-top: -5px;}
 div .style-06 {width: 90px;height: 30px;display: inline-block;margin-left: 5px;margin-right: 5px;text-align: center;}
+div .style-07 {height: 145px;overflow-y: auto;}
 </style>
 <div class="container clearfix">
     <div class="spacer-5px"></div>
@@ -101,7 +102,7 @@ div .style-06 {width: 90px;height: 30px;display: inline-block;margin-left: 5px;m
             <div class="spacer-20px"></div>
             <div class="line"></div>
             <div class="spacer-5px"></div>
-            <div id="content-solution">
+            <div id="content-solution" class="style-07">
                 <ul>
                 {% for solution in solution_list %}
                     <li><a href="{% url 'portal.views.solution_detail' solution.sid %}">{{ solution.title }}</a></li>
@@ -119,10 +120,10 @@ div .style-06 {width: 90px;height: 30px;display: inline-block;margin-left: 5px;m
             <div class="spacer-20px"></div>
             <div class="line"></div>
             <div class="spacer-5px"></div>
-            <div id="content-product">
+            <div id="content-product" class="style-07">
                 <ul>
                     {% for product in product_list %}
-                        <li><a href="{% url 'portal.views.product_detail' product.pid %}">{{ product.title }}</a></li>
+                    <li><a href="{% url 'portal.views.product_detail' product.pid %}">{{ product.title }}</a></li>
                     {% endfor %}
                 </ul>
             </div>
@@ -137,8 +138,12 @@ div .style-06 {width: 90px;height: 30px;display: inline-block;margin-left: 5px;m
             <div class="spacer-20px"></div>
             <div class="line"></div>
             <div class="spacer-5px"></div>
-            <div id="content-service">
-                <label>IT系统规模不断扩大，设施越来越复杂，要求的运行效率和服务质量越来越高。<br><strong>7x24</strong>&nbsp;的技术支持确保您的IT不间断提供服务。<br></label>
+            <div id="content-service" class="style-07">
+                <ul>
+                    {% for service in service_list %}
+                    <li><a href="{% url 'portal.views.service_detail' service.sid %}">{{ service.title }}</a></li>
+                    {% endfor %}
+                </ul>
             </div>
         </div>
     </div>

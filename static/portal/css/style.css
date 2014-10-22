@@ -109,12 +109,25 @@ div .hole-block {margin: 5px 10px 5px 10px;}
 div .white-box {background: #ffffff;padding:10px;border: 1px solid #e6e6e6;border-radius: 4px;}
 div .white-box .main-content-box {margin: 10px;}
 div .gray-box {background: #eeeeee;padding:10px;border: 1px solid #e6e6e6;border-radius: 4px;}
-div .item-block {width: 330px;display: inline-block;margin: 10px;}
-div .item-block h1,h2,h3,h4,h5,h6 {margin-bottom: 5px;}
+/*item-block*/
+div .item-block {width: 320px;display: inline-block;margin: 10px;padding: 5px 10px 5px 10px;border: 1px solid #e6e6e6;}
+div .item-block:hover {border: 1px solid #df3a65;}
+div .item-block:hover strong {color: #df3a65;}
+div .item-block:hover label {color: #df3a65;}
+div .item-block h1,h2,h3,h4,h5,h6 {margin-bottom: 0px;}
+div .item-block strong {color: #505050;}
 div .item-block .image-block {float: left;width: 40px;}
 div .item-block .content-block {margin-left: 50px;}
 div .item-block-small {width: 120px;height: 30px;display: inline-block;margin: 10px;text-align: center;}
-div .item-block-service {margin: 10px;}
+/*item-block-service*/
+div .item-block-service {margin: 10px;border: 1px solid;padding: 5px 10px 5px 10px;border: 1px solid #e6e6e6;}
+div .item-block-service:hover {border: 1px solid #df3a65;}
+div .item-block-service:hover strong {color: #df3a65;}
+div .item-block-service:hover label {color: #df3a65;}
+div .item-block-service:hover p {color: #df3a65;}
+div .item-block-service strong {color: #505050;}
+div .item-block-service p {padding: 0;}
+
 div .space {min-height: 600px;}
 div .line {margin-top: 5px;margin-bottom: 5px;height: 1px;border: none;background: #f6f6f6;}
 div .left {float: left;display: inline-block;}

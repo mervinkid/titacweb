@@ -15,19 +15,19 @@ def home(request):
     #load slide data
     slide_list = Slide.objects.get_enabled_slide()
     #load top data
-    TOP_DATA_COUNT = 7
+    top_data_count = 10
     #load solution top data
     solution_list = list()
     solutions = Solution.objects.get_enabled_solution()
     counter = 0
     while counter < len(solutions):
+        if counter == top_data_count:
+            break
         solution_item = dict()
         solution_data = solutions[counter]
         solution_item['title'] = solution_data.title
         solution_item['sid'] = convert_to_view_value(solution_data.id)
         solution_list.append(solution_item)
-        if counter == TOP_DATA_COUNT:
-            break
         counter += 1
 
     #load product top data
@@ -35,17 +35,31 @@ def home(request):
     products = Product.objects.get_enabled_product()
     counter = 0
     while counter < len(products):
+        if counter == top_data_count:
+            break
         product_item = dict()
         product_data = products[counter]
         product_item['title'] = product_data.title
         product_item['pid'] = convert_to_view_value(product_data.id)
         product_list.append(product_item)
-        if counter == TOP_DATA_COUNT:
+        counter += 1
+
+    #load service top data
+    service_list = list()
+    services = Service.objects.get_enabled_service()
+    counter = 0
+    while counter < len(services):
+        if counter == top_data_count:
             break
+        service_item = dict()
+        service_data = services[counter]
+        service_item['title'] = service_data.title
+        service_item['sid'] = convert_to_view_value(service_data.id)
+        service_list.append(service_item)
         counter += 1
 
     #load partner top data
-    PARTNER_DATA_COUNT = 8
+    partner_data_count = 8
     partner_list = list()
     partners = Partner.objects.get_partners()
     counter = 0
@@ -56,12 +70,12 @@ def home(request):
         partner_item['website'] = partner_data.website
         partner_item['logo'] = partner_data.logo
         partner_list.append(partner_item)
-        if counter == PARTNER_DATA_COUNT:
+        if counter == partner_data_count:
             break
         counter += 1
 
     #load customer top data
-    CUSTOMER_DATA_COUNT = 8
+    customer_data_count = 8
     customer_list = list()
     customers = Customer.objects.get_all_customer()
     counter = 0
@@ -71,7 +85,7 @@ def home(request):
         customer_item['title'] = customer_data.title
         customer_item['logo'] = customer_data.logo
         customer_list.append(customer_item)
-        if counter == CUSTOMER_DATA_COUNT:
+        if counter == customer_data_count:
             break
         counter += 1
 
@@ -85,6 +99,7 @@ def home(request):
             customer_list=customer_list,
             solution_list=solution_list,
             product_list=product_list,
+            service_list=service_list,
         )
     )
 
@@ -433,7 +448,7 @@ def search(request):
             exist = False
             for search_result_item in search_result:
                 if search_result_item['type'] == 'solution' \
-                    and search_result_item['id'] == convert_to_view_value(solution_id):
+                        and search_result_item['id'] == convert_to_view_value(solution_id):
                     exist = True
                     break
             if not exist:
@@ -443,6 +458,9 @@ def search(request):
                 solution_id = convert_to_view_value(solution_id)
                 solution_title = solution_item.title
                 solution_sketch = solution_item.sketch
+                solution_sketch = remove_html_tag(solution_sketch)
+                if len(solution_sketch) > 100:
+                    solution_sketch = solution_sketch[0:100] + '...'
                 result_item = {
                     'type': 'solution',
                     'id': solution_id,
@@ -475,7 +493,7 @@ def search(request):
             exist = False
             for search_result_item in search_result:
                 if search_result_item['type'] == 'product' \
-                    and search_result_item['id'] == convert_to_view_value(product_id):
+                        and search_result_item['id'] == convert_to_view_value(product_id):
                     exist = True
                     break
             if not exist:
@@ -485,6 +503,9 @@ def search(request):
                 product_id = convert_to_view_value(product_id)
                 product_title = product_item.title
                 product_sketch = product_item.sketch
+                product_sketch = remove_html_tag(product_sketch)
+                if len(product_sketch) > 100:
+                    product_sketch = product_sketch[0:100] + '...'
                 result_item = {
                     'type': 'product',
                     'id': product_id,

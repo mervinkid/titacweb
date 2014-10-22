@@ -27,12 +27,12 @@
                 <div class="line"></div>
                 <div class="spacer-10px"></div>
                 {% for service_item in services %}
-                <div class="item-block-service">
-                    <a href="{% url 'portal.views.service_detail' service_item.service_id %}">
-                        <h5>{{ service_item.service_title }}</h5>
-                        {% autoescape off %}{{ service_item.service_sketch }}{% endautoescape %}
-                    </a>
+                <a href="{% url 'portal.views.service_detail' service_item.service_id %}">
+                <div class="item-block-service">                    
+                        <label><strong>{{ service_item.service_title }}</strong></label><br>
+                        <label>{% autoescape off %}{{ service_item.service_sketch }}{% endautoescape %}</label>                   
                 </div>
+                </a>
                 {% endfor %}
             </div>
         </div>

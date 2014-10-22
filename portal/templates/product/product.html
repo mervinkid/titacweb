@@ -26,12 +26,12 @@
             <div class="line"></div>
             <div class="spacer-10px"></div>
             {% for product_item in products %}
-            <div class="item-block">
-                <a href="/product/{{ product_item.product_id }}">
-                    <h5>{{ product_item.product_title }}</h5>
-                    {{ product_item.product_subtitle }}
-                </a>
-            </div>
+            <a href="/product/{{ product_item.product_id }}">
+                <div class="item-block">                
+                    <label><strong>{{ product_item.product_title }}</strong></label><br>
+                    <label>{{ product_item.product_subtitle }}</label>                
+                </div>
+            </a>
             {% endfor %}
         </div>
     </div>
