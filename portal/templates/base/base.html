@@ -35,7 +35,7 @@
                     <p>
                         {% ifnotequal call_setting None %}
                         <span><img src="{% static 'portal/img/phone.png' %}" style="width: 12px;height: 12px;"></span>
-                        <span>&nbsp;{{ call_setting }}</span>
+                        <span><label>&nbsp;{{ call_setting }}</label></span>
                         {% endifnotequal %}
                         <span><label>&nbsp;&nbsp;|&nbsp;&nbsp;</label></span>
                         {% ifnotequal mail_setting None %}

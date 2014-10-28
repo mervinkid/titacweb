@@ -1,19 +1,17 @@
-/*TEMPLATE SETUP*/
-/*Reset*/
+/*reset*/
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, menu, nav, output, ruby, section, summary, time, mark, audio, video {margin: 0;padding: 0;border: 0;font: inherit;vertical-align: baseline;color: #6a6b6b;}
-/* HTML5 display-role reset for older browsers */
+/* html5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, footer, header, menu, nav, section {display: block;}
 body {line-height: 1;}
 ol, ul {list-style: none;}
 blockquote, q {quotes: none;}
 blockquote:before, blockquote:after, q:before, q:after {content: none;}
 table {border-collapse: collapse;border-spacing: 0;}
-/*1.2 General styles*/
+/*general styles*/
 body {background: #f6f6f6;font-family: "Microsoft YaHei","proxima-nova", "Arial", sans-serif;font-size: 12px;font-weight: 400;line-height: 1.5em;}
 img, embed, object, video {max-width: 100%;height: auto;}
 video {width: 100% !important;height: auto !important;}
 strong {font-weight: bold;}
-/*Typography and text styles*/
 /*headings*/
 h1, h2, h3, h4, h5, h6 {font-family: "Microsoft YaHei",'Helvetica Neue', Helvetica, Arial, sans-serif;color: #434343;font-weight: 600;line-height: 1.2em;font-style: normal;word-spacing: 1px;}
 h1 {font-size: 24px;margin-bottom: 15px;}
@@ -30,7 +28,7 @@ a.link-style:hover {text-decoration:underline;}
 /*paragraph*/
 p {padding-bottom: 10px;}
 p.text-big {font-size: 20px;color: #231f20;line-height: 1.3em;}
-/*Image / Video Styles*/
+/*image / Video Styles*/
 .image-border {background: #ffffff;padding: 4px;border: 1px solid #e6e6e6;border-radius: 4px;}
 .image-left {background: #ffffff;padding: 4px;margin-right: 10px;border: 1px solid #e6e6e6;border-radius: 4px;float: left;}
 .image-right {background: #ffffff;padding: 4px;margin-left: 10px;border: 1px solid #e6e6e6;border-radius: 4px;float: right;}
@@ -38,10 +36,10 @@ p.text-big {font-size: 20px;color: #231f20;line-height: 1.3em;}
 .left-align {float: left;margin-right: 10px;}
 .right-align {float: right;margin-left: 10px;}
 .video-wrapper {background: #ffffff;padding: 4px;border: 1px solid #e6e6e6;border-radius: 4px;}
-/*List Styles*/
+/*list styles*/
 ul.list-bullet-blue li {background: url(/static/portal/img/bullet-circle-blue.png) no-repeat left 7px;padding: 0 0 10px 15px;margin-bottom: 10px;font-size: 14px;color: #54c2e6;border-bottom: 1px dotted #cccccc;list-style-type: none;}
 ul.list-bullet li {background: url(/static/portal/img/bullet-circle.png) no-repeat 0 8px;padding-left: 15px;margin-bottom: 10px;font-size: 14px;list-style-type: none;}
-/*Dividers and spacers*/
+/*dividers and spacers*/
 .divider {background: #000000;width: 100px;height: 1px;margin: 15px auto;display: inline-block;}
 .divider-dotted {width: 100%;margin: 25px auto;border-top: 1px dotted #cccccc;display: inline-block;}
 .page-divider {background: url(/static/portal/img/page-divider.png) no-repeat center top;width: 940px;height: 99px;margin: 85px auto 0 auto;display: block;}
@@ -51,8 +49,7 @@ ul.list-bullet li {background: url(/static/portal/img/bullet-circle.png) no-repe
 .spacer-15px {height: 15px;}
 .spacer-10px {height: 10px;}
 .spacer-5px {height: 5px;}
-/*TEMPLATE STRUCTRE*/
-/*Common divs*/
+/*common divs*/
 #content {width: 100%;padding-top: 115px;}
 .content-page {padding-top: 165px;}
 /*header*/
@@ -74,7 +71,7 @@ ul.list-bullet li {background: url(/static/portal/img/bullet-circle.png) no-repe
 .copyrights{text-indent:-9999px;height:0;line-height:0;font-size:0;overflow:hidden;}
 /*header_bottom*/
 #hd-bottom-wrapper {background: url(/static/portal/img/header-top-shadow.png) repeat-x;width: 100%;}
-#header-bottom {background: url(/static/portal/img/header-top-info-shadow.png) repeat-x top #ffffff;width: 920px;padding: 10px 10px 5px 10px;margin: 0 auto 0 auto;font-size: 12px;border-bottom-left-radius: 4px;border-bottom-right-radius: 4px;box-shadow:0 1px 1px rgba(0, 0, 0, 0.07);}
+#header-bottom {background: url(/static/portal/img/header-top-info-shadow.png) repeat-x top #ffffff;width: 920px;padding: 10px 10px 5px 10px;margin: 0 auto 0 auto;font-size: 11px;border-bottom-left-radius: 4px;border-bottom-right-radius: 4px;box-shadow:0 1px 1px rgba(0, 0, 0, 0.07);}
 #header-bottom ul {float: left;}
 #header-bottom ul li {margin-right: 5px;background: none;list-style-type: none;float: left;}
 #header-bottom p {padding-bottom: 0;float: right;}
@@ -110,7 +107,7 @@ div .white-box {background: #ffffff;padding:10px;border: 1px solid #e6e6e6;borde
 div .white-box .main-content-box {margin: 10px;}
 div .gray-box {background: #eeeeee;padding:10px;border: 1px solid #e6e6e6;border-radius: 4px;}
 /*item-block*/
-div .item-block {width: 320px;display: inline-block;margin: 10px;padding: 5px 10px 5px 10px;border: 1px solid #e6e6e6;}
+div .item-block {width: 320px;display: inline-block;margin: 10px;padding: 5px 10px 5px 10px;border: 1px solid #e6e6e6;border-radius: 2px;}
 div .item-block:hover {border: 1px solid #df3a65;}
 div .item-block:hover strong {color: #df3a65;}
 div .item-block:hover label {color: #df3a65;}
@@ -120,7 +117,7 @@ div .item-block .image-block {float: left;width: 40px;}
 div .item-block .content-block {margin-left: 50px;}
 div .item-block-small {width: 120px;height: 30px;display: inline-block;margin: 10px;text-align: center;}
 /*item-block-service*/
-div .item-block-service {margin: 10px;border: 1px solid;padding: 5px 10px 5px 10px;border: 1px solid #e6e6e6;}
+div .item-block-service {margin: 10px;border: 1px solid;padding: 5px 10px 5px 10px;border: 1px solid #e6e6e6;border-radius: 2px;}
 div .item-block-service:hover {border: 1px solid #df3a65;}
 div .item-block-service:hover strong {color: #df3a65;}
 div .item-block-service:hover label {color: #df3a65;}
@@ -133,7 +130,7 @@ div .line {margin-top: 5px;margin-bottom: 5px;height: 1px;border: none;backgroun
 div .left {float: left;display: inline-block;}
 div .right {float: right;}
 .logo-img {border: 1px solid #e6e6e6;vertical-align: middle;width: 90px;height: 30px;}
-div .highlight-header {padding: 2px;padding-left:10px;background: #df3a65;width: 60px;}
+div .highlight-header {padding: 2px;padding-left:10px;background: #df3a65;width: 60px;border-radius: 2px;}
 div .highlight-header .white-color-text {color: #ffffff;}
 div .company-page-nav {width: 80px;float: left;padding: 5px;}
 div .company-page-content {margin-left: 90px;border-left: 1px solid #f6f6f6;padding: 5px;min-height: 500px;}
