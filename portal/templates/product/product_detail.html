@@ -35,7 +35,9 @@
             </div>
             <div class="spacer-10px"></div>
             <div class="main-content-box">
+                <div class="rich-content-area">
                 {% autoescape off %}{{ product_item.sketch }}{% endautoescape %}
+                </div
             </div>
             <div class="main-content-box">
                 <section id="solution-details" role="main">
@@ -114,7 +116,7 @@
                     <div class="line"></div>
                     <div class="spacer-10px"></div>
                 </div>
-                <div>
+                <div style="max-height: 160px;overflow-y: auto;">
                     {% for solution_item in solution_list %}
                     <p>
                         <a href="/solution/{{ solution_item.id }}">{{ solution_item.title }}</a>
