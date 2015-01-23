@@ -9,19 +9,29 @@ from portal.manager import *
 
 
 class Media(models.Model):
+    '''
     UPLOAD_ROOT = 'upload/'
+    '''
     title = models.CharField(
         db_column='title',
         max_length=250,
         help_text='*媒体文件标题',
         verbose_name='标题'
     )
+    '''
     file = models.FileField(
         db_column='file',
         upload_to=UPLOAD_ROOT,
         help_text='选择本地文件',
         verbose_name='文件'
     )
+    '''
+    file = models.CharField(
+        db_column='file',
+        max_length=250,
+        help_text='媒体文件URL',
+        verbose_name='文件'
+        )
     update = models.DateTimeField(
         db_column='update',
         default=datetime.datetime.now(),
@@ -38,6 +48,7 @@ class Media(models.Model):
         return \
             self.title
 
+    '''
     def save(self, *args, **kwargs):
         #判断文件是否改变
         media_file = str(self.file)
@@ -71,7 +82,13 @@ class Media(models.Model):
                 super(Media, media_item).save(*args, **kwargs)
             except Exception, error:
                 print error
+    '''
 
+    def save(self, *args, **kwargs):
+        self.update = datetime.datetime.now()
+        super(Media, self).save(*args, **kwargs)
+
+    '''
     def delete(self, *args, **kwargs):
         #删除数据记录
         super(Media, self).delete(*args, **kwargs)
@@ -80,7 +97,7 @@ class Media(models.Model):
         filename = settings.BASE_DIR + filename
         if os.path.exists(filename):
             os.remove(filename)
-
+    ''' 
 
 class Slide(models.Model):
     """
