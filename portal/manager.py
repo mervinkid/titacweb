@@ -1,5 +1,6 @@
-#coding=utf-8
+# coding=utf-8
 __author__ = 'Mervin'
+
 import django
 from django.db import models
 

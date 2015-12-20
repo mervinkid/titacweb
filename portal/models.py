@@ -99,6 +99,7 @@ class Media(models.Model):
             os.remove(filename)
     ''' 
 
+
 class Slide(models.Model):
     """
     用于管理站点首页幻灯片信息
@@ -148,7 +149,7 @@ class Slide(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        #保存时自动更新数据修改时间
+        # 保存时自动更新数据修改时间
         self.update = datetime.datetime.now()
         super(Slide, self).save(*args, **kwargs)
 
@@ -256,7 +257,7 @@ class News(models.Model):
             self.update.day
 
     def save(self, *args, **kwargs):
-        #保存时自动更新数据修改时间
+        # 保存时自动更新数据修改时间
         self.update = datetime.datetime.now()
         super(News, self).save(*args, **kwargs)
 

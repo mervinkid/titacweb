@@ -8,7 +8,8 @@ For more information on this file, see
 https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 """
 
-import os,sys
+import os
+import sys
 
 path = '/var/www/html/titacweb'
 if path not in sys.path:

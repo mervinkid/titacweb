@@ -50,7 +50,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.gzip.GZipMiddleware',
-    'portal.middleware.domain_redirect.DomainRedirectMiddleware',
+#    'portal.middleware.domain_redirect.DomainRedirectMiddleware',
 )
 
 ROOT_URLCONF = 'titacweb.urls'
@@ -61,22 +61,22 @@ WSGI_APPLICATION = 'titacweb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'titacweb',
-#        'USER': 'root',
-#        'PASSWORD': 'titac',
-#        'HOST': '127.0.0.1',
-#        'PORT': '3306',
-#    }
-#}
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'titacweb.db',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'titacweb',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
     }
 }
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': 'titacweb.db',
+#    }
+#}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
