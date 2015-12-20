@@ -64,10 +64,10 @@ WSGI_APPLICATION = 'titacweb.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'titacweb',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': '127.0.0.1',
+        'NAME': 'dgveqRUwQwaFDdRFfHsZ',
+        'USER': 'odWLHcAWgpv1xLok7yuw81tG',
+        'PASSWORD': 'UP70SA10NA4kqDmrpsOGrPKvpWXK6lfx',
+        'HOST': 'sqld.duapp.com',
         'PORT': '3306',
     }
 }
