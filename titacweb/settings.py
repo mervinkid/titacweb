@@ -61,22 +61,22 @@ WSGI_APPLICATION = 'titacweb.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dgveqRUwQwaFDdRFfHsZ',
-        'USER': 'odWLHcAWgpv1xLok7yuw81tG',
-        'PASSWORD': 'UP70SA10NA4kqDmrpsOGrPKvpWXK6lfx',
-        'HOST': 'sqld.duapp.com',
-        'PORT': '3306',
-    }
-}
 #DATABASES = {
 #    'default': {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': 'titacweb.db',
+#        'ENGINE': 'django.db.backends.mysql',
+#        'NAME': 'dgveqRUwQwaFDdRFfHsZ',
+#        'USER': 'odWLHcAWgpv1xLok7yuw81tG',
+#        'PASSWORD': 'UP70SA10NA4kqDmrpsOGrPKvpWXK6lfx',
+#        'HOST': 'sqld.duapp.com',
+#        'PORT': '3306',
 #    }
 #}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'titacweb.db',
+    }
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
