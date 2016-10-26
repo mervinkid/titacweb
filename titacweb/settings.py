@@ -116,5 +116,11 @@ STATICFILES_FINDERS = (
 )
 
 DOMAIN = 'www.titac.com.cn'
-USE_CDN = False
+USE_CDN = True
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}

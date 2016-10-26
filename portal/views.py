@@ -5,8 +5,10 @@ from django.shortcuts import render
 from django.http.response import Http404
 from portal.models import *
 from portal.utils import convert_to_data_value, convert_to_view_value, remove_html_tag
+from django.views.decorators.cache import cache_page
 
 
+@cache_page(60*5)
 def home(request):
     """
     :param request:
@@ -104,6 +106,7 @@ def home(request):
     )
 
 
+@cache_page(60*5)
 def solution(request):
     """
     :param request:
@@ -132,6 +135,7 @@ def solution(request):
     )
 
 
+@cache_page(60*5)
 def solution_detail(request, solution_id):
     """
     :param request:
@@ -191,6 +195,7 @@ def solution_detail(request, solution_id):
     )
 
 
+@cache_page(60*5)
 def product(request):
     """
     :param request:
@@ -220,6 +225,7 @@ def product(request):
     )
 
 
+@cache_page(60*5)
 def product_detail(request, product_id):
     """
     :param request:
@@ -268,6 +274,7 @@ def product_detail(request, product_id):
     )
 
 
+@cache_page(60*5)
 def service(request):
     """
     :param request:
@@ -296,6 +303,7 @@ def service(request):
     )
 
 
+@cache_page(60*5)
 def service_detail(request, service_id):
     """
     :param request:
@@ -334,6 +342,7 @@ def download(request):
     )
 
 
+@cache_page(60*5)
 def partner(request):
     """
     :param request:
@@ -353,6 +362,7 @@ def partner(request):
     )
 
 
+@cache_page(60*5)
 def career(request):
     """
     :param request:
@@ -362,6 +372,7 @@ def career(request):
     return render(request, 'career/career.html', context)
 
 
+@cache_page(60*5)
 def company(request):
     """
     :param request:
@@ -376,6 +387,7 @@ def company(request):
     )
 
 
+@cache_page(60*5)
 def privacy(request):
     """
     :param request:
@@ -390,6 +402,7 @@ def privacy(request):
     )
 
 
+@cache_page(60*5)
 def term(request):
     """
     :param request:
@@ -590,6 +603,7 @@ def search(request):
     return response
 
 
+@cache_page(60*5)
 def h404(request):
     return render(
         request,
@@ -600,6 +614,7 @@ def h404(request):
     )
 
 
+@cache_page(60*5)
 def h500(request):
     return render(
         request,
