@@ -1,6 +1,6 @@
 # project
 portal/migrations/*
-config/*.yml
+config/config.yml
 
 # python
 *.pyc
