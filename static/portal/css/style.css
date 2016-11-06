@@ -93,7 +93,7 @@ p.table-slug {font-size: 11px;color: #e69954;padding: 0;margin-left: 20px;displa
 #copyright {border-top:1px solid #e6e6e6;padding-top: 20px;padding-bottom: 30px;margin-top: 20px;font-size: 11px;text-align: center;color: #6c6c6c;}
 /*Search box*/
 div .search_box {margin-left: 5px;background: url(/static/portal/img/search.png) no-repeat right;border-radius: 2px;}
-div .search_box  #search_text{width: 120px;height: 16px;line-height: 16px;vertical-align: middle;font-size: 12px;outline: none;box-sizing: content-box;border: 1px solid #b6b6b6;border-radius: 2px;border-right: none;}
+div .search_box  #search_text{width: 120px;height: 16px;line-height: 16px;vertical-align: middle;font-size: 12px;outline: none;box-sizing: content-box;border: 1px solid #b6b6b6;border-radius: 1px;border-right: none;}
 div .search_box  #search_submit{width: 18px;height: 16px;line-height: 16px;background: none;border: none;text-align: center;text-indent: -500px;}
 /*head bottom bar images*/
 div .position-split{width: 16px;height: 16px;background: url("/static/portal/img/right-arrow.png");}

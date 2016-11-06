@@ -3,9 +3,11 @@ from django.http.response import Http404
 from django.shortcuts import render
 from django.views.decorators.cache import cache_page
 from django.conf import settings
+from urllib.parse import quote, unquote
+from datetime import datetime
 
 from portal.models import *
-from portal.utils import convert_to_data_value, convert_to_view_value, remove_html_tag
+from portal.utils import remove_html_tag
 
 
 @cache_page(60 * 5)
@@ -28,7 +30,7 @@ def home(request):
         solution_item = dict()
         solution_data = solutions[counter]
         solution_item['title'] = solution_data.title
-        solution_item['sid'] = convert_to_view_value(solution_data.id)
+        solution_item['sid'] = solution_data.id
         solution_list.append(solution_item)
         counter += 1
 
@@ -42,7 +44,7 @@ def home(request):
         product_item = dict()
         product_data = products[counter]
         product_item['title'] = product_data.title
-        product_item['pid'] = convert_to_view_value(product_data.id)
+        product_item['pid'] = product_data.id
         product_list.append(product_item)
         counter += 1
 
@@ -56,7 +58,7 @@ def home(request):
         service_item = dict()
         service_data = services[counter]
         service_item['title'] = service_data.title
-        service_item['sid'] = convert_to_view_value(service_data.id)
+        service_item['sid'] = service_data.id
         service_list.append(service_item)
         counter += 1
 
@@ -115,7 +117,7 @@ def solution(request):
     solution_list = Solution.objects.get_enabled_solution()
     solutions = []
     for solution_item in solution_list:
-        solution_id = convert_to_view_value(solution_item.id)
+        solution_id = solution_item.id
         solution_title = solution_item.title
         solution_subtitle = solution_item.subtitle
         solution_data = {
@@ -142,7 +144,7 @@ def solution_detail(request, solution_id):
     :param solution_id:
     :return:
     """
-    solution_id = convert_to_data_value(solution_id)
+    solution_id = solution_id
     solution_item = Solution.objects.get_solution_by_id(solution_id)
     if not solution_item:
         raise Http404
@@ -152,30 +154,15 @@ def solution_detail(request, solution_id):
     solution_content_list = SolutionContent.objects.get_content_by_solution_id(solution_id)
     # 获取相关信息
     # 获取相关产品
-    solution_product_list = SolutionProduct.objects.get_product_by_solution_id(solution_id)
-    product_list = list()
-    customer_list = list()
-    partner_list = list()
-    for solution_product_item in solution_product_list:
-        product_id = solution_product_item.product.id
-        product_item = Product.objects.get_product_by_id(product_id)
-        if not product_item:
-            solution_product_item.delete()
-        if product_item.enable == 0:
-            continue
+    product_list = list(solution_item.products.all().filter(enable=1))
+    customer_list = set()
+    partner_list = set()
+    for product_item in product_list:
         # 获取相关用户
-        product_customer_list = ProductCustomer.objects.get_customer_by_product_id(product_id)
-        for product_customer_item in product_customer_list:
-            customer_item = product_customer_item.customer
-            # 检查重复项
-            if customer_item not in customer_list:
-                customer_list.append(customer_item)
-        product_item.id = convert_to_view_value(product_item.id)
-        product_list.append(product_item)
+        for customer_item in list(product_item.customers.all()):
+            customer_list.add(customer_item)
         # 获取相关合作伙伴
-        partner_item = product_item.partner
-        if partner_item not in partner_list and partner_item:
-            partner_list.append(partner_item)
+        partner_list.add(product_item.partner)
 
     return render(
         request,
@@ -204,7 +191,7 @@ def product(request):
     product_list = Product.objects.get_enabled_product()
     products = list()
     for product_item in product_list:
-        product_id = convert_to_view_value(product_item.id)
+        product_id = product_item.id
         product_title = product_item.title
         product_subtitle = product_item.subtitle
         product_partner = product_item.partner
@@ -232,7 +219,7 @@ def product_detail(request, product_id):
     :param product_id:
     :return:
     """
-    product_id = convert_to_data_value(product_id)
+    product_id = product_id
     product_item = Product.objects.get_product_by_id(product_id)
     if not product_item:
         raise Http404
@@ -240,23 +227,9 @@ def product_detail(request, product_id):
     # 获取内容
     product_content_list = ProductContent.objects.get_content_by_product_id(product_id)
     # 获取相关方案
-    solution_product_list = SolutionProduct.objects.get_solution_by_product_id(product_id)
-    solution_list = []
-    for solution_product_item in solution_product_list:
-        solution_id = solution_product_item.solution.id
-        solution_item = Solution.objects.get_solution_by_id(solution_id)
-        if not solution_item:
-            solution_product_item.delete()
-        if solution_item.enable == 0:
-            continue
-        solution_item.id = convert_to_view_value(solution_item.id)
-        solution_list.append(solution_item)
+    solution_list = list(product_item.solutions.all().filter(enable=1))
     # 获取相关客户信息
-    product_customer_list = ProductCustomer.objects.get_customer_by_product_id(product_id)
-    customer_list = []
-    for product_customer_item in product_customer_list:
-        customer = product_customer_item.customer
-        customer_list.append(customer)
+    customer_list = list(product_item.customers.all())
 
     return render(
         request,
@@ -284,7 +257,7 @@ def service(request):
     service_list = Service.objects.get_enabled_service()
     services = list()
     for service_item in service_list:
-        service_id = convert_to_view_value(service_item.id)
+        service_id = service_item.id
         service_title = service_item.title
         service_sketch = service_item.sketch
         service_data = {
@@ -310,7 +283,7 @@ def service_detail(request, service_id):
     :param service_id:
     :return:
     """
-    service_id = convert_to_data_value(service_id)
+    service_id = service_id
     service_item = Service.objects.get_service_by_id(service_id)
     if not service_item:
         raise Http404
@@ -420,8 +393,8 @@ def term(request):
 def search(request):
     query = request.GET.get('s', '')
     # 对GET到的字符串数据进行转码
-    query = str(query).encode(encoding='utf-8')
     # 移除查询关键词前后的空格
+    # query = str(query).encode(encoding='utf-8')
     query = query.strip()
     # 将关键词按照空格分割成list
     query_list = query.split(' ')
@@ -440,7 +413,7 @@ def search(request):
         # 查询解决方案
         solution_result = Solution.objects.get_search(query_list)
         for solution_item in solution_result:
-            solution_id = convert_to_view_value(solution_item.id)
+            solution_id = solution_item.id
             solution_title = solution_item.title
             solution_sketch = remove_html_tag(solution_item.sketch)
             if len(solution_sketch) > 100:
@@ -461,14 +434,14 @@ def search(request):
             exist = False
             for search_result_item in search_result:
                 if search_result_item['type'] == 'solution' \
-                        and search_result_item['id'] == convert_to_view_value(solution_id):
+                        and search_result_item['id'] == solution_id:
                     exist = True
                     break
             if not exist:
                 solution_item = Solution.objects.get_solution_by_id(solution_id)
                 if not solution_item:
                     continue
-                solution_id = convert_to_view_value(solution_id)
+                solution_id = solution_id
                 solution_title = solution_item.title
                 solution_sketch = solution_item.sketch
                 solution_sketch = remove_html_tag(solution_sketch)
@@ -485,7 +458,7 @@ def search(request):
         # 查询产品
         product_result = Product.objects.get_search(query_list)
         for product_item in product_result:
-            product_id = convert_to_view_value(product_item.id)
+            product_id = product_item.id
             product_title = product_item.title
             product_sketch = remove_html_tag(product_item.sketch)
             if len(product_sketch) > 100:
@@ -506,14 +479,14 @@ def search(request):
             exist = False
             for search_result_item in search_result:
                 if search_result_item['type'] == 'product' \
-                        and search_result_item['id'] == convert_to_view_value(product_id):
+                        and search_result_item['id'] == product_id:
                     exist = True
                     break
             if not exist:
                 product_item = Product.objects.get_product_by_id(product_id)
                 if not product_item:
                     continue
-                product_id = convert_to_view_value(product_id)
+                product_id = product_id
                 product_title = product_item.title
                 product_sketch = product_item.sketch
                 product_sketch = remove_html_tag(product_sketch)
@@ -530,7 +503,7 @@ def search(request):
         # 查询服务
         service_result = Service.objects.get_search(query_list)
         for service_item in service_result:
-            service_id = convert_to_view_value(service_item.id)
+            service_id = service_item.id
             service_title = service_item.title
             service_sketch = remove_html_tag(service_item.sketch)
             if len(service_sketch) > 100:
@@ -561,12 +534,12 @@ def search(request):
 
     query_history = request.COOKIES.get('query_history')
     if not query_history or query_history == 'None':
-        if not query == '':
+        if query != '':
             query_history = list()
             query_history.append(query)
     else:
         # 将本次关键词加入搜索历史
-        query_history = query_history.split(',')
+        query_history = unquote(query_history).split(',')
         # 遍历搜索历史的每一项，检查是否有与本次关键词完全一样的项目
         for i in range(0, len(query_history), 1):
             if query == query_history[i]:
@@ -598,7 +571,7 @@ def search(request):
     # 搜索历史保存在客户端本地Cookie
     response.set_cookie('search', max_age=1)
     # 历史列表保存时间为2小时
-    response.set_cookie('query_history', query_history, max_age=7200)
+    response.set_cookie('query_history', value=quote(query_history), max_age=7200)
 
     return response
 
@@ -640,7 +613,7 @@ def generate_context(**contexts):
     keyword_setting = GlobalSetting.objects.get_keyword_setting()
     description_setting = GlobalSetting.objects.get_description_setting()
     # 获取当前年份
-    year = datetime.datetime.now().year
+    year = datetime.now().year
     # 将数据装入页面上下文
     setting_context = {
         'use_cdn': use_cdn,

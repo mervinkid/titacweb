@@ -90,19 +90,6 @@ class ServiceAdmin(BaseModelAdmin):
     list_filter = ('enable', 'update')
 
 
-class ProductCustomerAdmin(BaseModelAdmin):
-    model = ProductCustomer
-    ordering = ['id']
-    list_display = ['id', 'product', 'customer']
-    list_filter = ['product', 'customer']
-
-
-class SolutionProductAdmin(BaseModelAdmin):
-    model = SolutionProduct
-    ordering = ['id']
-    list_display = ('id', 'solution', 'product')
-
-
 admin.site.register(GlobalSetting, GlobalSettingAdmin)
 admin.site.register(Slide, SlideAdmin)
 admin.site.register(News, NewsAdmin)
@@ -113,6 +100,4 @@ admin.site.register(Solution, SolutionAdmin)
 admin.site.register(SolutionContent, SolutionContentAdmin)
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductContent, ProductContentAdmin)
-admin.site.register(ProductCustomer, ProductCustomerAdmin)
 admin.site.register(Service, ServiceAdmin)
-admin.site.register(SolutionProduct, SolutionProductAdmin)
