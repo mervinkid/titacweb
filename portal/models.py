@@ -1,10 +1,7 @@
-#coding=utf-8
+# coding=utf-8
 __author__ = 'Mervin'
-import os
 import datetime
-from django.conf import settings
-from django.db import models
-from portal.utils import generate_random_string
+
 from portal.manager import *
 
 
@@ -31,7 +28,7 @@ class Media(models.Model):
         max_length=250,
         help_text='媒体文件URL',
         verbose_name='文件'
-        )
+    )
     update = models.DateTimeField(
         db_column='update',
         default=datetime.datetime.now(),
@@ -97,7 +94,7 @@ class Media(models.Model):
         filename = settings.BASE_DIR + filename
         if os.path.exists(filename):
             os.remove(filename)
-    ''' 
+    '''
 
 
 class Slide(models.Model):
@@ -145,7 +142,7 @@ class Slide(models.Model):
 
     def __unicode__(self):
         if self.title is None:
-            return u''
+            return ''
         return self.title
 
     def save(self, *args, **kwargs):
@@ -397,7 +394,7 @@ class Solution(models.Model):
             self.title
 
     def save(self, *args, **kwargs):
-        #保存时自动更新数据修改时间
+        # 保存时自动更新数据修改时间
         self.update = datetime.datetime.now()
         return super(Solution, self).save(*args, **kwargs)
 
@@ -451,10 +448,10 @@ class SolutionContent(models.Model):
         verbose_name_plural = '解决方案内容'
 
     def __unicode__(self):
-            return self.title
+        return self.title
 
     def save(self, *args, **kwargs):
-        #保存时自动更新数据修改时间
+        # 保存时自动更新数据修改时间
         self.update = datetime.datetime.now()
         return super(SolutionContent, self).save(*args, **kwargs)
 
@@ -529,7 +526,7 @@ class Product(models.Model):
             self.title
 
     def save(self, *args, **kwargs):
-        #保存时自动更新数据修改时间
+        # 保存时自动更新数据修改时间
         self.update = datetime.datetime.now()
         return super(Product, self).save(*args, **kwargs)
 
@@ -587,7 +584,7 @@ class ProductContent(models.Model):
             self.title
 
     def save(self, *args, **kwargs):
-        #保存时自动更新数据修改时间
+        # 保存时自动更新数据修改时间
         self.update = datetime.datetime.now()
         return super(ProductContent, self).save(*args, **kwargs)
 
@@ -650,7 +647,7 @@ class Service(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        #保存时自动更新数据修改时间
+        # 保存时自动更新数据修改时间
         self.update = datetime.datetime.now()
         return super(Service, self).save(*args, **kwargs)
 

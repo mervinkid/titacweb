@@ -1,0 +1,8 @@
+# debug flag
+debug:
+# sqlite file path
+sqlite:
+# memcached host:port
+memcached:
+# static file root
+static_root:

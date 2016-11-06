@@ -1,9 +1,22 @@
+# project
+portal/migrations/*
+config/*.yml
+
+# python
 *.pyc
 *.pyo
 *.db
+__pycache__
+
+# data
 *.sqlite
 *.sqlite3
-*.css.map
-__pycache__
+
+# ide
 .idea/
+.vscode/
+
 media/*
+
+# virtualenv
+venv/

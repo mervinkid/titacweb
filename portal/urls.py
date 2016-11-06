@@ -1,21 +1,21 @@
-#coding=utf-8
+# coding=utf-8
 __author__ = 'Mervin'
-from django.conf.urls import patterns, url
+from django.conf.urls import url, include
+from portal import views as portal_views
 
-urlpatterns = patterns(
-    'portal.views',
-    url(r'^$', 'home'),
-    url(r'^download/$', 'download'),
-    url(r'^solution/$', 'solution'),
-    url(r'^solution/(\d+)/$', 'solution_detail'),
-    url(r'^product/$', 'product'),
-    url(r'^product/(\d+)/$', 'product_detail'),
-    url(r'^service/$', 'service'),
-    url(r'^service/(\d+)/$', 'service_detail'),
-    url(r'^partner/$', 'partner'),
-    url(r'^career/$', 'career'),
-    url(r'^company/$', 'company'),
-    url(r'^privacy/$', 'privacy'),
-    url(r'^term/$', 'term'),
-    url(r'^search/$', 'search')
-)
+urlpatterns = [
+    url(r'^$', portal_views.home),
+    url(r'^download/$', portal_views.download),
+    url(r'^solution/$', portal_views.solution),
+    url(r'^solution/(\d+)/$', portal_views.solution_detail),
+    url(r'^product/$', portal_views.product),
+    url(r'^product/(\d+)/$', portal_views.product_detail),
+    url(r'^service/$', portal_views.service),
+    url(r'^service/(\d+)/$', portal_views.service_detail),
+    url(r'^partner/$', portal_views.partner),
+    url(r'^career/$', portal_views.career),
+    url(r'^company/$', portal_views.company),
+    url(r'^privacy/$', portal_views.privacy),
+    url(r'^term/$', portal_views.term),
+    url(r'^search/$', portal_views.search)
+]

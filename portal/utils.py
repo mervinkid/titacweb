@@ -1,7 +1,7 @@
-#coding=utf-8
+# coding=utf-8
 __author__ = 'Mervin'
-import string
 import re
+import string
 from random import choice
 
 
@@ -40,7 +40,7 @@ def generate_random_string(length=16):
     :return:
     """
     chars = string.letters + string.digits
-    random_string =  ''.join([ choice(chars) for i in range(length)])
+    random_string = ''.join([choice(chars) for i in range(length)])
     return random_string
 
 
@@ -51,7 +51,7 @@ def remove_html_tag(source):
     :return:
     """
     if source:
-        result = re.sub('<[^>]+>','',source)
+        result = re.sub('<[^>]+>', '', source)
         return result
     else:
         return str()

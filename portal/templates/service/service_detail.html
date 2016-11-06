@@ -5,16 +5,20 @@
 
 <!--page style-->
 {% block style %}
-<link rel="stylesheet" media="screen" href="{% static 'portal/css/rca.css' %}" />
+    <link rel="stylesheet" media="screen" href="{% static 'portal/css/rca.css' %}"/>
 {% endblock %}
 
 <!--position-->
 {% block position %}
     <ul>
-        <li><a href="{% url 'portal.views.home' %}">首页</a></li>
-        <li><div class="position-split"></div></li>
-        <li><a href="{% url 'portal.views.service' %}">服务</a></li>
-        <li><div class="position-split"></div></li>
+        <li><a href="/">首页</a></li>
+        <li>
+            <div class="position-split"></div>
+        </li>
+        <li><a href="/service">服务</a></li>
+        <li>
+            <div class="position-split"></div>
+        </li>
         <li><label>{{ service_item.title }}</label></li>
     </ul>
 {% endblock %}
@@ -35,7 +39,7 @@
                 <div class="spacer-10px"></div>
                 <div class="main-content-box">
                     <div class="rich-content-area">
-                    {% autoescape off %}{{ service_item.content }}{% endautoescape %}
+                        {% autoescape off %}{{ service_item.content }}{% endautoescape %}
                     </div>
                 </div>
             </div>

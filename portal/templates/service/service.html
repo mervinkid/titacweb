@@ -7,8 +7,10 @@
 <!--position-->
 {% block position %}
     <ul>
-        <li><a href="{% url 'portal.views.home' %}">首页</a></li>
-        <li><div class="position-split"></div></li>
+        <li><a href="/">首页</a></li>
+        <li>
+            <div class="position-split"></div>
+        </li>
         <li><label>服务</label></li>
     </ul>
 {% endblock %}
@@ -27,12 +29,12 @@
                 <div class="line"></div>
                 <div class="spacer-10px"></div>
                 {% for service_item in services %}
-                <a href="{% url 'portal.views.service_detail' service_item.service_id %}">
-                <div class="item-block-service">                    
-                        <label><strong>{{ service_item.service_title }}</strong></label><br>
-                        <label>{% autoescape off %}{{ service_item.service_sketch }}{% endautoescape %}</label>                   
-                </div>
-                </a>
+                    <a href="/service/{{service_item.service_id}}">
+                        <div class="item-block-service">
+                            <label><strong>{{ service_item.service_title }}</strong></label><br>
+                            <label>{% autoescape off %}{{ service_item.service_sketch }}{% endautoescape %}</label>
+                        </div>
+                    </a>
                 {% endfor %}
             </div>
         </div>

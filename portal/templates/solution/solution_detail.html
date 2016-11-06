@@ -5,126 +5,136 @@
 
 <!--page style-->
 {% block style %}
-<link rel="stylesheet" media="screen" href="{% static 'portal/css/rca.css' %}" />
+    <link rel="stylesheet" media="screen" href="{% static 'portal/css/rca.css' %}"/>
 {% endblock %}
 
 <!--page script-->
 {% block script %}
-<script type="text/javascript" src="{% static 'portal/js/tab.js' %}"></script>
+    <script type="text/javascript" src="{% static 'portal/js/tab.js' %}"></script>
 {% endblock %}
 
 <!--position-->
 {% block position %}
     <ul>
-        <li><a href="{% url 'portal.views.home' %}">首页</a></li>
-        <li><div class="position-split"></div></li>
-        <li><a href="{% url 'portal.views.solution' %}">解决方案</a></li>
-        <li><div class="position-split"></div></li>
+        <li><a href="/">首页</a></li>
+        <li>
+            <div class="position-split"></div>
+        </li>
+        <li><a href="/solution">解决方案</a></li>
+        <li>
+            <div class="position-split"></div>
+        </li>
         <li><label>{{ solution_item.title }}</label></li>
     </ul>
 {% endblock %}
 
 {% block content %}
-<div class="container clearfix">
-   <div class="left-large-block">
-       <div class="white-box space">
-           <div class="main-content-box">
-               <h4><label>{{ solution_item.title }}</label></h4>
-               <h5><label>{{ solution_item.subtitle }}</label></h5>
-           </div>
-           <div class="spacer-10px"></div>
-           <div class="main-content-box">
-                <div class="rich-content-area">
-               {% autoescape off %}{{ solution_item.sketch }}{% endautoescape %}
+    <div class="container clearfix">
+        <div class="left-large-block">
+            <div class="white-box space">
+                <div class="main-content-box">
+                    <h4><label>{{ solution_item.title }}</label></h4>
+                    <h5><label>{{ solution_item.subtitle }}</label></h5>
                 </div>
-           </div>
-           <div class="main-content-box">
-                <section id="solution-details" role="main">
-                    <ul class="tabs">
-                        {% for solution_content in solution_content_list %}
-                        <li><label><a id="tab-button-{{ forloop.counter }}" onclick="activeTab('{{ forloop.counter }}');" {% if forloop.first %}class="active"{% endif %}>{{ solution_content.title }}</a></label></li>
-                        {% endfor %}
-                        <li><label><a id="tab-button-relate" onclick="activeTab('relate')">相关信息</a></label></li>
-                    </ul>
-                    <div id="main">
-                        <div class="panes">
+                <div class="spacer-10px"></div>
+                <div class="main-content-box">
+                    <div class="rich-content-area">
+                        {% autoescape off %}{{ solution_item.sketch }}{% endautoescape %}
+                    </div>
+                </div>
+                <div class="main-content-box">
+                    <section id="solution-details" role="main">
+                        <ul class="tabs">
                             {% for solution_content in solution_content_list %}
-                            <div class="table-content" id="tab-content-{{ forloop.counter }}" style="{% if not forloop.first %}display: none{% endif %}">
-                                <div class="rich-content-area">
-                                {% autoescape off %}
-                                {{ solution_content.content }}
-                                {% endautoescape %}
-                                </div>
-                            </div>
+                                <li><label><a id="tab-button-{{ forloop.counter }}"
+                                              onclick="activeTab('{{ forloop.counter }}');"
+                                              {% if forloop.first %}class="active"{% endif %}>{{ solution_content.title }}</a></label>
+                                </li>
                             {% endfor %}
-                            <div class="table-content" id="tab-content-relate" style="display: none">
-                                <div>
-                                    {% if product_count > 0 %}
-                                        <div><label><strong>相关产品</strong></label></div>
-                                        <div class="spacer-10px"></div>
-                                        {% for product_item in product_list %}
-                                        <a href="{% url 'portal.views.product_detail' product_item.id%}">
-                                            <div class="item-block">                                            
-                                                <label><strong>{{ product_item.title }}</strong></label><br>
-                                                <label>{{ product_item.subtitle }}</label> 
-                                            </div>
-                                        </a>
-                                        {% endfor %}
-                                        <div class="spacer-10px"></div>
-                                        <div class="line"></div>
-                                        <div class="spacer-20px"></div>
-                                    {% endif %}
+                            <li><label><a id="tab-button-relate" onclick="activeTab('relate')">相关信息</a></label></li>
+                        </ul>
+                        <div id="main">
+                            <div class="panes">
+                                {% for solution_content in solution_content_list %}
+                                    <div class="table-content" id="tab-content-{{ forloop.counter }}"
+                                         style="{% if not forloop.first %}display: none{% endif %}">
+                                        <div class="rich-content-area">
+                                            {% autoescape off %}
+                                                {{ solution_content.content }}
+                                            {% endautoescape %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                                <div class="table-content" id="tab-content-relate" style="display: none">
+                                    <div>
+                                        {% if product_count > 0 %}
+                                            <div><label><strong>相关产品</strong></label></div>
+                                            <div class="spacer-10px"></div>
+                                            {% for product_item in product_list %}
+                                                <a href="/product/{{product_item.id}}">
+                                                    <div class="item-block">
+                                                        <label><strong>{{ product_item.title }}</strong></label><br>
+                                                        <label>{{ product_item.subtitle }}</label>
+                                                    </div>
+                                                </a>
+                                            {% endfor %}
+                                            <div class="spacer-10px"></div>
+                                            <div class="line"></div>
+                                            <div class="spacer-20px"></div>
+                                        {% endif %}
 
-                                    {% if partner_count > 0 %}
-                                        <div><label><strong>合作伙伴</strong></label></div>
-                                        <div class="spacer-10px"></div>
-                                        {% for partner_item in partner_list %}
-                                        <div class="item-block-small">
-                                            <img src="{{ partner_item.logo.file }}" class="logo-img" alt="{{  partner_item.title }}">
-                                        </div>
-                                        {% endfor %}
-                                        <div class="spacer-10px"></div>
-                                        <div class="line"></div>
-                                        <div class="spacer-20px"></div>
-                                    {% endif %}
-                                    {% if customer_count > 0 %}
-                                        <div><label><strong>成功案例</strong></label></div>
-                                        <div class="spacer-10px"></div>
-                                        {% for customer_item in customer_list %}
-                                        <div class="item-block-small">
-                                            <img src="{{ customer_item.logo.file }}" class="logo-img" alt="{{  customer_item.title }}">
-                                        </div>
-                                        {% endfor %}
-                                    {% endif %}
+                                        {% if partner_count > 0 %}
+                                            <div><label><strong>合作伙伴</strong></label></div>
+                                            <div class="spacer-10px"></div>
+                                            {% for partner_item in partner_list %}
+                                                <div class="item-block-small">
+                                                    <img src="{{ partner_item.logo.file }}" class="logo-img"
+                                                         alt="{{ partner_item.title }}">
+                                                </div>
+                                            {% endfor %}
+                                            <div class="spacer-10px"></div>
+                                            <div class="line"></div>
+                                            <div class="spacer-20px"></div>
+                                        {% endif %}
+                                        {% if customer_count > 0 %}
+                                            <div><label><strong>成功案例</strong></label></div>
+                                            <div class="spacer-10px"></div>
+                                            {% for customer_item in customer_list %}
+                                                <div class="item-block-small">
+                                                    <img src="{{ customer_item.logo.file }}" class="logo-img"
+                                                         alt="{{ customer_item.title }}">
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
-           </div>
-       </div>
-   </div>
-    <div class="right-small-block">
-        <div class="float">
-            <div class="white-box">
-                {% include 'common/contact.html' %}
+                    </section>
+                </div>
             </div>
-            <div class="spacer-10px"></div>
-            <div class="white-box">
-            <div>
-                <label>相关产品</label>
-                <div class="line"></div>
+        </div>
+        <div class="right-small-block">
+            <div class="float">
+                <div class="white-box">
+                    {% include 'common/contact.html' %}
+                </div>
                 <div class="spacer-10px"></div>
-            </div>
-            <div style="max-height: 160px;overflow-y: auto;">
-                {% for product_item in product_list %}
-                <p>
-                    <a href="/product/{{ product_item.id }}">{{ product_item.title }}</a>
-                </p>
-                {% endfor %}
+                <div class="white-box">
+                    <div>
+                        <label>相关产品</label>
+                        <div class="line"></div>
+                        <div class="spacer-10px"></div>
+                    </div>
+                    <div style="max-height: 160px;overflow-y: auto;">
+                        {% for product_item in product_list %}
+                            <p>
+                                <a href="/product/{{ product_item.id }}">{{ product_item.title }}</a>
+                            </p>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-</div>
 {% endblock %}

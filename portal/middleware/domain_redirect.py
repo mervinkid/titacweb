@@ -1,7 +1,7 @@
-#coding=utf-8
+# coding=utf-8
 __author__ = 'Mervin'
-from django.http import HttpResponseRedirect
 from django.conf import settings
+from django.http import HttpResponseRedirect
 
 
 class DomainRedirectMiddleware(object):

@@ -1,25 +1,39 @@
 {% load staticfiles %}
-                <div class="container clearfix">
-                    <div class="four columns logo">
-                        <a href="/"><div id="image"></div></a>
-                    </div>
-                    <div id="menu" class="twelve columns">
-                        <ul>
-                            <li><span><label>Welcome</label></span><a href="{% url 'portal.views.home' %}" class="nav-home nav {% ifequal current 'home' %}selected{% endifequal %}">首页</a></li>
-                            <li><span><label>Solution</label></span><a href="{% url 'portal.views.solution' %}" class="nav-services nav {% ifequal current 'solution' %}selected{% endifequal %}">解决方案</a></li>
-                            <li><span><label>Product</label></span><a href="{% url 'portal.views.product' %}" class="nav-pricing nav {% ifequal current 'product' %}selected{% endifequal %}">产品</a></li>
-                            <li><span><label>Service</label></span><a href="{% url 'portal.views.service' %}" class="nav-contact nav {% ifequal current 'service' %}selected{% endifequal %}">服务</a></li>
-                            <li><span><label>Partner</label></span><a href="{% url 'portal.views.partner' %}" class="nav-contact nav {% ifequal current 'partner' %}selected{% endifequal %}">合作伙伴</a></li>
-                            <li><span><label>Company</label></span><a href="{% url 'portal.views.company' %}" class="nav-contact nav {% ifequal current 'company' %}selected{% endifequal %}">公司</a></li>
-                            <li>
-                                <div class="search_box">
-                                        <form accept-charset="utf-8" action="{% url 'portal.views.search' %}" method="get">
-                                        <input id="search_text" name='s' type="search"  placeholder="搜索">
-                                        <input id="search_submit" type="submit" value="search">
-                                        </form>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
+<div class="container clearfix">
+    <div class="four columns logo">
+        <a href="/">
+            <div id="image"></div>
+        </a>
+    </div>
+    <div id="menu" class="twelve columns">
+        <ul>
+            <li><span><label>Welcome</label></span><a href="/"
+                                                      class="nav-home nav {% ifequal current 'home' %}selected{% endifequal %}">首页</a>
+            </li>
+            <li><span><label>Solution</label></span><a href="/solution"
+                                                       class="nav-services nav {% ifequal current 'solution' %}selected{% endifequal %}">解决方案</a>
+            </li>
+            <li><span><label>Product</label></span><a href="/product"
+                                                      class="nav-pricing nav {% ifequal current 'product' %}selected{% endifequal %}">产品</a>
+            </li>
+            <li><span><label>Service</label></span><a href="/service"
+                                                      class="nav-contact nav {% ifequal current 'service' %}selected{% endifequal %}">服务</a>
+            </li>
+            <li><span><label>Partner</label></span><a href="/partner"
+                                                      class="nav-contact nav {% ifequal current 'partner' %}selected{% endifequal %}">合作伙伴</a>
+            </li>
+            <li><span><label>Company</label></span><a href="/company"
+                                                      class="nav-contact nav {% ifequal current 'company' %}selected{% endifequal %}">公司</a>
+            </li>
+            <li>
+                <div class="search_box">
+                    <form accept-charset="utf-8" action="/search" method="get">
+                        <input id="search_text" name='s' type="search" placeholder="搜索">
+                        <input id="search_submit" type="submit" value="search">
+                    </form>
                 </div>
-                <div class="clear"></div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="clear"></div>

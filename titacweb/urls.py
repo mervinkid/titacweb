@@ -1,25 +1,13 @@
-#coding=utf-8
-from django.conf import settings
-from django.conf.urls.static import static
-from django.conf.urls import patterns, include, url, handler404, handler500
+# coding=utf-8
+from django.conf.urls import include, url
 from django.contrib import admin
-import portal.urls
-admin.autodiscover()
 
-urlpatterns = patterns('',
-    url(r'^admin/console/', include(admin.site.urls)),
-    url(r'^', include(portal.urls)),
-)
+from portal import urls as portal_urls
 
-#静态文件处理
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-else:
-    urlpatterns += patterns('',
-        url(r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.STATIC_ROOT}),
-        url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root':settings.MEDIA_ROOT}),
-    )
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+    url(r'^', include(portal_urls)),
+]
 
 handler404 = 'portal.views.h404'
 handler500 = 'portal.views.h500'

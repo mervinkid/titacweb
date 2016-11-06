@@ -1,4 +1,4 @@
-#coding=utf-8
+# coding=utf-8
 """
 WSGI config for titacweb project.
 
@@ -15,9 +15,9 @@ path = '/var/www/html/titacweb'
 if path not in sys.path:
     sys.path.append(path)
 
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "titacweb.settings")
-os.environ.setdefault("PYTHON_EGG_CACHE","/tmp/.python-eggs")
+os.environ.setdefault("PYTHON_EGG_CACHE", "/tmp/.python-eggs")
 
 from django.core.wsgi import get_wsgi_application
+
 application = get_wsgi_application()

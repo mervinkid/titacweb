@@ -9,6 +9,7 @@ class BaseManager(models.Manager):
     """
     根据django版本
     """
+
     def __init__(self):
         models.Manager.__init__(self)
         self.django_version = int((django.get_version().split('.'))[1])
@@ -40,8 +41,8 @@ class GlobalSettingManager(BaseManager):
         """
         try:
             return self.query().get(key='call').value
-        except Exception, e:
-            print str(e)
+        except Exception as e:
+            print((str(e)))
             return None
 
     def get_mail_setting(self):
@@ -51,8 +52,8 @@ class GlobalSettingManager(BaseManager):
         """
         try:
             return self.query().get(key='mail').value
-        except Exception, e:
-            print str(e)
+        except Exception as e:
+            print((str(e)))
             return None
 
     def get_keyword_setting(self):
@@ -62,8 +63,8 @@ class GlobalSettingManager(BaseManager):
         """
         try:
             return self.query().get(key='keyword').value
-        except Exception, e:
-            print str(e)
+        except Exception as e:
+            print((str(e)))
             return str()
 
     def get_description_setting(self):
@@ -73,8 +74,8 @@ class GlobalSettingManager(BaseManager):
         """
         try:
             return self.query().get(key='description').value
-        except Exception, e:
-            print str(e)
+        except Exception as e:
+            print((str(e)))
             return str()
 
 
@@ -103,13 +104,12 @@ class PartnerManager(BaseManager):
         """
         try:
             return self.query().get(id=partner_id)
-        except Exception, e:
-            print str(e)
+        except Exception as e:
+            print((str(e)))
             return None
 
 
 class CustomerManager(BaseManager):
-
     def get_all_customer(self, order='title'):
         """
         获取所有客户信息
@@ -125,8 +125,8 @@ class CustomerManager(BaseManager):
         """
         try:
             return self.query().get(id=customer_id)
-        except Exception, e:
-            print(str(e))
+        except Exception as e:
+            print((str(e)))
             return None
 
 
@@ -146,8 +146,8 @@ class SolutionManager(BaseManager):
         """
         try:
             return self.query().get(id=solution_id)
-        except Exception, e:
-            print str(e)
+        except Exception as e:
+            print((str(e)))
             return None
 
     def get_search(self, query_list):
@@ -157,13 +157,13 @@ class SolutionManager(BaseManager):
         :return:
         """
         query_result = []
-        #对query_list中的关键词项遍历筛选
-        #查询项为title,keyword,sketch
+        # 对query_list中的关键词项遍历筛选
+        # 查询项为title,keyword,sketch
         for i in range(0, len(query_list), 1):
             query_item = query_list[i]
             if i == 0:
-                #第一次遍历
-                #进行全新查询
+                # 第一次遍历
+                # 进行全新查询
                 query_result = self.query().filter(
                     models.Q(title__icontains=query_item) |
                     models.Q(keyword__icontains=query_item) |
@@ -171,8 +171,8 @@ class SolutionManager(BaseManager):
                     enable=1
                 )
             else:
-                #第N次遍历
-                #对上一次遍历的结果进行筛选
+                # 第N次遍历
+                # 对上一次遍历的结果进行筛选
                 query_result = query_result.filter(
                     models.Q(title__icontains=query_item) |
                     models.Q(keyword__icontains=query_item) |
@@ -198,19 +198,19 @@ class SolutionContentManager(BaseManager):
         :return:
         """
         query_result = []
-        #对query_list中的关键词项遍历筛选
-        #查询项为title,content
+        # 对query_list中的关键词项遍历筛选
+        # 查询项为title,content
         for i in range(0, len(query_list), 1):
             query_item = query_list[i]
             if i == 0:
-                #第一次遍历
-                #进行全新查询
+                # 第一次遍历
+                # 进行全新查询
                 query_result = self.query().filter(
                     models.Q(title__icontains=query_item) |
                     models.Q(content__icontains=query_item))
             else:
-                #第N次遍历
-                #对上一次遍历的结果进行筛选
+                # 第N次遍历
+                # 对上一次遍历的结果进行筛选
                 query_result = query_result.filter(
                     models.Q(title__icontains=query_item) |
                     models.Q(content__icontains=query_item))
@@ -233,8 +233,8 @@ class ProductManager(BaseManager):
         """
         try:
             return self.query().get(id=product_id)
-        except Exception, e:
-            print str(e)
+        except Exception as e:
+            print((str(e)))
             return None
 
     def get_search(self, query_list):
@@ -244,13 +244,13 @@ class ProductManager(BaseManager):
         :return:
         """
         query_result = []
-        #对query_list中的关键词项遍历筛选
-        #查询项为title,keyword,sketch
+        # 对query_list中的关键词项遍历筛选
+        # 查询项为title,keyword,sketch
         for i in range(0, len(query_list), 1):
             query_item = query_list[i]
             if i == 0:
-                #第一次遍历
-                #进行全新查询
+                # 第一次遍历
+                # 进行全新查询
                 query_result = self.query().filter(
                     models.Q(title__icontains=query_item) |
                     models.Q(keyword__icontains=query_item) |
@@ -258,8 +258,8 @@ class ProductManager(BaseManager):
                     enable=1
                 )
             else:
-                #第N次遍历
-                #对上一次遍历的结果进行筛选
+                # 第N次遍历
+                # 对上一次遍历的结果进行筛选
                 query_result = query_result.filter(
                     models.Q(title__icontains=query_item) |
                     models.Q(keyword__icontains=query_item) |
@@ -285,20 +285,20 @@ class ProductContentManager(BaseManager):
         :return:
         """
         query_result = []
-        #对query_list中的关键词项遍历筛选
-        #查询项为title,content
+        # 对query_list中的关键词项遍历筛选
+        # 查询项为title,content
         for i in range(0, len(query_list), 1):
             query_item = query_list[i]
             if i == 0:
-                #第一次遍历
-                #进行全新查询
+                # 第一次遍历
+                # 进行全新查询
                 query_result = self.query().filter(
                     models.Q(title__icontains=query_item) |
                     models.Q(content__icontains=query_item)
                 )
             else:
-                #第N次遍历
-                #对上一次遍历的结果进行筛选
+                # 第N次遍历
+                # 对上一次遍历的结果进行筛选
                 query_result = query_result.filter(
                     models.Q(title__icontains=query_item) |
                     models.Q(content__icontains=query_item)
@@ -322,8 +322,8 @@ class ServiceManager(BaseManager):
         """
         try:
             return self.query().get(id=service_id)
-        except Exception, e:
-            print str(e)
+        except Exception as e:
+            print((str(e)))
             return None
 
     def get_search(self, query_list):
@@ -333,13 +333,13 @@ class ServiceManager(BaseManager):
         :return:
         """
         query_result = []
-        #对query_list中的关键词项遍历筛选
-        #查询项为title,keyword,sketch
+        # 对query_list中的关键词项遍历筛选
+        # 查询项为title,keyword,sketch
         for i in range(0, len(query_list), 1):
             query_item = query_list[i]
             if i == 0:
-                #第一次遍历
-                #进行全新查询
+                # 第一次遍历
+                # 进行全新查询
                 query_result = self.query().filter(
                     models.Q(title__icontains=query_item) |
                     models.Q(keyword__icontains=query_item) |
@@ -348,8 +348,8 @@ class ServiceManager(BaseManager):
                     enable=1
                 )
             else:
-                #第N次遍历
-                #对上一次遍历的结果进行筛选
+                # 第N次遍历
+                # 对上一次遍历的结果进行筛选
                 query_result = query_result.filter(
                     models.Q(title__icontains=query_item) |
                     models.Q(keyword__icontains=query_item) |

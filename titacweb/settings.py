@@ -1,4 +1,4 @@
-#coding=utf-8
+# coding=utf-8
 """
 Django settings for titacweb project.
 
@@ -12,8 +12,21 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import os.path
+import yaml
 from os.path import join
+from django.core.exceptions import ImproperlyConfigured
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+# Load configuration
+config_dir = os.path.join(BASE_DIR, 'config')
+config_file = os.path.join(config_dir, 'config.yml')
+with open(config_file) as file_data:
+    config = yaml.load(file_data)
+sqlite_config = config.get('sqlite')
+memcached_config = config.get('memcached')
+debug_config = config.get('debug')
+static_root_config = config.get('static_root')
 
 
 # Quick-start development settings - unsuitable for production
@@ -23,12 +36,28 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SECRET_KEY = 't=vrxe(%19p1!(q49@u^xvn+%))x)lz&saa572@vcwgv@3@b9('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = bool(debug_config)
 
-TEMPLATE_DEBUG = True
+# TEMPLATE_DEBUG = True
+
+# Templates
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
 
 ALLOWED_HOSTS = ['*']
-
 
 # Application definition
 
@@ -50,31 +79,19 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.gzip.GZipMiddleware',
-#    'portal.middleware.domain_redirect.DomainRedirectMiddleware',
+    #    'portal.middleware.domain_redirect.DomainRedirectMiddleware',
 )
 
 ROOT_URLCONF = 'titacweb.urls'
 
+
 WSGI_APPLICATION = 'titacweb.wsgi.application'
 
-
 # Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.mysql',
-#        'NAME': 'dgveqRUwQwaFDdRFfHsZ',
-#        'USER': 'odWLHcAWgpv1xLok7yuw81tG',
-#        'PASSWORD': 'UP70SA10NA4kqDmrpsOGrPKvpWXK6lfx',
-#        'HOST': 'sqld.duapp.com',
-#        'PORT': '3306',
-#    }
-#}
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'titacweb.db',
+        'NAME': str(sqlite_config),
     }
 }
 
@@ -91,7 +108,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
@@ -103,12 +119,14 @@ STATIC_URL = '/static/'
 
 ADMIN_MEDIA_PREFIX = '/static/admin/'
 
-if DEBUG:
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, "static"),
-    )
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static")
+]
+
+if static_root_config is not None and str(static_root_config) != os.path.join(BASE_DIR, "static"):
+    STATIC_ROOT = str(static_root_config)
 else:
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+    raise ImproperlyConfigured('Invalid \'static_root\' configuration.')
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -121,6 +139,6 @@ USE_CDN = True
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
+        'LOCATION': str(memcached_config),
     }
 }

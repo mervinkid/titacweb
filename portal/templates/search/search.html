@@ -5,82 +5,84 @@
 
 {% block position %}
     <ul>
-        <li><a href="{% url 'portal.views.home' %}">首页</a></li>
-        <li><div class="position-split"></div></li>
+        <li><a href="/">首页</a></li>
+        <li>
+            <div class="position-split"></div>
+        </li>
         <li><label>搜索结果</label></li>
     </ul>
 {% endblock %}
 
 {% block content %}
- <div class="container clearfix">
-    <!--left-->
-    <div class="left-large-block">
-        <div class="white-box space">
-            <div class="main-content-box">
-                <h4><label>搜索&nbsp;|&nbsp;Search</label></h4>
-                <div class="spacer-10px"></div>
-                {% if search_result == None %}
-                {% else %}
-                <label>共&nbsp;{{ search_result_count }}&nbsp;条结果与&nbsp;"{{ query }}"&nbsp;相关</label>
-                <div class="line"></div>
-                {% endif %}
-                <div class="spacer-20px"></div>
-                {% if search_result == None %}
-                <div style="text-align: center; padding: 50px;">
-                    {% if message == 0 %}
-                    <p>您搜索的频率过快超过了网站系统限制，请稍后再试。</p>
-                    {% elif message == 1 %}
-                    <p>您搜索的关键字不合法，请使用其他关键词进行搜索。</p>
+    <div class="container clearfix">
+        <!--left-->
+        <div class="left-large-block">
+            <div class="white-box space">
+                <div class="main-content-box">
+                    <h4><label>搜索&nbsp;|&nbsp;Search</label></h4>
+                    <div class="spacer-10px"></div>
+                    {% if search_result == None %}
                     {% else %}
-                    <p>没有查询到任何结果，请使用其他关键词进行搜索。</p>
+                        <label>共&nbsp;{{ search_result_count }}&nbsp;条结果与&nbsp;"{{ query }}"&nbsp;相关</label>
+                        <div class="line"></div>
+                    {% endif %}
+                    <div class="spacer-20px"></div>
+                    {% if search_result == None %}
+                        <div style="text-align: center; padding: 50px;">
+                            {% if message == 0 %}
+                                <p>您搜索的频率过快超过了网站系统限制，请稍后再试。</p>
+                            {% elif message == 1 %}
+                                <p>您搜索的关键字不合法，请使用其他关键词进行搜索。</p>
+                            {% else %}
+                                <p>没有查询到任何结果，请使用其他关键词进行搜索。</p>
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        {% for result_item in search_result %}
+                            <div style="margin-left: 10px;margin-right: 10px;height:60px;">
+                                <div style="position:absolute;width: 40px;">
+                                    <h1><label>{{ forloop.counter }}.</label></h1>
+                                </div>
+                                <div style="margin-left:40px;">
+                                    {% if result_item.type == 'solution' %}
+                                        <a href="/solution/{{ result_item.id }}">
+                                    {% elif result_item.type == 'product' %}
+                                        <a href="/product/{{ result_item.id }}">
+                                    {% elif result_item.type == 'service' %}
+                                        <a href="/service/{{ result_item.id }}">
+                                    {% endif %}
+                                    <h5 style="margin-bottom: 5px;">{{ result_item.title }}</h5>
+                                    {% autoescape off %}{{ result_item.sketch }}{% endautoescape %}
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="spacer-15px"></div>
+                        {% endfor %}
                     {% endif %}
                 </div>
-                {% else %}
-                {% for result_item in search_result %}
-                <div style="margin-left: 10px;margin-right: 10px;height:60px;">
-                    <div style="position:absolute;width: 40px;">
-                        <h1><label>{{ forloop.counter }}.</label></h1>
-                    </div>
-                    <div style="margin-left:40px;">
-                            {% if result_item.type == 'solution' %}
-                            <a href="/solution/{{ result_item.id }}">
-                            {% elif result_item.type == 'product' %}
-                            <a href="/product/{{ result_item.id }}">
-                            {% elif result_item.type == 'service' %}
-                                <a href="/service/{{ result_item.id }}">
-                            {% endif %}
-                                <h5 style="margin-bottom: 5px;">{{ result_item.title }}</h5>
-                                {% autoescape off %}{{ result_item.sketch }}{% endautoescape %}
-                            </a>
-                    </div>
-                </div>
-                <div class="spacer-15px"></div>
-                {% endfor %}
-                {% endif %}
             </div>
-        </div>
-    </div><!--end left-->
-    <!--right-->
-    <div class="right-small-block">
-        <div class="white-box">
-            {% include 'common/contact.html' %}
-        </div>
-        <div class="spacer-10px"></div>
-        <div class="white-box">
-            <label>您的搜索历史</label>
-            <div class="line"></div>
-            <p></p>
-            {% if not history_list %}
-            <p><label>还未进行过有效搜索</label></p>
-            {% endif %}
-            {% for history_item in history_list %}
-                <p>
-                    <a href="{% url 'portal.views.search' %}?s={{ history_item }}">
-                        {{ history_item }}
-                    </a>
-                </p>
-            {% endfor %}
-        </div>
-    </div><!--end right-->
-</div>
+        </div><!--end left-->
+        <!--right-->
+        <div class="right-small-block">
+            <div class="white-box">
+                {% include 'common/contact.html' %}
+            </div>
+            <div class="spacer-10px"></div>
+            <div class="white-box">
+                <label>您的搜索历史</label>
+                <div class="line"></div>
+                <p></p>
+                {% if not history_list %}
+                    <p><label>还未进行过有效搜索</label></p>
+                {% endif %}
+                {% for history_item in history_list %}
+                    <p>
+                        <a href="/search?s={{ history_item }}">
+                            {{ history_item }}
+                        </a>
+                    </p>
+                {% endfor %}
+            </div>
+        </div><!--end right-->
+    </div>
 {% endblock %}

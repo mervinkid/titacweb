@@ -1,0 +1,8 @@
+# debug flag
+debug: true
+# sqlite file path
+sqlite: titacweb.db
+# memcached host:port
+memcached: 127.0.0.1:11211
+# static file root
+static_root: /tmp

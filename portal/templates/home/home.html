@@ -7,66 +7,104 @@
 <!--position-->
 {% block position %}
     <ul xmlns="http://www.w3.org/1999/html">
-        <li><a href="{% url 'portal.views.home' %}">首页</a></li>
+        <li><a href="/">首页</a></li>
     </ul>
 {% endblock %}
 
 <!--content-->
 {% block content %}
-<style type="text/css">
-div .style-01 {height: 35px;padding: 5px;}
-div .style-02 {height: 180px;}
-div .style-03 {height: 300px;}
-div .style-04 {float: left;width: 110px;line-height: 25px;vertical-align: middle;}
-div .style-05 {margin-left: 110px;border-left: 1px solid #e6e6e6;padding-left: 20px;padding-right: 20px;}
-div .style-05 .more-button {float: right;margin-right: -10px;margin-top: -5px;}
-div .style-06 {width: 90px;height: 30px;display: inline-block;margin-left: 5px;margin-right: 5px;text-align: center;}
-div .style-07 {height: 145px;overflow-y: auto;}
-</style>
-<div class="container clearfix">
-    <div class="spacer-5px"></div>
-    <!--slider starts-->
-    <div class="hole-block">
-    <div class="flexslider slider">
-        <ul class="slides">
-            {% for slide in slides %}
-                <li>
-                    {% autoescape off %}
-                        <div class="style-03">
-                            <div id="content-slider">
-                                {{ slide.content }}
-                            </div>
-                        </div>
-                    {% endautoescape %}
-                </li>
-            {% endfor %}
-        </ul><!--slides end-->
-    </div>
-    </div>
-</div>
-<div class="container clearfix">
-    <div class="hole-block">
-        <div class="white-box">
-            <div class="style-01 style-04">
-                <h6><label>合作伙伴</label></h6>
-                <label>Partner</label>
-            </div>
-            <div class="style-01 style-05">
-                <div id="content-partner">
-                    {% for partner in partner_list %}
-                    <div class="style-06">
-                        <img src="{{ partner.logo.file }}" alt="{{ partner.title }}" class="logo-img">
-                    </div>
+    <style type="text/css">
+        div .style-01 {
+            height: 35px;
+            padding: 5px;
+        }
+
+        div .style-02 {
+            height: 180px;
+        }
+
+        div .style-03 {
+            height: 300px;
+        }
+
+        div .style-04 {
+            float: left;
+            width: 110px;
+            line-height: 25px;
+            vertical-align: middle;
+        }
+
+        div .style-05 {
+            margin-left: 110px;
+            border-left: 1px solid #e6e6e6;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        div .style-05 .more-button {
+            float: right;
+            margin-right: -10px;
+            margin-top: -5px;
+        }
+
+        div .style-06 {
+            width: 90px;
+            height: 30px;
+            display: inline-block;
+            margin-left: 5px;
+            margin-right: 5px;
+            text-align: center;
+        }
+
+        div .style-07 {
+            height: 145px;
+            overflow-y: auto;
+        }
+    </style>
+    <div class="container clearfix">
+        <div class="spacer-5px"></div>
+        <!--slider starts-->
+        <div class="hole-block">
+            <div class="flexslider slider">
+                <ul class="slides">
+                    {% for slide in slides %}
+                        <li>
+                            {% autoescape off %}
+                                <div class="style-03">
+                                    <div id="content-slider">
+                                        {{ slide.content }}
+                                    </div>
+                                </div>
+                            {% endautoescape %}
+                        </li>
                     {% endfor %}
-                    <div class="more-button">
-                        <a href="{% url 'portal.views.partner' %}">more</a>
+                </ul><!--slides end-->
+            </div>
+        </div>
+    </div>
+    <div class="container clearfix">
+        <div class="hole-block">
+            <div class="white-box">
+                <div class="style-01 style-04">
+                    <h6><label>合作伙伴</label></h6>
+                    <label>Partner</label>
+                </div>
+                <div class="style-01 style-05">
+                    <div id="content-partner">
+                        {% for partner in partner_list %}
+                            <div class="style-06">
+                                <img src="{{ partner.logo.file }}" alt="{{ partner.title }}" class="logo-img">
+                            </div>
+                        {% endfor %}
+                        <div class="more-button">
+                            <a href="/partner">more</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="spacer-20px"></div>
     </div>
-    <div class="spacer-20px"></div>
-</div>
     <div class="container clearfix">
         <div class="hole-block">
             <div class="white-box">
@@ -77,12 +115,12 @@ div .style-07 {height: 145px;overflow-y: auto;}
                 <div class="style-01 style-05">
                     <div id="content-customer">
                         {% for customer in customer_list %}
-                        <div class="style-06">
-                            <img src="{{ customer.logo.file }}" alt="{{ customer.title }}" class="logo-img">
-                        </div>
+                            <div class="style-06">
+                                <img src="{{ customer.logo.file }}" alt="{{ customer.title }}" class="logo-img">
+                            </div>
                         {% endfor %}
                         <div class="more-button">
-                            <a href="{% url 'portal.views.partner' %}">more</a>
+                            <a href="/partner">more</a>
                         </div>
                     </div>
                 </div>
@@ -90,83 +128,86 @@ div .style-07 {height: 145px;overflow-y: auto;}
         </div>
         <div class="spacer-30px"></div>
     </div>
-<div class="container clearfix">
-    <div class="four columns">
-        <div class="white-box style-02">
-            <div>
-                <div class="left"><h6><label>解决方案&nbsp;|&nbsp;Solution</label></h6></div>
-                <div class="right"><a href="{% url 'portal.views.solution' %}">more</a></div>
-            </div>
-            <div class="spacer-20px"></div>
-            <div class="line"></div>
-            <div class="spacer-5px"></div>
-            <div id="content-solution" class="style-07">
-                <ul>
-                {% for solution in solution_list %}
-                    <li><a href="{% url 'portal.views.solution_detail' solution.sid %}">{{ solution.title }}</a></li>
-                {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="four columns">
-        <div class="white-box style-02">
-            <div>
-                <div class="left"><h6><label>产品&nbsp;|&nbsp;Product</label></h6></div>
-                <div class="right"><a href="{% url 'portal.views.product' %}">more</a></div>
-            </div>
-            <div class="spacer-20px"></div>
-            <div class="line"></div>
-            <div class="spacer-5px"></div>
-            <div id="content-product" class="style-07">
-                <ul>
-                    {% for product in product_list %}
-                    <li><a href="{% url 'portal.views.product_detail' product.pid %}">{{ product.title }}</a></li>
-                    {% endfor %}
-                </ul>
+    <div class="container clearfix">
+        <div class="four columns">
+            <div class="white-box style-02">
+                <div>
+                    <div class="left"><h6><label>解决方案&nbsp;|&nbsp;Solution</label></h6></div>
+                    <div class="right"><a href="/solution">more</a></div>
+                </div>
+                <div class="spacer-20px"></div>
+                <div class="line"></div>
+                <div class="spacer-5px"></div>
+                <div id="content-solution" class="style-07">
+                    <ul>
+                        {% for solution in solution_list %}
+                            <li><a href="/solution/{{solution.sid}}">{{ solution.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="four columns">
-        <div class="white-box style-02">
-            <div>
-                <div class="left"><h6><label>服务&nbsp;|&nbsp;Service</label></h6></div>
-                <div class="right"><a href="{% url 'portal.views.service' %}">more</a></div>
-            </div>
-            <div class="spacer-20px"></div>
-            <div class="line"></div>
-            <div class="spacer-5px"></div>
-            <div id="content-service" class="style-07">
-                <ul>
-                    {% for service in service_list %}
-                    <li><a href="{% url 'portal.views.service_detail' service.sid %}">{{ service.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="four columns">
-        <div class="white-box style-02">
-            <div>
-                <div class="left"><h6><label>公司&nbsp;|&nbsp;Company</label></h6></div>
-                <div class="right"><a href="{% url 'portal.views.company' %}">more</a></div>
-            </div>
-            <div class="spacer-20px"></div>
-            <div class="line"></div>
-            <div class="spacer-5px"></div>
-            <div id="content-company">
-                <label>泰科泰格是IT解决方案与服务供应商。 <br>公司主营业务包括：<br>行业解决方案、产品工程解决方案及相关软件产品、平台及服务等。</label>
+        <div class="four columns">
+            <div class="white-box style-02">
+                <div>
+                    <div class="left"><h6><label>产品&nbsp;|&nbsp;Product</label></h6></div>
+                    <div class="right"><a href="/product">more</a></div>
+                </div>
+                <div class="spacer-20px"></div>
+                <div class="line"></div>
+                <div class="spacer-5px"></div>
+                <div id="content-product" class="style-07">
+                    <ul>
+                        {% for product in product_list %}
+                            <li><a href="/product/{{product.pid}}">{{ product.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
         </div>
+        <div class="four columns">
+            <div class="white-box style-02">
+                <div>
+                    <div class="left"><h6><label>服务&nbsp;|&nbsp;Service</label></h6></div>
+                    <div class="right"><a href="/service">more</a></div>
+                </div>
+                <div class="spacer-20px"></div>
+                <div class="line"></div>
+                <div class="spacer-5px"></div>
+                <div id="content-service" class="style-07">
+                    <ul>
+                        {% for service in service_list %}
+                            <li><a href="/service/{{service.sid}}">{{ service.title }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="four columns">
+            <div class="white-box style-02">
+                <div>
+                    <div class="left"><h6><label>公司&nbsp;|&nbsp;Company</label></h6></div>
+                    <div class="right"><a href="/company">more</a></div>
+                </div>
+                <div class="spacer-20px"></div>
+                <div class="line"></div>
+                <div class="spacer-5px"></div>
+                <div id="content-company">
+                    <label>泰科泰格是IT解决方案与服务供应商。 <br>公司主营业务包括：<br>行业解决方案、产品工程解决方案及相关软件产品、平台及服务等。</label>
+                </div>
+            </div>
+        </div>
+        <script type="application/javascript">
+            $(document).ready(function () {
+                $("div [id^='content-']").attr("style", "display:none");
+                setTimeout(function () {
+                    var content = $("div [id^='content-']");
+                    content.fadeIn(500);
+                }, 500);
+            });
+        </script>
     </div>
-    <script type="application/javascript">
-        $(document).ready(function(){
-            $("div [id^='content-']").attr("style", "display:none");
-            setTimeout(function(){
-                var content = $("div [id^='content-']");
-                content.fadeIn(500);
-            }, 500);
-        });
-    </script>
-</div>
- {% endblock %}
+{% endblock %}

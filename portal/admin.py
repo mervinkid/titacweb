@@ -1,5 +1,6 @@
-#coding=utf-8
+# coding=utf-8
 from django.contrib import admin
+
 from portal.models import *
 
 
@@ -100,6 +101,7 @@ class SolutionProductAdmin(BaseModelAdmin):
     model = SolutionProduct
     ordering = ['id']
     list_display = ('id', 'solution', 'product')
+
 
 admin.site.register(GlobalSetting, GlobalSettingAdmin)
 admin.site.register(Slide, SlideAdmin)
