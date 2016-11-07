@@ -2,3 +2,4 @@ django==1.10.3
 python-memcached==1.58
 gunicorn==19.6.0
 PyYAML==3.12
+aiohttp==1.1.1
