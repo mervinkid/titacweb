@@ -5,15 +5,14 @@ import re
 from datetime import datetime
 
 from django.db import models
-from qiniu import Auth, put_file, BucketManager
-from portal.utils import generate_string
+from qiniu import Auth, put_file
 
+from portal.utils import generate_string
 from titacweb import settings
 from .base import BaseManager
 
 
 class Media(models.Model):
-
     title = models.CharField(
         db_column='title',
         max_length=250,
@@ -53,8 +52,10 @@ class Media(models.Model):
     def save(self, *args, **kwargs):
         file = str(self.file)
         if re.match(r'((http|ftp|https)://)(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.'
-                           r'[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\#\&%_\./-~-]*)?', file, re.I):
+                    r'[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\#\&%_\./-~-]*)?',
+                    file, re.I) is not None:
             super(Media, self).save()
+            return
         if len(file.split('.')) < 2:
             return
         super(Media, self).save()
