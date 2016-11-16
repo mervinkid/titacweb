@@ -3,3 +3,5 @@ python-memcached==1.58
 gunicorn==19.6.0
 PyYAML==3.12
 aiohttp==1.1.1
+qiniu==7.0.9.1
+pip==9.0.1

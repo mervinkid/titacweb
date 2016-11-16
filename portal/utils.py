@@ -1,16 +1,17 @@
 # coding=utf-8
 __author__ = 'Mervin'
+import random
 import re
 import string
 from random import choice
 
 
 def convert_to_view_value(param):
-    '''
+    """
     转换页面id值到数据id值
     :param param:
     :return:
-    '''
+    """
     try:
         data_id = int(param)
     except:
@@ -19,11 +20,11 @@ def convert_to_view_value(param):
 
 
 def convert_to_data_value(param):
-    '''
+    """
     转换数据id值到页面id值
     :param parm:
     :return:
-    '''
+    """
     try:
         page_id = int(param)
     except:
@@ -55,3 +56,16 @@ def remove_html_tag(source):
         return result
     else:
         return str()
+
+
+def generate_string(length):
+    if not isinstance(length, int):
+        return ''
+    if length < 1:
+        return ''
+    seed = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
+    sa = []
+    for i in range(length):
+        sa.append(random.choice(seed))
+        salt = ''.join(sa)
+    return salt

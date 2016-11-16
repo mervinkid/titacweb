@@ -1,24 +1,28 @@
 # -*- conding: utf-8 -*-
 
-from django.db import models
+import os
+import re
 from datetime import datetime
+
+from django.db import models
+from qiniu import Auth, put_file, BucketManager
+from portal.utils import generate_string
+
+from titacweb import settings
 from .base import BaseManager
 
 
 class Media(models.Model):
-    """
-    UPLOAD_ROOT = 'upload/'
-    """
+
     title = models.CharField(
         db_column='title',
         max_length=250,
         help_text='*媒体文件标题',
         verbose_name='标题'
     )
-    '''
     file = models.FileField(
         db_column='file',
-        upload_to=UPLOAD_ROOT,
+        upload_to='upload/',
         help_text='选择本地文件',
         verbose_name='文件'
     )
@@ -29,6 +33,7 @@ class Media(models.Model):
         help_text='媒体文件URL',
         verbose_name='文件'
     )
+    '''
     update = models.DateTimeField(
         db_column='update',
         default=datetime.now(),
@@ -45,56 +50,26 @@ class Media(models.Model):
         return \
             self.title
 
-    '''
     def save(self, *args, **kwargs):
-        #判断文件是否改变
-        media_file = str(self.file)
-        file_changed = False
-        if str(media_file).find(Media.UPLOAD_ROOT) == -1:
-            file_changed = True
-        if file_changed:
-            #查找原数据中的值并尝试删除原文件
-            try:
-                original_media = Media.objects.get(id=self.id)
-                original_file = str(original_media.file).encode(encoding='utf-8')
-                original_file = settings.BASE_DIR + original_file
-                if os.path.exists(original_file):
-                    os.remove(original_file)
-            except Exception, error:
-                print error
-        self.update = datetime.datetime.now()
-        super(Media, self).save(*args, **kwargs)
-        #更新文件后对生成随机文件名并对文件和数据记录进行修改
-        if file_changed:
-            try:
-                media_item = Media.objects.get(id=self.id)
-                original_file = str(media_item.file.file).encode(encoding='utf-8')
-                if not os.path.exists(original_file):
-                    return
-                extend = os.path.splitext(original_file)[1]
-                new_name = generate_random_string(16) + extend
-                new_file = os.path.join(settings.MEDIA_ROOT, Media.UPLOAD_ROOT, new_name)
-                media_item.file = settings.MEDIA_URL + Media.UPLOAD_ROOT + new_name
-                os.rename(original_file, new_file)
-                super(Media, media_item).save(*args, **kwargs)
-            except Exception, error:
-                print error
-    '''
-
-    def save(self, *args, **kwargs):
-        self.update = datetime.now()
-        super(Media, self).save(*args, **kwargs)
-
-    '''
-    def delete(self, *args, **kwargs):
-        #删除数据记录
-        super(Media, self).delete(*args, **kwargs)
-        #尝试删除文件
-        filename = str(self.file).encode(encoding='utf-8')
-        filename = settings.BASE_DIR + filename
-        if os.path.exists(filename):
-            os.remove(filename)
-    '''
+        file = str(self.file)
+        if re.match(r'((http|ftp|https)://)(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.'
+                           r'[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\#\&%_\./-~-]*)?', file, re.I):
+            super(Media, self).save()
+        if len(file.split('.')) < 2:
+            return
+        super(Media, self).save()
+        file_type = file.split('.')[-1]
+        q = Auth(settings.QINIU_ACCESS_KEY, settings.QINIU_SECRET_KEY)
+        bucket_name = settings.QINIU_BUCKET
+        # upload new file
+        key = '%s.%s' % (generate_string(16), file_type)
+        token = q.upload_token(bucket_name, key, 3600)
+        ret, info = put_file(token, key, os.path.join(settings.MEDIA_ROOT, 'upload', file.strip().replace(' ', '_')))
+        os.remove(os.path.join(settings.MEDIA_ROOT, 'upload', file.strip().replace(' ', '_')))
+        print('re: %s' % ret)
+        print('info: %s' % info)
+        self.file = '%s/%s' % (settings.QINIU_BASE_URL, key)
+        super(Media, self).save()
 
 
 class GlobalSettingManager(BaseManager):

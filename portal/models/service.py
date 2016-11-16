@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
-from django.db import models
 from datetime import datetime
+
+from django.db import models
+
 from .base import BaseManager
 
 
 class ServiceManager(BaseManager):
-    def get_enabled_service(self, order='title'):
+    def get_enabled_service(self, order='title', count=10):
         """
         查询所有可用服务
         :return:
         """
-        return self.query().filter(enable=1).order_by(order)
+        return self.query().filter(enable=1).order_by(order)[0:count]
 
     def get_service_by_id(self, service_id):
         """

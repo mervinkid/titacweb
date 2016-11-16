@@ -1,6 +1,7 @@
 # coding=utf-8
 __author__ = 'Mervin'
-from django.conf.urls import url, include
+from django.conf.urls import url
+
 from portal import views as portal_views
 
 urlpatterns = [
@@ -17,5 +18,8 @@ urlpatterns = [
     url(r'^company/$', portal_views.company),
     url(r'^privacy/$', portal_views.privacy),
     url(r'^term/$', portal_views.term),
-    url(r'^search/$', portal_views.search)
+    url(r'^search/$', portal_views.search),
+    url(
+        r'^media/((\w|/|:|.|_)+)$',
+        portal_views.media_direct),
 ]

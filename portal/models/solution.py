@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
-from django.db import models
 from datetime import datetime
+
+from django.db import models
+
 from .base import BaseManager
 from .product import Product
 
 
 class SolutionManager(BaseManager):
-    def get_enabled_solution(self, order='title'):
+    def get_enabled_solution(self, order='title', count=10):
         """
         获取所有处于有效状态的数据
         :return:
         """
-        return self.query().filter(enable=1).order_by(order)
+        return self.query().filter(enable=1).order_by(order)[0:count]
 
     def get_solution_by_id(self, solution_id):
         """

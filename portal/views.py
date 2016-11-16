@@ -1,10 +1,11 @@
 # coding=utf-8
-from django.http.response import Http404
-from django.shortcuts import render
-from django.views.decorators.cache import cache_page
-from django.conf import settings
-from urllib.parse import quote, unquote
 from datetime import datetime
+from urllib.parse import quote, unquote
+
+from django.conf import settings
+from django.http.response import Http404
+from django.shortcuts import render, redirect
+from django.views.decorators.cache import cache_page
 
 from portal.models import *
 from portal.utils import remove_html_tag
@@ -21,77 +22,25 @@ def home(request):
     # load top data
     top_data_count = 10
     # load solution top data
-    solution_list = list()
-    solutions = Solution.objects.get_enabled_solution()
-    counter = 0
-    while counter < len(solutions):
-        if counter == top_data_count:
-            break
-        solution_item = dict()
-        solution_data = solutions[counter]
-        solution_item['title'] = solution_data.title
-        solution_item['sid'] = solution_data.id
-        solution_list.append(solution_item)
-        counter += 1
+    solution_list = [{'title': solution.title, 'pid': solution.id} for solution in
+                     Solution.objects.get_enabled_solution(count=top_data_count)]
 
     # load product top data
-    product_list = list()
-    products = Product.objects.get_enabled_product()
-    counter = 0
-    while counter < len(products):
-        if counter == top_data_count:
-            break
-        product_item = dict()
-        product_data = products[counter]
-        product_item['title'] = product_data.title
-        product_item['pid'] = product_data.id
-        product_list.append(product_item)
-        counter += 1
+    product_list = [{'title': product.title, 'pid': product.id} for product in
+                    Product.objects.get_enabled_product(count=top_data_count)]
 
     # load service top data
-    service_list = list()
-    services = Service.objects.get_enabled_service()
-    counter = 0
-    while counter < len(services):
-        if counter == top_data_count:
-            break
-        service_item = dict()
-        service_data = services[counter]
-        service_item['title'] = service_data.title
-        service_item['sid'] = service_data.id
-        service_list.append(service_item)
-        counter += 1
+    service_list = [{'title': service.title, 'pid': service.id} for service in
+                    Service.objects.get_enabled_service(count=top_data_count)]
 
     # load partner top data
-    partner_data_count = 8
-    partner_list = list()
-    partners = Partner.objects.get_partners()
-    counter = 0
-    while counter < len(partners):
-        partner_item = dict()
-        partner_data = partners[counter]
-        partner_item['title'] = partner_data.title
-        partner_item['website'] = partner_data.website
-        partner_item['logo'] = partner_data.logo
-        partner_list.append(partner_item)
-        if counter == partner_data_count:
-            break
-        counter += 1
+    top_data_count = 8
+    partner_list = [{'title': partner.title, 'website': partner.website, 'logo': partner.logo} for partner in
+                    Partner.objects.get_partners(count=top_data_count)]
 
     # load customer top data
-    customer_data_count = 8
-    customer_list = list()
-    customers = Customer.objects.get_all_customer()
-    counter = 0
-    while counter < len(customers):
-        customer_item = dict()
-        customer_data = customers[counter]
-        customer_item['title'] = customer_data.title
-        customer_item['logo'] = customer_data.logo
-        customer_list.append(customer_item)
-        if counter == customer_data_count:
-            break
-        counter += 1
+    customer_list = [{'title': customer.title, 'logo': customer.logo} for customer in
+                     Customer.objects.get_all_customer(count=top_data_count)]
 
     return render(
         request,
@@ -629,3 +578,9 @@ def generate_context(**contexts):
         if context['keywords'] == str():
             context['keywords'] = keyword_setting
     return context
+
+
+def media_direct(request, *args):
+    url = str(args[0])
+    url = url.replace('http:/', 'http://')
+    return redirect(to=url)

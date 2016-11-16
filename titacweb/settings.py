@@ -27,6 +27,10 @@ sqlite_config = config.get('sqlite')
 memcached_config = config.get('memcached')
 debug_config = config.get('debug')
 static_root_config = config.get('static_root')
+qiniu_access_key_config = config.get('qiniu_access_key')
+qiniu_secret_key_config = config.get('qiniu_secret_key')
+qiniu_bucket_config = config.get('qiniu_bucket')
+qiniu_base_url_config = config.get('qiniu_base_url')
 
 
 # Quick-start development settings - unsuitable for production
@@ -111,7 +115,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-MEDIA_ROOT = join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 MEDIA_URL = '/media/'
 
@@ -142,3 +146,9 @@ CACHES = {
         'LOCATION': str(memcached_config),
     }
 }
+
+
+QINIU_ACCESS_KEY = str(qiniu_access_key_config)
+QINIU_SECRET_KEY = str(qiniu_secret_key_config)
+QINIU_BUCKET = str(qiniu_bucket_config)
+QINIU_BASE_URL = str(qiniu_base_url_config)

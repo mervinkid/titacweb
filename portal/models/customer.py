@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+
 from .base import BaseManager
 from .misc import Media
 
 
 class CustomerManager(BaseManager):
-    def get_all_customer(self, order='title'):
+    def get_all_customer(self, order='title', count=10):
         """
         获取所有客户信息
         :return:
         """
-        return self.query().all().order_by(order)
+        return self.query().all().order_by(order)[0:count]
 
     def get_customer_by_id(self, customer_id):
         """

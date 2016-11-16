@@ -29,7 +29,7 @@
                 <div class="line"></div>
                 <div class="spacer-10px"></div>
                 {% for service_item in services %}
-                    <a href="/service/{{service_item.service_id}}">
+                    <a href="/service/{{ service_item.service_id }}">
                         <div class="item-block-service">
                             <label><strong>{{ service_item.service_title }}</strong></label><br>
                             <label>{% autoescape off %}{{ service_item.service_sketch }}{% endautoescape %}</label>

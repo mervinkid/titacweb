@@ -6,3 +6,8 @@ sqlite:
 memcached:
 # static file root
 static_root:
+# qiniu
+qiniu_access_key:
+qiniu_secret_key:
+qiniu_bucket:
+qiniu_base_url:

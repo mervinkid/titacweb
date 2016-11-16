@@ -1,16 +1,17 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+
 from .base import BaseManager
 from .misc import Media
 
 
 class PartnerManager(BaseManager):
-    def get_partners(self, order='title'):
+    def get_partners(self, order='title', count=10):
         """
         获取所有合作伙伴信息
         :return:
         """
-        return self.query().all().order_by(order)
+        return self.query().all().order_by(order)[0:count]
 
     def get_partner_by_id(self, partner_id):
         """

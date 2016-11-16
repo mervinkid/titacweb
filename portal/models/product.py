@@ -1,18 +1,20 @@
 # -*- coding: utf-8 -*-
-from django.db import models
 from datetime import datetime
+
+from django.db import models
+
 from .base import BaseManager
-from .partner import Partner
 from .customer import Customer
+from .partner import Partner
 
 
 class ProductManager(BaseManager):
-    def get_enabled_product(self, order='title'):
+    def get_enabled_product(self, order='title', count=10):
         """
         获取所有处于有效状态的数据
         :return:
         """
-        return self.query().filter(enable=1).order_by(order)
+        return self.query().filter(enable=1).order_by(order)[0:count]
 
     def get_product_by_id(self, product_id):
         """
