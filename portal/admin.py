@@ -43,7 +43,6 @@ class MediaAdmin(BaseModelAdmin):
     list_filter = ('update', 'title')
 
 
-
 class PartnerAdmin(BaseModelAdmin):
     model = Partner
     ordering = ['id']

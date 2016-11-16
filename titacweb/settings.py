@@ -50,7 +50,7 @@ DEBUG = bool(debug_config)
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -68,6 +68,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = (
+    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -154,3 +155,5 @@ QINIU_ACCESS_KEY = str(qiniu_access_key_config)
 QINIU_SECRET_KEY = str(qiniu_secret_key_config)
 QINIU_BUCKET = str(qiniu_bucket_config)
 QINIU_BASE_URL = str(qiniu_base_url_config)
+
+JET_SIDE_MENU_COMPACT = True
