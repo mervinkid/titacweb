@@ -16,6 +16,8 @@ import yaml
 from os.path import join
 from django.core.exceptions import ImproperlyConfigured
 
+os.environ["HOME"] = '/home/titacweb'
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Load configuration

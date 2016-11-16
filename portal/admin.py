@@ -39,8 +39,9 @@ class NewsAdmin(BaseModelAdmin):
 class MediaAdmin(BaseModelAdmin):
     model = Media
     ordering = ['id']
-    list_display = ('id', 'title', 'file', 'update')
+    list_display = ('id', 'title', lambda obj: obj.file, 'update')
     list_filter = ('update', 'title')
+
 
 
 class PartnerAdmin(BaseModelAdmin):
