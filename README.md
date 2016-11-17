@@ -2,6 +2,11 @@
 This is the website appliction for [Beijing Tac-au-tac Technology Co.,Ltd](http://www.titac.com.cn).
 It based on [Django](http://www.djangoproject.com).
 
+## Dependencies
+
+Backend based on Python 3 and SQLite.<br>
+For detail see [requirements.txt](requirements.txt) 
+
 ## Contributing
 
 1. Fork it.
