@@ -22,24 +22,24 @@ def home(request):
     # load top data
     top_data_count = 10
     # load solution top data
-    solution_list = [{'title': solution.title, 'pid': solution.id} for solution in
+    solution_list = [{'title': solution_item.title, 'pid': solution_item.id} for solution_item in
                      Solution.objects.get_enabled_solution(count=top_data_count)]
 
     # load product top data
-    product_list = [{'title': product.title, 'pid': product.id} for product in
+    product_list = [{'title': product_item.title, 'pid': product_item.id} for product_item in
                     Product.objects.get_enabled_product(count=top_data_count)]
 
     # load service top data
-    service_list = [{'title': service.title, 'pid': service.id} for service in
+    service_list = [{'title': service_item.title, 'pid': service_item.id} for service_item in
                     Service.objects.get_enabled_service(count=top_data_count)]
 
     # load partner top data
-    top_data_count = 8
-    partner_list = [{'title': partner.title, 'website': partner.website, 'logo': partner.logo} for partner in
-                    Partner.objects.get_partners(count=top_data_count)]
+    top_data_count = 7
+    partner_list = [{'title': partner_item.title, 'website': partner_item.website, 'logo': partner_item.logo} for
+                    partner_item in Partner.objects.get_partners(count=top_data_count)]
 
     # load customer top data
-    customer_list = [{'title': customer.title, 'logo': customer.logo} for customer in
+    customer_list = [{'title': customer_item.title, 'logo': customer_item.logo} for customer_item in
                      Customer.objects.get_all_customer(count=top_data_count)]
 
     return render(
