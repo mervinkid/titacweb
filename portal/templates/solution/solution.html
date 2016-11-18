@@ -33,7 +33,7 @@
                     <a href="/solution/{{ solution_item.solution_id }}">
                         <div class="item-block">
                             <label><strong>{{ solution_item.solution_title }}</strong></label><br>
-                            <label>{{ solution_item.solution_subtitle }}</label>
+                            <label>{% if solution_item.solution_subtitle %}{{ solution_item.solution_subtitle }}{% else %}&nbsp;{% endif %}</label>
                         </div>
                     </a>
                 {% endfor %}
